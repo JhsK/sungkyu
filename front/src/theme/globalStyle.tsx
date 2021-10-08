@@ -14,11 +14,15 @@ const GlobalStyle = () => (
   <Global
     styles={css`
       ${reset} html, body, #__next {
+        margin: 0;
+        padding: 0;
       }
 
       body {
         overflow-x: hidden;
         width: 100%;
+        background-color: #ffdee9;
+        background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
       }
 
       a {
