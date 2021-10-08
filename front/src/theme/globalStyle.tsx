@@ -14,8 +14,6 @@ const GlobalStyle = () => (
   <Global
     styles={css`
       ${reset} html, body, #__next {
-        margin: 0;
-        padding: 0;
       }
 
       body {
