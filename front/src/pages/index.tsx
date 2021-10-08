@@ -1,5 +1,6 @@
 import React from 'react';
+import Header from 'src/components/Header';
 
-const Home = () => <h1>test page</h1>;
+const Home = () => <Header />;
 
 export default Home;
