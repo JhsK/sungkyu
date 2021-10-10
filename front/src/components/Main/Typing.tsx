@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { lightTheme } from 'src/theme';
 import { keyframes } from '@emotion/react';
 
 const typing = keyframes`
@@ -19,7 +20,7 @@ const Section = styled.section`
   width: 100%;
   height: 100%;
   scroll-snap-align: start;
-  background-color: #ffdee9;
+  background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
   background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
   background-blend-mode: multiply;
   background-attachment: fixed;

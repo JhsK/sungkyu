@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Header from 'src/components/Header';
 import Typing from 'src/components/Main/Typing';
+import Intro from 'src/components/Main/Intro';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Container = styled.div`
   position: relative;
@@ -13,8 +16,10 @@ const Container = styled.div`
 
 const Home = () => {
   useEffect(() => {
-    window.addEventListener('scroll', (e) => {
-      console.log(e.target.scrollingElement.scrollTop);
+    window.addEventListener('wheel', (e) => {
+      console.log('gage');
+      // console.log(e.target.scrollingElement.scrollTop);
+      AOS.refresh();
     });
   }, []);
 
@@ -23,6 +28,7 @@ const Home = () => {
       <Container>
         <Header />
         <Typing />
+        <Intro />
       </Container>
     </>
   );

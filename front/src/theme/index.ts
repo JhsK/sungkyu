@@ -8,7 +8,8 @@ const responsiveView = {
 };
 
 export const lightTheme = {
-  BACKGROUND_COLOR: '#ffffff',
+  BACKGROUND_TYPING_COLOR: '#ffdee9',
+  BACKGROUND_INTRO_COLOR: '#ffffff',
   FONT_COLOR_WHITE: '#ffffff',
 };
 
