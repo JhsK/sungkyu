@@ -18,13 +18,15 @@ const MenuLi = styled.ul`
   justify-content: space-between;
 
   li {
+    font-size: 1.2rem;
+    font-weight: bold;
     margin-right: 2rem;
   }
 `;
 
-const Header = () => (
+const Header = ({ logoColor }) => (
   <Container>
-    <Logo />
+    <Logo logoColor={logoColor} />
     <div className="menu">
       <MenuLi>
         <li>ABOUT</li>
