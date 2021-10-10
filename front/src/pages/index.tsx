@@ -1,5 +1,15 @@
 import React, { useEffect } from 'react';
+import styled from '@emotion/styled';
 import Header from 'src/components/Header';
+import Typing from 'src/components/Main/Typing';
+
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+`;
 
 const Home = () => {
   useEffect(() => {
@@ -10,67 +20,10 @@ const Home = () => {
 
   return (
     <>
-      <Header />
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
+      <Container>
+        <Header />
+        <Typing />
+      </Container>
     </>
   );
 };
