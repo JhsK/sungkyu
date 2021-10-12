@@ -3,6 +3,7 @@ import ReactPageScroller from 'react-page-scroller';
 import Typing from './Typing';
 import Intro from './Intro';
 import Projects from './Projects';
+import Blog from './Blog';
 
 const Main = ({ projects }) => (
   // <ReactPageScroller onBeforePageScroll={setScrollPage}>
@@ -13,6 +14,7 @@ const Main = ({ projects }) => (
     <Typing />
     <Intro />
     <Projects projects={projects} />
+    <Blog />
   </>
 );
 

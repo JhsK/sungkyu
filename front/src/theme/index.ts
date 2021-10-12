@@ -12,6 +12,7 @@ export const lightTheme = {
   BACKGROUND_INTRO_COLOR: '#ffffff',
   BACKGROUND_PROJECTS_COLOR: '#F5F5F5',
   FONT_COLOR_WHITE: '#ffffff',
+  FONT_COLOR_DARKGRAY: '#727272',
 };
 
 export type ThemeType = typeof lightTheme;
