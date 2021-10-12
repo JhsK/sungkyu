@@ -10,6 +10,7 @@ const responsiveView = {
 export const lightTheme = {
   BACKGROUND_TYPING_COLOR: '#ffdee9',
   BACKGROUND_INTRO_COLOR: '#ffffff',
+  BACKGROUND_PROJECTS_COLOR: '#F5F5F5',
   FONT_COLOR_WHITE: '#ffffff',
 };
 

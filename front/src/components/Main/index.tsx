@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import ReactPageScroller from 'react-page-scroller';
 import Typing from './Typing';
 import Intro from './Intro';
+import Projects from './Projects';
 
-const Main = () => (
+const Main = ({ projects }) => (
   // <ReactPageScroller onBeforePageScroll={setScrollPage}>
   //   <Typing />
   //   <Intro scrollPage={scrollPage} />
@@ -11,6 +12,7 @@ const Main = () => (
   <>
     <Typing />
     <Intro />
+    <Projects projects={projects} />
   </>
 );
 
