@@ -5,7 +5,7 @@ import Intro from './Intro';
 import Projects from './Projects';
 import Blog from './Blog';
 
-const Main = ({ projects }) => (
+const Main = ({ projects, blog }) => (
   // <ReactPageScroller onBeforePageScroll={setScrollPage}>
   //   <Typing />
   //   <Intro scrollPage={scrollPage} />
@@ -14,7 +14,7 @@ const Main = ({ projects }) => (
     <Typing />
     <Intro />
     <Projects projects={projects} />
-    <Blog />
+    <Blog blog={blog} />
   </>
 );
 

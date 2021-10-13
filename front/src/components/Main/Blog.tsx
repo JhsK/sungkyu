@@ -1,6 +1,26 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 import { lightTheme } from 'src/theme';
+import { MdKeyboardArrowRight } from 'react-icons/md';
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -28,15 +48,25 @@ const Content = styled.div`
   align-items: flex-start;
   justify-content: center;
 
+  .activeFade {
+    width: 100%;
+    animation: ${fadeIn} 3s;
+  }
+
+  .disableFade {
+    width: 100%;
+    animation: ${fadeOut} 3s;
+  }
+
   .title {
     font-size: 2rem;
     font-weight: bold;
-    height: 10%;
   }
 `;
 
 const PostContainer = styled.div`
   width: 100%;
+  padding-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -60,33 +90,55 @@ const PostContainer = styled.div`
       font-weight: bold;
     }
 
-    .more {
+    .moreContainer {
+      display: flex;
+      align-items: center;
       color: ${lightTheme.FONT_COLOR_DARKGRAY};
       margin-top: 1rem;
+
+      .font {
+        font-size: 0.9rem;
+      }
+      .icon {
+        font-size: 1rem;
+      }
     }
   }
 `;
 
-const Blog = () => (
+const Blog = ({ blog }) => (
   <Container>
     <Section>
       <Content>
-        <span className="title">BLOG</span>
-        <PostContainer>
-          <div className="post">
-            <div className="postImg" />
-            <span className="postTitle">제목 테스트1</span>
-            <span className="more">more &gt;</span>
-          </div>
-          <div className="post">
-            <div className="postImg" />
-            <span>제목 테스트1</span>
-          </div>
-          <div className="post">
-            <div className="postImg" />
-            <span>제목 테스트1</span>
-          </div>
-        </PostContainer>
+        <div className={blog ? 'activeFade' : 'disableFade'}>
+          <span className="title">BLOG</span>
+          <PostContainer>
+            <div className="post">
+              <div className="postImg" />
+              <span className="postTitle">제목 테스트1</span>
+              <div className="moreContainer">
+                <span className="font">more</span>
+                <MdKeyboardArrowRight className="icon" />
+              </div>
+            </div>
+            <div className="post">
+              <div className="postImg" />
+              <span className="postTitle">제목 테스트1</span>
+              <div className="moreContainer">
+                <span className="font">more</span>
+                <MdKeyboardArrowRight className="icon" />
+              </div>
+            </div>
+            <div className="post">
+              <div className="postImg" />
+              <span className="postTitle">제목 테스트1</span>
+              <div className="moreContainer">
+                <span className="font">more</span>
+                <MdKeyboardArrowRight className="icon" />
+              </div>
+            </div>
+          </PostContainer>
+        </div>
       </Content>
     </Section>
   </Container>
