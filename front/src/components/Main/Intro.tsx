@@ -15,15 +15,8 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
-<<<<<<< HEAD
-  ${fadeAnimation};
-  color: red;
   /* scroll-snap-align: start; */
   background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
-=======
-  scroll-snap-align: start;
-  background-color: ${lightTheme.BACKGROUND_INTRO_COLOR};
->>>>>>> 38ab944238a00fc8670c6df4d6defe147a784aa9
 `;
 
 const Content = styled.div`
