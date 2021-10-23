@@ -32,6 +32,7 @@ const Section = styled.section`
   width: 100%;
   height: 100%;
   ${fadeAnimation};
+  color: red;
   /* scroll-snap-align: start; */
   background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
 `;
