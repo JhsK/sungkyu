@@ -15,11 +15,18 @@ const typing = keyframes`
     }
 `;
 
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+`;
+
 const Section = styled.section`
-  /* position: relative; */
+  position: relative;
   width: 100%;
   height: 100%;
-  /* scroll-snap-align: start; */
+  scroll-snap-align: start;
   background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
   background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
   background-blend-mode: multiply;
@@ -57,13 +64,15 @@ const H1 = styled.h1`
 `;
 
 const Typing = () => (
-  <Section>
-    <Content>
-      <h1>저는</h1>
-      <H1>불편함을 해소하기 위해 고민하는</H1>
-      <h1>개발자 입니다.</h1>
-    </Content>
-  </Section>
+  <Container>
+    <Section>
+      <Content>
+        <h1>저는</h1>
+        <H1>불편함을 해소하기 위해 고민하는</H1>
+        <h1>개발자 입니다.</h1>
+      </Content>
+    </Section>
+  </Container>
 );
 
 export default Typing;
