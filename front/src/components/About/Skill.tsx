@@ -11,7 +11,7 @@ import tailwindIcon from '../../../public/skill/tailwind.png';
 import eslintIcon from '../../../public/skill/eslint.png';
 import preitterIcon from '../../../public/skill/preitter.png';
 import nodeIcon from '../../../public/skill/nodejs.png';
-import expressIcon from '../../../public/skill/express.png';
+import expressIcon from '../../../public/skill/expressjs.png';
 import sequelizeIcon from '../../../public/skill/sequelize.png';
 import mysqlIcon from '../../../public/skill/mysql.png';
 import gitIcon from '../../../public/skill/git.png';
@@ -27,7 +27,7 @@ const FRONT_SKILL_ONE = [
   { icon: reactIcon, title: 'React' },
   { icon: reduxIcon, title: 'Redux' },
 ] as const;
-const FRONT_SKILL_TWO = [{ icon: tailwindIcon, title: 'TailWindCss' }] as const;
+const FRONT_SKILL_TWO = [{ icon: tailwindIcon, title: 'TailWindCSS' }] as const;
 const FRONT_SKILL_THREE = [
   { icon: eslintIcon, title: 'ESLint' },
   { icon: preitterIcon, title: 'Preitter' },
@@ -47,7 +47,7 @@ const TOOL_SKILL_ONE = [
   { icon: notionIcon, title: 'Notion' },
 ] as const;
 
-const SKILL_ARRAY = [FRONT_SKILL_ONE, FRONT_SKILL_TWO, FRONT_SKILL_THREE, BACK_SKILL_ONE, TOOL_SKILL_ONE] as const;
+const FRONT_SKILL = [FRONT_SKILL_ONE, FRONT_SKILL_TWO, FRONT_SKILL_THREE] as const;
 
 const SkillContainer = styled.div`
   width: 1200px;
@@ -77,7 +77,7 @@ const IconContainer = styled.div`
   /* justify-content: space-evenly; */
   width: 100%;
   margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2.5rem;
 `;
 
 const Skills = styled.div`
@@ -92,13 +92,20 @@ const Skills = styled.div`
   }
 `;
 
+const SubTitle = styled.span`
+  font-size: 1rem;
+  font-weight: bold;
+  padding-left: 0.3rem;
+  margin-top: 6rem;
+`;
+
 const Skill = () => (
   <SkillContainer>
     <span className="title" role="img" aria-labelledby="hamer">
       🔨 Skills
     </span>
     <span className="subTitle">Front-end</span>
-    {SKILL_ARRAY.map((field, index) => (
+    {FRONT_SKILL.map((field, index) => (
       <IconContainer key={index}>
         {field.map((image, i) => (
           <Skills key={i}>
@@ -108,6 +115,24 @@ const Skill = () => (
         ))}
       </IconContainer>
     ))}
+    <SubTitle>Back-end</SubTitle>
+    <IconContainer>
+      {BACK_SKILL_ONE.map((image, i) => (
+        <Skills key={i}>
+          <Image src={image.icon} alt="front-end skill" />
+          <span key={i}>{image.title}</span>
+        </Skills>
+      ))}
+    </IconContainer>
+    <SubTitle>Collaboration & Tools</SubTitle>
+    <IconContainer>
+      {TOOL_SKILL_ONE.map((image, i) => (
+        <Skills key={i}>
+          <Image src={image.icon} alt="front-end skill" />
+          <span key={i}>{image.title}</span>
+        </Skills>
+      ))}
+    </IconContainer>
   </SkillContainer>
 );
 
