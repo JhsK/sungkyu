@@ -8,15 +8,12 @@ import IntroduceText from '../share/IntroduceText';
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  overflow: auto;
-  scroll-snap-type: y mandatory;
 `;
 
 const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
-  /* scroll-snap-align: start; */
   background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
 `;
 
