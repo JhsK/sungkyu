@@ -22,8 +22,7 @@ const GlobalStyle = () => (
       body {
         overflow-x: hidden;
         width: 100%;
-        background-color: #ffdee9;
-        background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
+        background-color: #fff;
         font-family: NanumSquare, 'Noto Sans KR', notokr, 'Nanum Gothic', 'Malgun Gothic', sans-serif;
       }
 

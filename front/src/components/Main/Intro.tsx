@@ -14,7 +14,7 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
+  background-color: ${lightTheme.BACKGROUND_INTRO_COLOR};
 `;
 
 const Content = styled.div`

@@ -1,7 +1,7 @@
 import React from 'react';
+import { Global, css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { lightTheme } from 'src/theme';
-import { keyframes } from '@emotion/react';
 
 const typing = keyframes`
     0% {
@@ -19,16 +19,14 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: auto;
+  background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
+  background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
 `;
 
 const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
-  background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
-  background-blend-mode: multiply;
-  background-attachment: fixed;
 `;
 
 const Content = styled.div`
