@@ -26,17 +26,13 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: auto;
-  scroll-snap-type: y mandatory;
 `;
 
 const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;
-  scroll-snap-type: start;
   background-color: ${lightTheme.BACKGROUND_INTRO_COLOR};
-  background-blend-mode: multiply;
-  background-attachment: fixed;
 `;
 
 const Content = styled.div`
@@ -50,12 +46,12 @@ const Content = styled.div`
 
   .activeFade {
     width: 100%;
-    animation: ${fadeIn} 3s;
+    animation: ${fadeIn} 5s;
   }
 
   .disableFade {
     width: 100%;
-    animation: ${fadeOut} 3s;
+    animation: ${fadeOut} 5s;
   }
 
   .title {
