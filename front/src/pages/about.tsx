@@ -4,7 +4,7 @@ import Header from 'src/components/Header';
 
 const About = () => (
   <>
-    <Header />
+    <Header logoColor />
     <AboutComponent />
   </>
 );
