@@ -41,7 +41,11 @@ const MenuLi = styled.ul`
 const Header = ({ logoColor }: HeaderProps) => (
   <StickyContainer color={logoColor}>
     <Container>
-      <Logo logoColor={logoColor} />
+      <Link href="/">
+        <a>
+          <Logo logoColor={logoColor} />
+        </a>
+      </Link>
       <div className="menu">
         <MenuLi>
           <li>
