@@ -52,6 +52,7 @@ const FRONT_SKILL = [FRONT_SKILL_ONE, FRONT_SKILL_TWO, FRONT_SKILL_THREE] as con
 const SkillContainer = styled.div`
   width: 1200px;
   margin: 0 auto;
+  padding-bottom: 2rem;
 
   span {
     display: block;
