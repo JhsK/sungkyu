@@ -13,8 +13,8 @@ const Home = () => {
       // console.log(e.target.scrollingElement.scrollTop);
       // console.log(window.scrollY);
 
-      if (line < 500) setLogoColor(false);
-      if (line > 1000) setLogoColor(true);
+      if (line < 300) setLogoColor(false);
+      if (line > 500) setLogoColor(true);
       if (line > 1300) setProjectsAnimation(true);
       else setProjectsAnimation(false);
       if (line > 2650) setBlogAnimation(true);
