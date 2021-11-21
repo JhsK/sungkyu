@@ -5,6 +5,8 @@ import Logo from './Logo';
 
 type HeaderProps = {
   logoColor: boolean;
+  logoSize?: number;
+  headerPadding?: boolean;
 };
 
 const StickyContainer = styled.div`
@@ -13,7 +15,8 @@ const StickyContainer = styled.div`
   width: 100%;
   z-index: 1000;
   background: ${(props) => props.color && '#fff'};
-  padding-bottom: 1rem;
+  /* padding: 1rem 0; */
+  padding: ${(props) => (props.headerPadding ? '0' : '1rem 0')};
 `;
 
 const Container = styled.div`
@@ -22,7 +25,7 @@ const Container = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   align-items: flex-end;
-  height: 80px;
+  height: 60px;
 `;
 
 const MenuLi = styled.ul`
@@ -38,12 +41,12 @@ const MenuLi = styled.ul`
   }
 `;
 
-const Header = ({ logoColor }: HeaderProps) => (
-  <StickyContainer color={logoColor}>
+const Header = ({ logoColor, logoSize, headerPadding = false }: HeaderProps) => (
+  <StickyContainer color={logoColor} headerPadding={headerPadding}>
     <Container>
       <Link href="/">
         <a>
-          <Logo logoColor={logoColor} />
+          <Logo size={logoSize} logoColor={logoColor} />
         </a>
       </Link>
       <div className="menu">
