@@ -1,76 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from 'src/components/Header';
+import Main from 'src/components/Main';
 
 const Home = () => {
+  const [logoColor, setLogoColor] = useState(false);
+  const [projectsAnimation, setProjectsAnimation] = useState(false);
+  const [blogAnimation, setBlogAnimation] = useState(false);
+
   useEffect(() => {
-    window.addEventListener('scroll', (e) => {
-      console.log(e.target.scrollingElement.scrollTop);
-    });
+    const handleScroll = (e) => {
+      const line = e.target.scrollingElement.scrollTop;
+      // console.log(e.target.scrollingElement.scrollTop);
+      // console.log(window.scrollY);
+
+      if (line < 300) setLogoColor(false);
+      if (line > 500) setLogoColor(true);
+      if (line > 1300) setProjectsAnimation(true);
+      else setProjectsAnimation(false);
+      if (line > 2650) setBlogAnimation(true);
+      else setBlogAnimation(false);
+    };
+    window.addEventListener('scroll', handleScroll);
+    // window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
-      <Header />
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
-      <p style={{ marginTop: '3rem' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci quibusdam consectetur tenetur, asperiores
-        officiis repellendus vitae quae est modi, ratione sed eaque molestias praesentium assumenda animi provident
-        impedit cupiditate dignissimos!
-      </p>
+      <Header logoColor={logoColor} />
+      <Main projects={projectsAnimation} blog={blogAnimation} />
     </>
   );
 };
