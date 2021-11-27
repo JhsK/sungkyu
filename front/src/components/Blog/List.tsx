@@ -42,6 +42,10 @@ const ListContainer = styled.div`
   display: flex;
   align-items: flex-start;
 
+  &:hover {
+    box-shadow: 8px 8px 4px -1px rgba(0, 0, 0, 0.14);
+  }
+
   img {
     width: 30%;
     height: 100%;
@@ -81,8 +85,7 @@ const TagsContainer = styled.div`
 `;
 
 const Hr = styled.hr`
-  color: red;
-  background-color: red;
+  opacity: 0.2;
   margin: 2rem 0;
 `;
 
@@ -93,6 +96,7 @@ const List = () => (
         <span>All</span>
         <span>최신순</span>
         <span>후순위</span>
+        <span>작성하기</span>
       </div>
       <input type="text" />
     </LableContainer>
