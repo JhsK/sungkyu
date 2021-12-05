@@ -1,10 +1,13 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import Image from 'next/image';
-import Test from '../../../public/test.jpg';
+import Link from 'next/link';
+import React from 'react';
 
 const Container = styled.div`
   width: 70%;
+
+  a {
+    margin-bottom: 1rem;
+  }
 `;
 
 const LableContainer = styled.div`
@@ -89,8 +92,17 @@ const Hr = styled.hr`
   margin: 2rem 0;
 `;
 
+const CreateBtn = styled.div`
+  margin-bottom: 1rem;
+`;
+
 const List = () => (
   <Container>
+    <CreateBtn>
+      <Link href="/blog/new">
+        <a>작성하기</a>
+      </Link>
+    </CreateBtn>
     <LableContainer>
       <div className="filter">
         <span>All</span>
