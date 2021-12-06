@@ -70,6 +70,7 @@ import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const Container = styled.div`
   /* margin-top: 7rem; */
@@ -81,17 +82,45 @@ const TitleInput = styled.input`
   border: none;
   margin-bottom: 2rem;
   border-bottom: 2px solid #a3cfcd;
+  font-size: 1.7rem;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const TagInput = styled.input`
   height: 40px;
   width: 50%;
   border: none;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const BtnContainer = styled.div`
   text-align: right;
   margin-top: 2rem;
+
+  button {
+    width: 100px;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:nth-child(1) {
+    background-color: #a3cfcd;
+    color: #fff;
+  }
+
+  button:nth-child(2) {
+    margin-left: 1rem;
+  }
 `;
 
 const PostEditor = () => {
@@ -107,7 +136,7 @@ const PostEditor = () => {
       <TagInput placeholder="태그를 입력하세요" type="text" />
       <Editor
         previewStyle="vertical"
-        height="600px"
+        height="75vh"
         hideModeSwitch
         initialEditType="markdown"
         initialValue="hello"
@@ -115,7 +144,11 @@ const PostEditor = () => {
       />
       <BtnContainer>
         <button>작성하기</button>
-        <button>목록이동</button>
+        <button>
+          <Link href="/blog">
+            <a>목록이동</a>
+          </Link>
+        </button>
       </BtnContainer>
       {/* <button onClick={handleClick}>ttt</button> */}
     </Container>
