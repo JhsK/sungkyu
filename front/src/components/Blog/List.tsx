@@ -44,9 +44,11 @@ const ListContainer = styled.div`
   cursor: pointer;
   display: flex;
   align-items: flex-start;
+  transition: box-shadow 0.3s ease 0s, border-color 0.3s ease 0s;
 
   &:hover {
-    box-shadow: 8px 8px 4px -1px rgba(0, 0, 0, 0.14);
+    box-shadow: 4px 4px 1px -1px rgba(0, 0, 0, 0.12);
+    /* transition: box-shadow 0.3s ease 0s, border-color 0.3s ease 0s; */
   }
 
   img {
@@ -108,7 +110,6 @@ const List = () => (
         <span>All</span>
         <span>최신순</span>
         <span>후순위</span>
-        <span>작성하기</span>
       </div>
       <input type="text" />
     </LableContainer>
