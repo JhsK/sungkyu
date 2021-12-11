@@ -36,7 +36,7 @@ const Text = styled.div`
 const Footer = () => (
   <FooterContainer>
     <Content>
-      <Logo />
+      <Logo logoColor />
       <Text>
         <span>임성규</span>
         <span>qwe6293@nate.com</span>

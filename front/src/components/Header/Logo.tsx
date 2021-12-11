@@ -5,7 +5,7 @@ export const LOGO_TYPE_DARK = '#000000';
 
 type LogoProps = {
   logoColor: boolean;
-  size: number;
+  size?: number;
 };
 
 const returnSVG = (size: number, color: boolean) => (

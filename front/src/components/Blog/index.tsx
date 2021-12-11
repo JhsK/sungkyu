@@ -2,8 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 import List from './List';
 import Tags from './Tags';
+import Footer from '../Footer';
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const BlogContainer = styled.div`
   display: flex;
   align-items: flex-start;
   width: 1200px;
@@ -13,8 +20,11 @@ const Container = styled.div`
 
 const BlogComponent = () => (
   <Container>
-    <List />
-    <Tags />
+    <BlogContainer>
+      <List />
+      <Tags />
+    </BlogContainer>
+    <Footer />
   </Container>
 );
 
