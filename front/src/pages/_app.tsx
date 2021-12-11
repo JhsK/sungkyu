@@ -3,7 +3,7 @@ import Head from 'next/head';
 import GlobalStyle from 'src/theme/globalStyle';
 import type { AppProps } from 'next/app';
 
-const App = ({ Component }: AppProps) => (
+const App = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
       <meta charSet="utf-8" />
@@ -20,7 +20,7 @@ const App = ({ Component }: AppProps) => (
       <title>Sungkyu</title>
     </Head>
     <GlobalStyle />
-    <Component />
+    <Component {...pageProps} />
   </>
 );
 export default App;
