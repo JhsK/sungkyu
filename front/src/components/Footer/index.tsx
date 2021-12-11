@@ -19,7 +19,7 @@ const Content = styled.div`
 `;
 
 const Text = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding-bottom: 1rem 0;
   font-size: 0.9rem;
   font-weight: bold;
@@ -36,7 +36,7 @@ const Text = styled.div`
 const Footer = () => (
   <FooterContainer>
     <Content>
-      <Logo />
+      <Logo logoColor height={30} width={100} />
       <Text>
         <span>임성규</span>
         <span>qwe6293@nate.com</span>

@@ -37,7 +37,7 @@ const MenuLi = styled.ul`
   li {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-right: 2rem;
+    margin-left: 2rem;
   }
 `;
 
