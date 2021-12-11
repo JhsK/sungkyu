@@ -5,15 +5,16 @@ export const LOGO_TYPE_DARK = '#000000';
 
 type LogoProps = {
   logoColor: boolean;
-  size?: number;
+  width?: number;
+  height?: number;
 };
 
-const returnSVG = (size: number, color: boolean) => (
+const returnSVG = (width: number, height: number, color: boolean) => (
   <svg
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
-    width="200.000000pt"
-    height={`${size}pt`}
+    width={`${width}.000000pt`}
+    height={`${height}pt`}
     viewBox="0 0 200.000000 40.000000"
     preserveAspectRatio="xMidYMid meet"
   >
@@ -69,8 +70,8 @@ c22 28 44 51 48 51 4 0 26 -39 49 -88 34 -71 42 -98 42 -145 l0 -57 35 0 35 0
   </svg>
 );
 
-const Logo = ({ logoColor, size = 60 }: LogoProps) => {
-  const memoSVG = useMemo(() => returnSVG(size, logoColor), [logoColor, size]);
+const Logo = ({ logoColor, height = 60, width = 200 }: LogoProps) => {
+  const memoSVG = useMemo(() => returnSVG(width, height, logoColor), [logoColor, width, height]);
 
   return <>{memoSVG}</>;
 };
