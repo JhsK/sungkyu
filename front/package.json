@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@toast-ui/editor": "^2.5.4",
