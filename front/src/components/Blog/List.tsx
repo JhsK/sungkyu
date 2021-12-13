@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Container = styled.div`
   width: 70%;
@@ -19,7 +19,7 @@ const LableContainer = styled.div`
   .filter {
     span {
       margin-right: 1.5rem;
-      font-weight: bold;
+      font-weight: 800;
       font-size: 1rem;
       cursor: pointer;
     }
@@ -36,6 +36,18 @@ const LableContainer = styled.div`
   input:focus {
     outline: none;
   }
+`;
+
+const All = styled.span`
+  color: ${(props) => (props.color === 'All' ? '#000' : '#b5b5b5')};
+`;
+
+const Newest = styled.span`
+  color: ${(props) => (props.color === '최신순' ? '#000' : '#b5b5b5')};
+`;
+
+const Latest = styled.span`
+  color: ${(props) => (props.color === '후순위' ? '#000' : '#b5b5b5')};
 `;
 
 const ListContainer = styled.div`
@@ -98,58 +110,72 @@ const CreateBtn = styled.div`
   margin-bottom: 1rem;
 `;
 
-const List = () => (
-  <Container>
-    <CreateBtn>
-      <Link href="/blog/new">
-        <a>작성하기</a>
-      </Link>
-    </CreateBtn>
-    <LableContainer>
-      <div className="filter">
-        <span>All</span>
-        <span>최신순</span>
-        <span>후순위</span>
-      </div>
-      <input type="text" />
-    </LableContainer>
-    <ListContainer>
-      <ContentContainer>
-        <div>
-          <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
-          <div>
-            네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
-            Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-          </div>
-        </div>
-        <TagsContainer>
-          <span>#자바스크립트</span>
-          <span>#웹</span>
-          <span>#자바스크립트</span>
-        </TagsContainer>
-      </ContentContainer>
-      <img alt="test" src="test.jpg" />
-    </ListContainer>
-    <Hr />
-    <ListContainer>
-      <ContentContainer>
-        <div>
-          <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
-          <div>
-            네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
-            Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-          </div>
-        </div>
-        <TagsContainer>
-          <span>#자바스크립트</span>
-          <span>#웹</span>
-          <span>#자바스크립트</span>
-        </TagsContainer>
-      </ContentContainer>
-      <img alt="test" src="test.jpg" />
-    </ListContainer>
-    <Hr />
-  </Container>
-);
+type CategoryType = 'All' | '최신순' | '후순위';
 
+const List = () => {
+  const [category, setCategory] = useState<CategoryType>('All');
+  const activeCategory = (label: CategoryType) => {
+    setCategory(label);
+  };
+
+  return (
+    <Container>
+      <CreateBtn>
+        <Link href="/blog/new">
+          <a>작성하기</a>
+        </Link>
+      </CreateBtn>
+      <LableContainer>
+        <div className="filter">
+          <All color={category} onClick={() => activeCategory('All')}>
+            All
+          </All>
+          <Newest color={category} onClick={() => activeCategory('최신순')}>
+            최신순
+          </Newest>
+          <Latest color={category} onClick={() => activeCategory('후순위')}>
+            후순위
+          </Latest>
+        </div>
+        <input type="text" />
+      </LableContainer>
+      <ListContainer>
+        <ContentContainer>
+          <div>
+            <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
+            <div>
+              네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
+              Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
+            </div>
+          </div>
+          <TagsContainer>
+            <span>#자바스크립트</span>
+            <span>#웹</span>
+            <span>#자바스크립트</span>
+          </TagsContainer>
+        </ContentContainer>
+        <img alt="test" src="test.jpg" />
+      </ListContainer>
+      <Hr />
+      <ListContainer>
+        <ContentContainer>
+          <div>
+            <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
+            <div>
+              네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
+              Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
+            </div>
+          </div>
+          <TagsContainer>
+            <span>#자바스크립트</span>
+            <span>#웹</span>
+            <span>#자바스크립트</span>
+          </TagsContainer>
+        </ContentContainer>
+        <img alt="test" src="test.jpg" />
+      </ListContainer>
+      <Hr />
+    </Container>
+  );
+};
 export default List;
