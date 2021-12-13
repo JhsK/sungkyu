@@ -16,16 +16,16 @@ const Container = styled.div`
 const LabelContainer = styled.div`
   span {
     display: block;
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0.3rem 0;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
+    cursor: pointer;
   }
 
   span:hover {
-    background-color: #82a0aa;
-    color: #fff;
+    /* background-color: #82a0aa; */
+    /* color: #fff; */
+    border-bottom: 2px solid #82a0aa;
   }
 `;
 
