@@ -5,14 +5,21 @@ const Container = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -70%);
   display: flex;
   flex-direction: column;
 
   img {
     width: 300px;
-    height: 200px;
+    height: 300px;
     border-radius: 9999px;
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+  }
+
+  span {
+    font-size: 1.2rem;
+    font-weight: bold;
     margin-bottom: 1rem;
   }
 `;
