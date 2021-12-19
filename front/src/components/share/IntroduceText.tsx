@@ -2,17 +2,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const IntroduceContainer = styled.div`
-  .title {
+  span {
     display: block;
-    font-size: 2.3rem;
     font-weight: bold;
+  }
+  .title {
+    font-size: 2.3rem;
     margin-bottom: 2rem;
   }
 
   .subTitle {
-    display: block;
     font-size: 1.8rem;
-    font-weight: bold;
     margin-bottom: 1.2rem;
   }
 
