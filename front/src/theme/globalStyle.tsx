@@ -2,7 +2,7 @@ import { Global, css } from '@emotion/react';
 import reset from 'emotion-reset';
 import React from 'react';
 
-import { ThemeType } from './index';
+import { lightTheme, ThemeType } from './index';
 
 interface GlobalStyleProps {
   theme: ThemeType;
@@ -20,14 +20,14 @@ const GlobalStyle = () => (
       body {
         overflow-x: hidden;
         width: 100%;
-        background-color: #fff;
+        background-color: ${lightTheme.BACKGROUND_INTRO_COLOR};
         font-family: NanumSquare, 'Noto Sans KR', notokr, 'Nanum Gothic', 'Malgun Gothic', sans-serif;
       }
 
       a {
         text-decoration: none;
         outline: none;
-        color: #000;
+        color: ${lightTheme.PUBLIC_BLACK};
       }
     `}
   />

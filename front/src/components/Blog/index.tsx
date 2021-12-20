@@ -15,8 +15,8 @@ const BlogContainer = styled.div`
   display: flex;
   align-items: flex-start;
   width: 1200px;
-  margin: 10rem auto 0 auto;
-  gap: 2.2rem;
+  margin: 9rem auto 0 auto;
+  gap: 2rem;
 `;
 
 const BlogComponent = () => (

@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { lightTheme } from 'src/theme';
 import Logo from '../Header/Logo';
 
 const FooterContainer = styled.div`
   width: 100%;
   padding: 2rem 0;
-  background-color: ${lightTheme.BACKGROUND_PROJECTS_COLOR};
+  background-color: ${(props) => props.theme.BACKGROUND_PROJECTS_COLOR};
 `;
 
 const Content = styled.div`

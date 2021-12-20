@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { lightTheme } from 'src/theme';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 const fadeIn = keyframes`
@@ -32,7 +31,7 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: ${lightTheme.BACKGROUND_INTRO_COLOR};
+  background-color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
 `;
 
 const Content = styled.div`
@@ -89,7 +88,7 @@ const PostContainer = styled.div`
     .moreContainer {
       display: flex;
       align-items: center;
-      color: ${lightTheme.FONT_COLOR_DARKGRAY};
+      color: ${(props) => props.theme.FONT_COLOR_DARKGRAY};
       margin-top: 1rem;
 
       .font {

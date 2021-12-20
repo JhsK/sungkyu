@@ -9,13 +9,17 @@ type HeaderProps = {
   headerPadding?: boolean;
 };
 
-const StickyContainer = styled.div`
+type StickyContainerProps = {
+  logoColor: boolean;
+  headerPadding?: boolean;
+};
+
+const StickyContainer = styled.div<StickyContainerProps>`
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: ${(props) => props.color && '#fff'};
-  /* padding: 1rem 0; */
+  background-color: ${(props) => props.logoColor && props.theme.BACKGROUND_INTRO_COLOR};
   padding: ${(props) => (props.headerPadding ? '0' : '1rem 0')};
 `;
 
@@ -42,7 +46,7 @@ const MenuLi = styled.ul`
 `;
 
 const Header = ({ logoColor, logoSize, headerPadding = false }: HeaderProps) => (
-  <StickyContainer color={logoColor} headerPadding={headerPadding}>
+  <StickyContainer logoColor={logoColor} headerPadding={headerPadding}>
     <Container>
       <Link href="/">
         <a>

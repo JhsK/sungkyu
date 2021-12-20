@@ -68,9 +68,13 @@
 import React, { Component } from 'react';
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor } from '@toast-ui/react-editor';
+import { Editor, EditorProps } from '@toast-ui/react-editor';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+
+export interface PostEditorWithForwardedProps extends EditorProps {
+  forwardedRef?: React.MutableRefObject<Editor>;
+}
 
 const Container = styled.div`
   /* margin-top: 7rem; */
@@ -81,7 +85,7 @@ const TitleInput = styled.input`
   width: 50%;
   border: none;
   margin-bottom: 2rem;
-  border-bottom: 2px solid #a3cfcd;
+  border-bottom: 2px solid ${(props) => props.theme.POST_EDIT_TITLE_BORDER_COLOR};
   font-size: 1.7rem;
 
   &:focus {
@@ -103,6 +107,7 @@ const TagInput = styled.input`
 const BtnContainer = styled.div`
   text-align: right;
   margin-top: 2rem;
+  padding-bottom: 2rem;
 
   button {
     width: 100px;
@@ -115,7 +120,7 @@ const BtnContainer = styled.div`
 
   button:nth-child(1) {
     background-color: #a3cfcd;
-    color: #fff;
+    color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
   }
 
   button:nth-child(2) {
@@ -185,10 +190,6 @@ export default PostEditor;
 // import React from 'react';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import { Editor, EditorProps } from '@toast-ui/react-editor';
-
-// export interface PostEditorWithForwardedProps extends EditorProps {
-//   forwardedRef?: React.MutableRefObject<Editor>;
-// }
 
 // const PostEditor = (props: PostEditorWithForwardedProps) => (
 //   <>

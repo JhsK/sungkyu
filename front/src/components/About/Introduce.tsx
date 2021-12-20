@@ -4,7 +4,7 @@ import IntroduceText from '../share/IntroduceText';
 
 const AboutContainer = styled.div`
   width: 1200px;
-  margin: 8rem auto 0 auto;
+  margin: 9rem auto 0 auto;
 
   span {
     font-weight: bold;
