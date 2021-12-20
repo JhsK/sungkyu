@@ -71,7 +71,6 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { lightTheme } from 'src/theme';
 
 export interface PostEditorWithForwardedProps extends EditorProps {
   forwardedRef?: React.MutableRefObject<Editor>;
@@ -86,7 +85,7 @@ const TitleInput = styled.input`
   width: 50%;
   border: none;
   margin-bottom: 2rem;
-  border-bottom: 2px solid ${lightTheme.POST_EDIT_TITLE_BORDER_COLOR};
+  border-bottom: 2px solid ${(props) => props.theme.POST_EDIT_TITLE_BORDER_COLOR};
   font-size: 1.7rem;
 
   &:focus {
@@ -121,7 +120,7 @@ const BtnContainer = styled.div`
 
   button:nth-child(1) {
     background-color: #a3cfcd;
-    color: ${lightTheme.BACKGROUND_INTRO_COLOR};
+    color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
   }
 
   button:nth-child(2) {

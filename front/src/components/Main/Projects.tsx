@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { lightTheme } from 'src/theme';
 import { keyframes } from '@emotion/react';
 
 const verticalScroll = keyframes`
@@ -30,7 +29,7 @@ const Section = styled.section`
   width: 100%;
   height: 100%;
   scroll-snap-type: start;
-  background-color: ${lightTheme.BACKGROUND_PROJECTS_COLOR};
+  background-color: ${(props) => props.theme.BACKGROUND_PROJECTS_COLOR};
   background-blend-mode: multiply;
   background-attachment: fixed;
 `;

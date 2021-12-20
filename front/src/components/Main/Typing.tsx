@@ -1,7 +1,6 @@
 import React from 'react';
 import { Global, css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { lightTheme } from 'src/theme';
 
 const typing = keyframes`
     0% {
@@ -19,7 +18,7 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: auto;
-  background-color: ${lightTheme.BACKGROUND_TYPING_COLOR};
+  background-color: ${(props) => props.theme.BACKGROUND_TYPING_COLOR};
   background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
 `;
 

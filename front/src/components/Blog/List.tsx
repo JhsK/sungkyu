@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { lightTheme } from 'src/theme';
 import React, { useState } from 'react';
 
 const Container = styled.div`
@@ -40,15 +39,15 @@ const LableContainer = styled.div`
 `;
 
 const All = styled.span`
-  color: ${(props) => (props.color === 'All' ? '#000' : lightTheme.NO_ACTIVE_CATEGORY_COLOR)};
+  color: ${(props) => (props.color === 'All' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const Newest = styled.span`
-  color: ${(props) => (props.color === '최신순' ? '#000' : lightTheme.NO_ACTIVE_CATEGORY_COLOR)};
+  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const Latest = styled.span`
-  color: ${(props) => (props.color === '후순위' ? '#000' : lightTheme.NO_ACTIVE_CATEGORY_COLOR)};
+  color: ${(props) => (props.color === '후순위' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const ListContainer = styled.div`
@@ -97,7 +96,7 @@ const TagsContainer = styled.div`
 
   span {
     font-size: 0.8rem;
-    color: ${lightTheme.POST_EDIT_TITLE_BORDER_COLOR};
+    color: ${(props) => props.theme.POST_EDIT_TITLE_BORDER_COLOR};
     margin-right: 0.8rem;
   }
 `;

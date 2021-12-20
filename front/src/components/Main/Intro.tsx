@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { lightTheme } from 'src/theme';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import IntroduceText from '../share/IntroduceText';
@@ -14,7 +13,7 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: ${lightTheme.BACKGROUND_INTRO_COLOR};
+  background-color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
 `;
 
 const Content = styled.div`

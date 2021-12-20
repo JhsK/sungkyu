@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import GlobalStyle from 'src/theme/globalStyle';
 import type { AppProps } from 'next/app';
+import { ThemeProvider } from '@emotion/react';
+import { lightTheme } from 'src/theme';
 
 const App = ({ Component, pageProps }: AppProps) => (
   <>
@@ -20,7 +22,9 @@ const App = ({ Component, pageProps }: AppProps) => (
       <title>Sungkyu</title>
     </Head>
     <GlobalStyle />
-    <Component {...pageProps} />
+    <ThemeProvider theme={lightTheme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
   </>
 );
 export default App;

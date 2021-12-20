@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
+import { lightTheme } from 'src/theme';
 
-export const LOGO_TYPE_LIGHT = '#ffffff';
-export const LOGO_TYPE_DARK = '#000000';
+export const LOGO_TYPE_LIGHT = lightTheme.BACKGROUND_INTRO_COLOR;
+export const LOGO_TYPE_DARK = lightTheme.PUBLIC_BLACK;
 
 type LogoProps = {
   logoColor: boolean;
