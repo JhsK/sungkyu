@@ -107,30 +107,31 @@ const Skill = () => (
     </span>
     <span className="subTitle">Front-end</span>
     {FRONT_SKILL.map((field, index) => (
+      // eslint-disable-next-line react/no-array-index-key
       <IconContainer key={index}>
         {field.map((image, i) => (
-          <Skills key={i}>
+          <Skills key={image.title}>
             <Image src={image.icon} alt="front-end skill" />
-            <span key={i}>{image.title}</span>
+            <span>{image.title}</span>
           </Skills>
         ))}
       </IconContainer>
     ))}
     <SubTitle>Back-end</SubTitle>
     <IconContainer>
-      {BACK_SKILL_ONE.map((image, i) => (
-        <Skills key={i}>
+      {BACK_SKILL_ONE.map((image) => (
+        <Skills key={image.title}>
           <Image src={image.icon} alt="front-end skill" />
-          <span key={i}>{image.title}</span>
+          <span>{image.title}</span>
         </Skills>
       ))}
     </IconContainer>
     <SubTitle>Collaboration & Tools</SubTitle>
     <IconContainer>
-      {TOOL_SKILL_ONE.map((image, i) => (
-        <Skills key={i}>
+      {TOOL_SKILL_ONE.map((image) => (
+        <Skills key={image.title}>
           <Image src={image.icon} alt="front-end skill" />
-          <span key={i}>{image.title}</span>
+          <span>{image.title}</span>
         </Skills>
       ))}
     </IconContainer>

@@ -25,7 +25,7 @@ const LabelContainer = styled.div`
   span:hover {
     /* background-color: #82a0aa; */
     /* color: #fff; */
-    border-bottom: 2px solid #82a0aa;
+    border-bottom: 2px solid ${(props) => props.theme.POST_TAG_BORDER_COLOR};
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import AboutComponent from 'src/components/About';
 import Header from 'src/components/Header';
 import useScroll from 'src/hooks/useScroll';

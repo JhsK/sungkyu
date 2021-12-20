@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Container = styled.div`
-  width: 70%;
+  width: 73%;
 
   a {
     margin-bottom: 1rem;
@@ -39,15 +39,15 @@ const LableContainer = styled.div`
 `;
 
 const All = styled.span`
-  color: ${(props) => (props.color === 'All' ? '#000' : '#b5b5b5')};
+  color: ${(props) => (props.color === 'All' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const Newest = styled.span`
-  color: ${(props) => (props.color === '최신순' ? '#000' : '#b5b5b5')};
+  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const Latest = styled.span`
-  color: ${(props) => (props.color === '후순위' ? '#000' : '#b5b5b5')};
+  color: ${(props) => (props.color === '후순위' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const ListContainer = styled.div`
@@ -96,7 +96,7 @@ const TagsContainer = styled.div`
 
   span {
     font-size: 0.8rem;
-    color: #989898;
+    color: ${(props) => props.theme.POST_EDIT_TITLE_BORDER_COLOR};
     margin-right: 0.8rem;
   }
 `;
