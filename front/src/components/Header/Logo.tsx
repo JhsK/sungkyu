@@ -8,6 +8,7 @@ type LogoProps = {
   logoColor: boolean;
   width?: number;
   height?: number;
+  size?: number;
 };
 
 const returnSVG = (width: number, height: number, color: boolean) => (
@@ -71,7 +72,7 @@ c22 28 44 51 48 51 4 0 26 -39 49 -88 34 -71 42 -98 42 -145 l0 -57 35 0 35 0
   </svg>
 );
 
-const Logo = ({ logoColor, height = 60, width = 200 }: LogoProps) => {
+const Logo = ({ logoColor, size, height = 40, width = 150 }: LogoProps) => {
   const memoSVG = useMemo(() => returnSVG(width, height, logoColor), [logoColor, width, height]);
 
   return <>{memoSVG}</>;
