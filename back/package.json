@@ -2,7 +2,7 @@
   "name": "back",
   "version": "1.0.0",
   "description": "sungkyu blog server",
-  "main": "app.ts",
+  "main": "app.js",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "test": "nodemon app",
-    "dev": "ts-node-dev --inspect --watch -- ./src/app.ts"
+    "dev": "nodemon app"
   },
   "author": "JhsK",
   "license": "ISC"
