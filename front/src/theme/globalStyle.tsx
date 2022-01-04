@@ -29,6 +29,10 @@ const GlobalStyle = () => (
         outline: none;
         color: ${lightTheme.PUBLIC_BLACK};
       }
+
+      button {
+        border: 1px solid #000;
+      }
     `}
   />
 );
