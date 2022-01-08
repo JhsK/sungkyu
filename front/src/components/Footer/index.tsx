@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { GrLogin } from 'react-icons/gr';
+import { useRouter } from 'next/router';
 import Logo from '../Header/Logo';
 
 const FooterContainer = styled.div`
@@ -18,6 +20,8 @@ const Content = styled.div`
 `;
 
 const Text = styled.div`
+  display: flex;
+  align-items: center;
   margin-top: 1rem;
   padding-bottom: 1rem 0;
   font-size: 0.9rem;
@@ -32,22 +36,32 @@ const Text = styled.div`
   }
 `;
 
-const Footer = () => (
-  <FooterContainer>
-    <Content>
-      <Logo logoColor height={30} width={100} />
-      <Text>
-        <span>임성규</span>
-        <span>qwe6293@nate.com</span>
-        <Link href="https://github.com/JhsK">
-          <a>https://github.com/JhsK</a>
-        </Link>
-      </Text>
-      <Text>
-        <span>Copyright &copy; 2021 Sungkyu All Rights Reserved.</span>
-      </Text>
-    </Content>
-  </FooterContainer>
-);
+const Footer = () => {
+  const router = useRouter();
+
+  return (
+    <FooterContainer>
+      <Content>
+        <Logo logoColor height={30} width={100} />
+        <Text>
+          <span>임성규</span>
+          <span>qwe6293@nate.com</span>
+          <Link href="https://github.com/JhsK">
+            <a>https://github.com/JhsK</a>
+          </Link>
+        </Text>
+        <Text>
+          <span>Copyright &copy; 2021 Sungkyu All Rights Reserved.</span>
+          <GrLogin
+            onClick={() => {
+              router.push('/user/sign_in');
+            }}
+            size={20}
+          />
+        </Text>
+      </Content>
+    </FooterContainer>
+  );
+};
 
 export default Footer;
