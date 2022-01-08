@@ -3,6 +3,7 @@ const cors = require("cors");
 const passport = require("passport");
 const session = require("express-session");
 const dotenv = require("dotenv");
+const morgan = require("morgan");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
@@ -20,6 +21,7 @@ db.sequelize
   .catch(console.error);
 passportConfig();
 
+app.use(morgan("dev"));
 app.use(
   cors({
     origin: true,
@@ -47,11 +49,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/user", userRouter);
-
 app.get("/", (req, res) => {
   res.send("hello api");
 });
+
+app.use("/user", userRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("서버 실행 중");

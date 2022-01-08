@@ -4,6 +4,10 @@ import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Form, FormContainer } from 'src/components/Form';
+import { signIn } from 'src/api';
+import router from 'next/router';
+import { toast, ToastContainer } from 'react-toastify';
+import Link from 'next/link';
 
 interface JoinInput {
   email: string;
@@ -39,10 +43,29 @@ const Sign_in = () => {
     formState: { errors },
     setError,
   } = useForm<JoinInput>();
-  const onSubmit: SubmitHandler<JoinInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<JoinInput> = async (data) => {
+    try {
+      const { data: loginData } = await signIn(data);
+      toast.success('로그인에 성공 했습니다!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        router.push('/user/sign_in');
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
+      <ToastContainer />
       <Header logoColor />
       <Page>
         <Container onSubmit={handleSubmit(onSubmit)}>
@@ -51,17 +74,19 @@ const Sign_in = () => {
             <Form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label htmlFor="email">이메일</label>
-                <input name="email" type="text" />
+                <input {...register('email')} name="email" type="text" />
               </div>
               <div>
                 <label htmlFor="password">비밀번호</label>
-                <input name="password" type="password" />
+                <input {...register('password')} name="password" type="password" />
               </div>
               <Button borderNone submitType>
                 로그인
               </Button>
               <Button borderNone={false} submitType={false}>
-                회원가입
+                <Link href="/user/sign_up">
+                  <a>회원가입</a>
+                </Link>
               </Button>
             </Form>
           </FormContainer>
