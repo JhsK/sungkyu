@@ -1,9 +1,13 @@
 import styled from '@emotion/styled';
+import router from 'next/router';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast, ToastContainer } from 'react-toastify';
+import { signUp } from 'src/api';
 import Footer from 'src/components/Footer';
 import { Button, Form, FormContainer } from 'src/components/Form';
 import Header from 'src/components/Header';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface JoinInput {
   email: string;
@@ -44,13 +48,31 @@ const Sign_up = () => {
     setError,
     formState: { errors },
   } = useForm<JoinInput>();
-  const onSubmit: SubmitHandler<JoinInput> = (data: JoinInput) => {
+  const onSubmit: SubmitHandler<JoinInput> = async (data: JoinInput) => {
     if (data.password !== data.password_confirmation) {
       setError('password', { message: validationMessage.passwordConfirmation }, { shouldFocus: true });
+    }
+    try {
+      await signUp(data);
+      toast.success('회원가입에 성공 했습니다!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        router.push('/user/sign_in');
+      }, 1000);
+    } catch (error) {
+      console.log(errors);
     }
   };
   return (
     <>
+      <ToastContainer />
       <Header logoColor />
       <Page>
         <Container>
