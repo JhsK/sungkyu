@@ -10,13 +10,8 @@ import Header from 'src/components/Header';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRecoilState } from 'recoil';
 import { currentUserState } from 'src/atom';
+import { JoinInput } from 'src/constant';
 
-interface JoinInput {
-  email: string;
-  password: string;
-  password_confirmation: string;
-  username: string;
-}
 const Page = styled.div`
   width: 100%;
   height: 100%;

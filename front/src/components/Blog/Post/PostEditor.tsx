@@ -65,12 +65,14 @@
 
 // export default ToastEditorComponent;
 
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import router from 'next/router';
+import { postCreateAPI } from 'src/api';
 
 export interface PostEditorWithForwardedProps extends EditorProps {
   forwardedRef?: React.MutableRefObject<Editor>;
@@ -118,43 +120,61 @@ const BtnContainer = styled.div`
     cursor: pointer;
   }
 
-  button:nth-child(1) {
+  button:nth-of-type(1) {
     background-color: #a3cfcd;
     color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
   }
 
-  button:nth-child(2) {
+  button:nth-of-type(2) {
     margin-left: 1rem;
   }
 `;
 
 const PostEditor = () => {
   const editorRef = React.createRef<Editor>();
+  const [title, setTitle] = useState('');
 
-  const handleClick = () => {
-    console.log(editorRef.current.getInstance().getMarkdown());
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const onSubmitPost = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown() };
+    console.log(values);
+    // console.log(editorRef.current?.getInstance()?.getMarkdown());
+    try {
+      await postCreateAPI(values);
+      router.replace('/blog');
+    } catch (error) {
+      console.log(error);
+      alert('오류가 발생했습니다. 관리자에게 문의해주세요');
+    }
   };
 
   return (
     <Container>
-      <TitleInput type="text" placeholder="제목을 입력해주세요" />
-      <TagInput placeholder="태그를 입력하세요" type="text" />
-      <Editor
-        previewStyle="vertical"
-        height="75vh"
-        hideModeSwitch
-        initialEditType="markdown"
-        initialValue="hello"
-        ref={editorRef}
-      />
-      <BtnContainer>
-        <button>작성하기</button>
-        <button>
-          <Link href="/blog">
-            <a>목록이동</a>
-          </Link>
-        </button>
-      </BtnContainer>
+      <form onSubmit={onSubmitPost}>
+        <TitleInput onChange={onChangeTitle} name="title" type="text" placeholder="제목을 입력해주세요" />
+        <TagInput placeholder="태그를 입력하세요" type="text" />
+        <Editor
+          previewStyle="vertical"
+          height="75vh"
+          hideModeSwitch
+          initialEditType="markdown"
+          initialValue="hello"
+          // onChange={onChangeEditor}
+          ref={editorRef}
+        />
+        <BtnContainer>
+          <button type="submit">작성하기</button>
+          <button>
+            <Link href="/blog">
+              <a>목록이동</a>
+            </Link>
+          </button>
+        </BtnContainer>
+      </form>
       {/* <button onClick={handleClick}>ttt</button> */}
     </Container>
   );

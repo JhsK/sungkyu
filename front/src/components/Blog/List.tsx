@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { currentUserState } from 'src/atom';
 
 const Container = styled.div`
   width: 73%;
@@ -113,6 +115,7 @@ const CreateBtn = styled.div`
 type CategoryType = 'All' | '최신순' | '후순위';
 
 const List = () => {
+  const currentUser = useRecoilValue(currentUserState);
   const [category, setCategory] = useState<CategoryType>('All');
   const activeCategory = (label: CategoryType) => {
     setCategory(label);
@@ -121,9 +124,11 @@ const List = () => {
   return (
     <Container>
       <CreateBtn>
-        <Link href="/blog/new">
-          <a>작성하기</a>
-        </Link>
+        {currentUser?.isAuthenticated && (
+          <Link href="/blog/new">
+            <a>작성하기</a>
+          </Link>
+        )}
       </CreateBtn>
       <LableContainer>
         <div className="filter">

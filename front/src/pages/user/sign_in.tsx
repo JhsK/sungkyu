@@ -11,13 +11,7 @@ import Link from 'next/link';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { currentUserState } from 'src/atom';
-
-interface JoinInput {
-  email: string;
-  password: string;
-  password_confirmation: string;
-  username: string;
-}
+import { LogInInput } from 'src/constant';
 
 const Page = styled.div`
   width: 100%;
@@ -45,8 +39,8 @@ const Sign_in = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<JoinInput>();
-  const onSubmit: SubmitHandler<JoinInput> = async (data) => {
+  } = useForm<LogInInput>();
+  const onSubmit: SubmitHandler<LogInInput> = async (data) => {
     try {
       const { data: loginData } = await signIn(data);
       setCurrentUser({ isAuthenticated: true, ...loginData });
@@ -64,6 +58,15 @@ const Sign_in = () => {
       }, 1000);
     } catch (error) {
       console.log(error);
+      toast.error('로그인 정보를 확인해주세요', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -83,7 +86,6 @@ const Sign_in = () => {
       }, 1000);
     }
   }, []);
-  console.log(currentUser);
   return (
     <>
       <ToastContainer />
