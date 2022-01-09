@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
@@ -9,7 +9,7 @@ import router from 'next/router';
 import { toast, ToastContainer } from 'react-toastify';
 import Link from 'next/link';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { currentUserState } from 'src/atom';
 
 interface JoinInput {
@@ -40,7 +40,7 @@ const Container = styled.div`
 `;
 
 const Sign_in = () => {
-  const setCurrentUser = useSetRecoilState(currentUserState);
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
   const {
     register,
     handleSubmit,
@@ -60,13 +60,30 @@ const Sign_in = () => {
         progress: undefined,
       });
       setTimeout(() => {
-        router.push('/');
+        router.replace('/');
       }, 1000);
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    if (currentUser?.isAuthenticated) {
+      toast.error('이미 로그인 상태입니다', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        router.back();
+      }, 1000);
+    }
+  }, []);
+  console.log(currentUser);
   return (
     <>
       <ToastContainer />
