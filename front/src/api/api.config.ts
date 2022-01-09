@@ -3,6 +3,8 @@ import { configs } from 'src/config';
 
 const { API_URL, VERSION } = configs;
 
+axios.defaults.withCredentials = true;
+
 const headerConfig = {
   baseURL: API_URL,
   headers: {

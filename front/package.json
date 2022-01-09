@@ -30,7 +30,8 @@
     "react-hook-form": "^7.22.5",
     "react-icons": "^4.3.1",
     "react-page-scroller": "^2.2.1",
-    "react-toastify": "^8.1.0"
+    "react-toastify": "^8.1.0",
+    "recoil": "^0.5.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",

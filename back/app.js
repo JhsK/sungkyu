@@ -8,6 +8,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/user");
+const postRouter = require("./routes/post");
 const db = require("./models");
 const passportConfig = require("./passport");
 
@@ -24,7 +25,7 @@ passportConfig();
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: true,
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -38,11 +39,11 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
-    proxy: true,
-    cookie: {
-      httpOnly: true,
-      secure: true,
-    },
+    // proxy: true,
+    // cookie: {
+    //   httpOnly: true,
+    //   secure: true,
+    // },
   })
 );
 
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", userRouter);
+app.use("/post", postRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("서버 실행 중");
