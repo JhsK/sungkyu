@@ -8,6 +8,9 @@ import { signIn } from 'src/api';
 import router from 'next/router';
 import { toast, ToastContainer } from 'react-toastify';
 import Link from 'next/link';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSetRecoilState } from 'recoil';
+import { currentUserState } from 'src/atom';
 
 interface JoinInput {
   email: string;
@@ -37,15 +40,16 @@ const Container = styled.div`
 `;
 
 const Sign_in = () => {
+  const setCurrentUser = useSetRecoilState(currentUserState);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (data) => {
     try {
       const { data: loginData } = await signIn(data);
+      setCurrentUser({ isAuthenticated: true, ...loginData });
       toast.success('로그인에 성공 했습니다!', {
         position: 'top-center',
         autoClose: 2000,
@@ -56,7 +60,7 @@ const Sign_in = () => {
         progress: undefined,
       });
       setTimeout(() => {
-        router.push('/user/sign_in');
+        router.push('/');
       }, 1000);
     } catch (error) {
       console.log(error);
@@ -68,7 +72,7 @@ const Sign_in = () => {
       <ToastContainer />
       <Header logoColor />
       <Page>
-        <Container onSubmit={handleSubmit(onSubmit)}>
+        <Container>
           <h1>로그인</h1>
           <FormContainer size={330}>
             <Form onSubmit={handleSubmit(onSubmit)}>

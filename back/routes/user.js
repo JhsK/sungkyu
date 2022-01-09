@@ -6,6 +6,26 @@ const { User, Post } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 const router = express.Router();
 
+router.get("/", async (req, res, next) => {
+  try {
+    if (req.user) {
+      const fullUserWithoutPassword = await User.findOne({
+        where: { id: req.user.id },
+        attributes: {
+          exclude: ["password"],
+        },
+      });
+      console.log("로그인 정보");
+      res.status(200).json(fullUserWithoutPassword);
+    } else {
+      res.status(200).json({});
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 router.post("/sign_in", isNotLoggedIn, (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
@@ -25,13 +45,8 @@ router.post("/sign_in", isNotLoggedIn, (req, res, next) => {
         attributes: {
           exclude: ["password"],
         },
-        include: [
-          {
-            model: Post,
-            attributes: ["id"],
-          },
-        ],
       });
+      console.log("로그인 성공");
       return res.status(200).json(fullUserWithoutPassword);
     });
   })(req, res, next);

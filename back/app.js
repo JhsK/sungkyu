@@ -24,7 +24,7 @@ passportConfig();
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: true,
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -38,11 +38,11 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
-    proxy: true,
-    cookie: {
-      httpOnly: true,
-      secure: true,
-    },
+    // proxy: true,
+    // cookie: {
+    //   httpOnly: true,
+    //   secure: true,
+    // },
   })
 );
 
