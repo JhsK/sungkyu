@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { getPostAPI } from 'src/api';
+import { useQuery } from 'react-query';
 import List from './List';
 import Tags from './Tags';
 import Footer from '../Footer';
@@ -19,14 +21,17 @@ const BlogContainer = styled.div`
   gap: 2rem;
 `;
 
-const BlogComponent = () => (
-  <Container>
-    <BlogContainer>
-      <List />
-      <Tags />
-    </BlogContainer>
-    <Footer />
-  </Container>
-);
+const BlogComponent = () => {
+  const { data: posts } = useQuery('posts', getPostAPI);
+  return (
+    <Container>
+      <BlogContainer>
+        <List />
+        <Tags />
+      </BlogContainer>
+      <Footer />
+    </Container>
+  );
+};
 
 export default BlogComponent;
