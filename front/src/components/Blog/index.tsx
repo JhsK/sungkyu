@@ -23,6 +23,7 @@ const BlogContainer = styled.div`
 
 const BlogComponent = () => {
   const { data: posts } = useQuery('posts', getPostAPI);
+  console.log(posts);
   return (
     <Container>
       <BlogContainer>

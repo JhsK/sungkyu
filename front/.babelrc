@@ -5,5 +5,5 @@
     "@babel/preset-react",
     "@babel/preset-env"
   ],
-  "plugins": ["@emotion"]
+  "plugins": ["@emotion", "@babel/plugin-transform-runtime"]
 }
