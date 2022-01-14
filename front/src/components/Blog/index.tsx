@@ -2,6 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { getPostAPI } from 'src/api';
 import { useQuery } from 'react-query';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/react';
 import List from './List';
 import Tags from './Tags';
 import Footer from '../Footer';
@@ -22,16 +24,30 @@ const BlogContainer = styled.div`
 `;
 
 const BlogComponent = () => {
-  const { data: posts } = useQuery('posts', getPostAPI);
-  console.log(posts);
+  const { data: posts, isLoading } = useQuery('posts', getPostAPI);
+
   return (
-    <Container>
-      <BlogContainer>
-        <List />
-        <Tags />
-      </BlogContainer>
-      <Footer />
-    </Container>
+    <>
+      {isLoading ? (
+        <ClipLoader
+          css={css`
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          `}
+          size={200}
+        />
+      ) : (
+        <Container>
+          <BlogContainer>
+            <List postsData={posts} />
+            <Tags />
+          </BlogContainer>
+          <Footer />
+        </Container>
+      )}
+    </>
   );
 };
 
