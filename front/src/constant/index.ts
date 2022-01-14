@@ -21,3 +21,14 @@ export interface postCreateType {
   title: string;
   content: string;
 }
+
+export interface Model {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PostModel extends Model {
+  title: string;
+  UserId: number;
+}
