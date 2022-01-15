@@ -15,7 +15,12 @@ export const postCreateAPI = async (params: postCreateType) => {
   return data;
 };
 
-export const getPostAPI: () => Promise<PostModel> = async () => {
+export const getPostsAPI: () => Promise<PostModel> = async () => {
   const { data } = await API.get('/post');
+  return data;
+};
+
+export const getPostAPI: (id: string) => Promise<PostModel> = async (id) => {
+  const { data } = await API.get(`post/${id}`);
   return data;
 };

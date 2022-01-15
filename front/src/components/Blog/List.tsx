@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import router from 'next/router';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { currentUserState } from 'src/atom';
@@ -149,7 +150,7 @@ const List = ({ postsData }) => {
       {postsData &&
         postsData.map((post: PostModel) => (
           <>
-            <ListContainer key={post.id}>
+            <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
               <ContentContainer key={post.id}>
                 <div key={post.id}>
                   <span className="title">{post.title}</span>

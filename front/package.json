@@ -23,6 +23,7 @@
     "emotion-reset": "^3.0.1",
     "framer-motion": "^5.5.5",
     "gray-matter": "^4.0.3",
+    "moment": "^2.29.1",
     "next": "^11.1.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

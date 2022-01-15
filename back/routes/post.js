@@ -28,6 +28,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.id },
+    });
+    console.log(post);
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 router.post("/create", isLoggedIn, async (req, res, next) => {
   try {
     const post = await Post.create({

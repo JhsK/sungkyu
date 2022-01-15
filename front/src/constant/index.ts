@@ -32,4 +32,6 @@ export interface Model {
 export interface PostModel extends Model {
   title: string;
   UserId: number;
+  tag?: string[];
+  content: string;
 }

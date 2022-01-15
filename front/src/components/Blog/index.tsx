@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { getPostAPI } from 'src/api';
+import { getPostsAPI } from 'src/api';
 import { useQuery } from 'react-query';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/react';
@@ -24,7 +24,7 @@ const BlogContainer = styled.div`
 `;
 
 const BlogComponent = () => {
-  const { data: posts, isLoading } = useQuery('posts', getPostAPI);
+  const { data: posts, isLoading } = useQuery('posts', getPostsAPI);
 
   return (
     <>
