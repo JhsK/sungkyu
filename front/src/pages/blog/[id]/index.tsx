@@ -3,10 +3,11 @@ import styled from '@emotion/styled';
 import Header from 'src/components/Header';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { getPostAPI } from 'src/api';
-import { useQuery } from 'react-query';
+import { getPostAPI, postDeleteAPI } from 'src/api';
+import { useMutation, useQuery } from 'react-query';
 import moment from 'moment';
 import 'moment/locale/ko';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Viewer = dynamic(() => import('../../../components/Blog/Post/PostViewer'), { ssr: false });
 
@@ -60,9 +61,11 @@ const PostView = () => {
     return data;
   });
 
-  console.log(post);
+  const deleteMutate = useMutation(postDeleteAPI);
+
   return (
     <>
+      <ToastContainer />
       <Header logoColor />
       <Container>
         <TitleContainer>
@@ -71,7 +74,32 @@ const PostView = () => {
             <span>{moment(post?.createdAt).format('LL')}</span>
             <UpdateAndDeleteBtn>
               <span>수정</span>
-              <span>삭제</span>
+              <span
+                onClick={() => {
+                  const deleteBoolean = window.confirm('정말 삭제하시겠습니까?');
+                  if (deleteBoolean) {
+                    deleteMutate.mutate(post.id, {
+                      onSuccess: () => {
+                        toast.success('로그인에 성공 했습니다!', {
+                          position: 'top-center',
+                          autoClose: 2000,
+                          hideProgressBar: true,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                        });
+
+                        setTimeout(() => {
+                          router.replace('/blog');
+                        }, 2000);
+                      },
+                    });
+                  }
+                }}
+              >
+                삭제
+              </span>
             </UpdateAndDeleteBtn>
           </SubTitle>
           <TagList>

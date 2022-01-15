@@ -21,6 +21,12 @@ export const getPostsAPI: () => Promise<PostModel> = async () => {
 };
 
 export const getPostAPI: (id: string) => Promise<PostModel> = async (id) => {
-  const { data } = await API.get(`post/${id}`);
+  const { data } = await API.get(`/post/${id}`);
+  return data;
+};
+
+export const postDeleteAPI: (id) => Promise<number> = async (id) => {
+  console.log(id);
+  const { data } = await API.delete(`/post/${id}`);
   return data;
 };

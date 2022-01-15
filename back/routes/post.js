@@ -67,13 +67,13 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.delete("/:postId", isLoggedIn, async (req, res, next) => {
+router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const deletePost = await Post.findOne({
-      where: { id: req.params.postId },
+      where: { id: req.params.id },
     });
     await deletePost.destroy();
-    res.status(200).json(parseInt(req.params.postId, 10));
+    res.status(200).json(parseInt(req.params.id, 10));
   } catch (error) {
     console.error(error);
     next(error);
