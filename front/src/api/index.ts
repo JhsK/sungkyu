@@ -1,11 +1,12 @@
-import { JoinInput, LogInInput, postCreateType, PostModel } from 'src/constant';
+import { AxiosResponse } from 'axios';
+import { currentUserType, JoinInput, LogInInput, postCreateType, PostModel } from 'src/constant';
 import { API } from './api.config';
 
 export const signUp = async (params: JoinInput) => API.post('/user/sign_up', params);
 export const signIn = async (params: LogInInput) => API.post('/user/sign_in', params);
 export const logOut = async () => API.post('/user/logout');
 
-export const getAuth = async () => {
+export const getAuth: () => Promise<AxiosResponse<currentUserType, any>> = async () => {
   const data = await API.get('/user');
   return data;
 };

@@ -8,6 +8,8 @@ import { useMutation, useQuery } from 'react-query';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { toast, ToastContainer } from 'react-toastify';
+import { useRecoilValueLoadable } from 'recoil';
+import { currentUserSelector } from 'src/atom';
 
 const Viewer = dynamic(() => import('../../../components/Blog/Post/PostViewer'), { ssr: false });
 
@@ -56,6 +58,7 @@ const UpdateAndDeleteBtn = styled.div`
 const PostView = () => {
   const router = useRouter();
   const { id } = router.query;
+  const currentUser = useRecoilValueLoadable(currentUserSelector);
   const { data: post } = useQuery(`post-${id}`, async () => {
     const data = await getPostAPI(String(id));
     return data;
@@ -72,35 +75,37 @@ const PostView = () => {
           <Title>{post?.title}</Title>
           <SubTitle>
             <span>{moment(post?.createdAt).format('LL')}</span>
-            <UpdateAndDeleteBtn>
-              <span>수정</span>
-              <span
-                onClick={() => {
-                  const deleteBoolean = window.confirm('정말 삭제하시겠습니까?');
-                  if (deleteBoolean) {
-                    deleteMutate.mutate(post.id, {
-                      onSuccess: () => {
-                        toast.success('로그인에 성공 했습니다!', {
-                          position: 'top-center',
-                          autoClose: 2000,
-                          hideProgressBar: true,
-                          closeOnClick: true,
-                          pauseOnHover: true,
-                          draggable: true,
-                          progress: undefined,
-                        });
+            {currentUser?.contents?.isAuthenticated && (
+              <UpdateAndDeleteBtn>
+                <span>수정</span>
+                <span
+                  onClick={() => {
+                    const deleteBoolean = window.confirm('정말 삭제하시겠습니까?');
+                    if (deleteBoolean) {
+                      deleteMutate.mutate(post.id, {
+                        onSuccess: () => {
+                          toast.success('로그인에 성공 했습니다!', {
+                            position: 'top-center',
+                            autoClose: 2000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                          });
 
-                        setTimeout(() => {
-                          router.replace('/blog');
-                        }, 2000);
-                      },
-                    });
-                  }
-                }}
-              >
-                삭제
-              </span>
-            </UpdateAndDeleteBtn>
+                          setTimeout(() => {
+                            router.replace('/blog');
+                          }, 2000);
+                        },
+                      });
+                    }
+                  }}
+                >
+                  삭제
+                </span>
+              </UpdateAndDeleteBtn>
+            )}
           </SubTitle>
           <TagList>
             <span>JS</span>

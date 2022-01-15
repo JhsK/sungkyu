@@ -14,7 +14,7 @@ export interface currentUserType {
   username?: string;
   createdAt?: string;
   updatedAt?: string;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 export interface postCreateType {

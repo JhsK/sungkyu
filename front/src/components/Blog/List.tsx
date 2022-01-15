@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import router from 'next/router';
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { currentUserState } from 'src/atom';
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { currentUserSelector, currentUserState } from 'src/atom';
 import { PostModel } from 'src/constant';
 
 const Container = styled.div`
@@ -117,7 +117,7 @@ const CreateBtn = styled.div`
 type CategoryType = 'All' | '최신순' | '후순위';
 
 const List = ({ postsData }) => {
-  const currentUser = useRecoilValue(currentUserState);
+  const currentUser = useRecoilValueLoadable(currentUserSelector);
   const [category, setCategory] = useState<CategoryType>('All');
   const activeCategory = (label: CategoryType) => {
     setCategory(label);
@@ -127,7 +127,7 @@ const List = ({ postsData }) => {
   return (
     <Container>
       <CreateBtn>
-        {currentUser?.isAuthenticated && (
+        {currentUser?.contents?.isAuthenticated && (
           <Link href="/blog/new">
             <a>작성하기</a>
           </Link>

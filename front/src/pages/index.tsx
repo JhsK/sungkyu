@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { currentUserState } from 'src/atom';
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { currentUserSelector, currentUserState } from 'src/atom';
 import Header from 'src/components/Header';
 import Main from 'src/components/Main';
-import useAuth from 'src/hooks/useAuth';
 
 const Home = () => {
   const [logoColor, setLogoColor] = useState(false);
   const [projectsAnimation, setProjectsAnimation] = useState(false);
   const [blogAnimation, setBlogAnimation] = useState(false);
-  const currentUser = useRecoilValue(currentUserState);
-  useAuth();
+  const user = useRecoilValueLoadable(currentUserSelector);
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -29,7 +27,7 @@ const Home = () => {
     // window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  console.log(currentUser);
+  console.log(user);
   return (
     <>
       <Header logoColor={logoColor} />

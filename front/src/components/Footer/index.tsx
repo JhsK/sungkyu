@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { GrLogin, GrLogout } from 'react-icons/gr';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
-import { currentUserState } from 'src/atom';
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { currentUserSelector, currentUserState } from 'src/atom';
 import { logOut } from 'src/api';
 import { toast } from 'react-toastify';
 import Logo from '../Header/Logo';
@@ -41,7 +41,7 @@ const Text = styled.div`
 `;
 
 const Footer = () => {
-  const currentUser = useRecoilValue(currentUserState);
+  const currentUser = useRecoilValueLoadable(currentUserSelector);
   const router = useRouter();
 
   return (
@@ -57,7 +57,7 @@ const Footer = () => {
         </Text>
         <Text>
           <span>Copyright &copy; 2021 Sungkyu All Rights Reserved.</span>
-          {currentUser?.isAuthenticated ? (
+          {currentUser?.contents?.isAuthenticated ? (
             <GrLogout
               onClick={async () => {
                 await logOut();
