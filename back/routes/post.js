@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 
-const { Post, User } = require("../models");
+const { Post, User, Tag, PostTag } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
@@ -12,7 +12,15 @@ router.get("/", async (req, res, next) => {
     const posts = await Post.findAll({
       where,
       order: [["createdAt", "DESC"]],
+      // include: [
+      //   {
+      //     model: Tag,
+      //     // where: { PostId: Post.id },
+      //     attributes: ["name"],
+      //   },
+      // ],
     });
+    console.log(posts);
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
@@ -27,6 +35,18 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
       content: req.body.content,
       UserId: req.user.id,
     });
+
+    if (req.body.tag.length > 0) {
+      const tags = req.body.tag;
+      const result = await Promise.all(
+        tags.map((tag) =>
+          Tag.findOrCreate({
+            where: { name: tag.toLowerCase() },
+          })
+        )
+      ); // [[노드, true], [리액트, true]]
+      await post.addTags(result.map((v) => v[0]));
+    }
     res.status(200).json("success");
   } catch (error) {
     console.error(error);
