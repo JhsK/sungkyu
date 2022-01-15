@@ -12,6 +12,7 @@ declare module '@emotion/react' {
     POST_TAG_COLOR: string;
     POST_TAG_BORDER_COLOR: string;
     POST_EDIT_TITLE_BORDER_COLOR: string;
+    POST_EDIT_BUTTON_COLOR: string;
     BACKGROUND_USER_COLOR: string;
   }
 }

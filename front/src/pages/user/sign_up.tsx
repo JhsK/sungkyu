@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import router from 'next/router';
+import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast, ToastContainer } from 'react-toastify';
+import { signUp } from 'src/api';
 import Footer from 'src/components/Footer';
 import { Button, Form, FormContainer } from 'src/components/Form';
 import Header from 'src/components/Header';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRecoilState } from 'recoil';
+import { currentUserState } from 'src/atom';
+import { JoinInput } from 'src/constant';
 
-interface JoinInput {
-  email: string;
-  password: string;
-  password_confirmation: string;
-  username: string;
-}
 const Page = styled.div`
   width: 100%;
   height: 100%;
@@ -38,19 +39,56 @@ const validationMessage = {
 };
 
 const Sign_up = () => {
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm<JoinInput>();
-  const onSubmit: SubmitHandler<JoinInput> = (data: JoinInput) => {
+  const onSubmit: SubmitHandler<JoinInput> = async (data: JoinInput) => {
     if (data.password !== data.password_confirmation) {
       setError('password', { message: validationMessage.passwordConfirmation }, { shouldFocus: true });
     }
+    try {
+      await signUp(data);
+      toast.success('회원가입에 성공 했습니다!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        router.replace('/user/sign_in');
+      }, 1000);
+    } catch (error) {
+      console.log(errors);
+    }
   };
+
+  useEffect(() => {
+    if (currentUser?.isAuthenticated) {
+      toast.error('이미 로그인 상태입니다', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        router.back();
+      }, 1000);
+    }
+  }, []);
+
   return (
     <>
+      <ToastContainer />
       <Header logoColor />
       <Page>
         <Container>

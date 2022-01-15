@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { currentUserState } from 'src/atom';
+import { PostModel } from 'src/constant';
 
 const Container = styled.div`
   width: 73%;
@@ -112,18 +115,22 @@ const CreateBtn = styled.div`
 
 type CategoryType = 'All' | '최신순' | '후순위';
 
-const List = () => {
+const List = ({ postsData }) => {
+  const currentUser = useRecoilValue(currentUserState);
   const [category, setCategory] = useState<CategoryType>('All');
   const activeCategory = (label: CategoryType) => {
     setCategory(label);
   };
+  console.log('asf', postsData);
 
   return (
     <Container>
       <CreateBtn>
-        <Link href="/blog/new">
-          <a>작성하기</a>
-        </Link>
+        {currentUser?.isAuthenticated && (
+          <Link href="/blog/new">
+            <a>작성하기</a>
+          </Link>
+        )}
       </CreateBtn>
       <LableContainer>
         <div className="filter">
@@ -139,6 +146,29 @@ const List = () => {
         </div>
         <input type="text" />
       </LableContainer>
+      {postsData &&
+        postsData.map((post: PostModel) => (
+          <>
+            <ListContainer key={post.id}>
+              <ContentContainer key={post.id}>
+                <div key={post.id}>
+                  <span className="title">{post.title}</span>
+                  <div>
+                    네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을
+                    출시했습니다. Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
+                  </div>
+                </div>
+                <TagsContainer>
+                  <span>#자바스크립트</span>
+                  <span>#웹</span>
+                  <span>#자바스크립트</span>
+                </TagsContainer>
+              </ContentContainer>
+              <img alt="test" src="test.jpg" />
+            </ListContainer>
+            <Hr key={post.createdAt} />
+          </>
+        ))}
       <ListContainer>
         <ContentContainer>
           <div>

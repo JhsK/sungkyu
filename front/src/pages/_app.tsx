@@ -1,30 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import GlobalStyle from 'src/theme/globalStyle';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@emotion/react';
 import { lightTheme } from 'src/theme';
+import { RecoilRoot } from 'recoil';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { configs } from 'src/config';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-const App = ({ Component, pageProps }: AppProps) => (
-  <>
-    <Head>
-      <meta charSet="utf-8" />
-      <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
-      />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"
-      />
-      <title>Sungkyu</title>
-    </Head>
-    <GlobalStyle />
-    <ThemeProvider theme={lightTheme}>
-      <Component {...pageProps} />
-    </ThemeProvider>
-  </>
-);
+const isProduction = configs.ENV === 'production';
+
+const App = ({ Component, pageProps }: AppProps) => {
+  const [queryClient] = React.useState(() => new QueryClient());
+
+  return (
+    <>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"
+        />
+        <title>Sungkyu</title>
+      </Head>
+      <GlobalStyle />
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <RecoilRoot>
+            <ThemeProvider theme={lightTheme}>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </RecoilRoot>
+        </Hydrate>
+        {isProduction ? null : <ReactQueryDevtools position="bottom-right" />}
+      </QueryClientProvider>
+    </>
+  );
+};
 export default App;

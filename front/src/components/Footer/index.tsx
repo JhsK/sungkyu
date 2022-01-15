@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { GrLogin } from 'react-icons/gr';
+import { GrLogin, GrLogout } from 'react-icons/gr';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { currentUserState } from 'src/atom';
+import { logOut } from 'src/api';
+import { toast } from 'react-toastify';
 import Logo from '../Header/Logo';
 
 const FooterContainer = styled.div`
@@ -37,6 +41,7 @@ const Text = styled.div`
 `;
 
 const Footer = () => {
+  const currentUser = useRecoilValue(currentUserState);
   const router = useRouter();
 
   return (
@@ -52,12 +57,22 @@ const Footer = () => {
         </Text>
         <Text>
           <span>Copyright &copy; 2021 Sungkyu All Rights Reserved.</span>
-          <GrLogin
-            onClick={() => {
-              router.push('/user/sign_in');
-            }}
-            size={20}
-          />
+          {currentUser?.isAuthenticated ? (
+            <GrLogout
+              onClick={async () => {
+                await logOut();
+                router.replace('/');
+              }}
+              size={20}
+            />
+          ) : (
+            <GrLogin
+              onClick={() => {
+                router.push('/user/sign_in');
+              }}
+              size={20}
+            />
+          )}
         </Text>
       </Content>
     </FooterContainer>
