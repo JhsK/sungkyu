@@ -20,6 +20,7 @@ export interface currentUserType {
 export interface postCreateType {
   title: string;
   content: string;
+  tag?: string[];
 }
 
 export interface Model {
