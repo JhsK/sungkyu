@@ -18,6 +18,7 @@ export const lightTheme = {
   POST_TAG_COLOR: '#ddc3c3',
   POST_TAG_BORDER_COLOR: '#82a0aa',
   POST_EDIT_TITLE_BORDER_COLOR: '#989898',
+  POST_EDIT_BUTTON_COLOR: '#a3cfcd',
   BACKGROUND_USER_COLOR: '#fafafa',
 };
 

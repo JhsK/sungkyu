@@ -65,7 +65,7 @@
 
 // export default ToastEditorComponent;
 
-import React, { Component, useState } from 'react';
+import React, { Component, useRef, useState } from 'react';
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
@@ -89,6 +89,7 @@ const TitleInput = styled.input`
   margin-bottom: 2rem;
   border-bottom: 2px solid ${(props) => props.theme.POST_EDIT_TITLE_BORDER_COLOR};
   font-size: 1.7rem;
+  display: block;
 
   &:focus {
     outline: none;
@@ -106,6 +107,14 @@ const TagInput = styled.input`
   }
 `;
 
+const TagValue = styled.span`
+  padding: 0.3rem 0.5rem;
+  color: ${(props) => props.theme.POST_EDIT_BUTTON_COLOR};
+  background-color: ${(props) => props.theme.POST_EDIT_TITLE_BORDER_COLOR};
+  border-radius: 10px;
+  margin-right: 0.5rem;
+`;
+
 const BtnContainer = styled.div`
   text-align: right;
   margin-top: 2rem;
@@ -121,7 +130,7 @@ const BtnContainer = styled.div`
   }
 
   button:nth-of-type(1) {
-    background-color: #a3cfcd;
+    background-color: ${(props) => props.theme.POST_EDIT_BUTTON_COLOR};
     color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
   }
 
@@ -133,14 +142,35 @@ const BtnContainer = styled.div`
 const PostEditor = () => {
   const editorRef = React.createRef<Editor>();
   const [title, setTitle] = useState('');
+  const [tag, setTag] = useState([]);
+  const [tagInputValue, setTagInputValue] = useState('');
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const onSubmitPost = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onChangeTag = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTagInputValue(e.target.value);
+  };
+
+  const onKeyUpTag = (e) => {
+    if (e.keyCode === 13) {
+      const addTagValue = e.target.value;
+      setTag((prev) => [...prev, addTagValue]);
+      setTagInputValue('');
+    } else setTag((prev) => [...prev]);
+  };
+
+  const deleteTag = (index: number) => {
+    setTag([...tag.filter((tavValue, i) => index !== i)]);
+  };
+
+  const onSubmitPost = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown() };
+    if (title === '') {
+      return alert('제목은 필수 입니다');
+    }
+    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag };
     console.log(values);
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
@@ -150,13 +180,29 @@ const PostEditor = () => {
       console.log(error);
       alert('오류가 발생했습니다. 관리자에게 문의해주세요');
     }
-  };
 
+    return '';
+  };
   return (
     <Container>
-      <form onSubmit={onSubmitPost}>
+      {/* <form onSubmit={onSubmitPost}> */}
+      <div>
         <TitleInput onChange={onChangeTitle} name="title" type="text" placeholder="제목을 입력해주세요" />
-        <TagInput placeholder="태그를 입력하세요" type="text" />
+        {tag &&
+          tag.map((tagValue, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <TagValue key={tagValue} onClick={() => deleteTag(index)}>
+              {tagValue}
+            </TagValue>
+          ))}
+        <TagInput
+          value={tagInputValue}
+          onChange={onChangeTag}
+          placeholder="태그를 입력하세요"
+          type="text"
+          // onKeyUp={onKeyUpTag}
+          onKeyDown={onKeyUpTag}
+        />
         <Editor
           previewStyle="vertical"
           height="75vh"
@@ -167,15 +213,15 @@ const PostEditor = () => {
           ref={editorRef}
         />
         <BtnContainer>
-          <button type="submit">작성하기</button>
+          <button onClick={onSubmitPost}>작성하기</button>
           <button>
             <Link href="/blog">
               <a>목록이동</a>
             </Link>
           </button>
         </BtnContainer>
-      </form>
-      {/* <button onClick={handleClick}>ttt</button> */}
+        {/* </form> */}
+      </div>
     </Container>
   );
 };
