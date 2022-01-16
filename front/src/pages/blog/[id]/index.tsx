@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import Header from 'src/components/Header';
 import dynamic from 'next/dynamic';
@@ -77,7 +77,7 @@ const PostView = () => {
             <span>{moment(post?.createdAt).format('LL')}</span>
             {currentUser?.contents?.isAuthenticated && (
               <UpdateAndDeleteBtn>
-                <span>수정</span>
+                <span onClick={() => router.push(`/blog/${id}/update`)}>수정</span>
                 <span
                   onClick={() => {
                     const deleteBoolean = window.confirm('정말 삭제하시겠습니까?');

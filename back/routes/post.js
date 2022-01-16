@@ -67,6 +67,25 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.put("/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    console.log("fasfasfasfsa", req.params);
+    await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
+    res.status(200).json({ result: true });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const deletePost = await Post.findOne({
