@@ -12,13 +12,13 @@ router.get("/", async (req, res, next) => {
     const posts = await Post.findAll({
       where,
       order: [["createdAt", "DESC"]],
-      // include: [
-      //   {
-      //     model: Tag,
-      //     // where: { PostId: Post.id },
-      //     attributes: ["name"],
-      //   },
-      // ],
+      include: [
+        {
+          model: Tag,
+          // where: { PostId: Post.id },
+          // attributes: ["name"],
+        },
+      ],
     });
     console.log(posts);
     res.status(200).json(posts);

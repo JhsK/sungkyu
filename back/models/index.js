@@ -31,4 +31,6 @@ Post.associate(db);
 Tag.associate(db);
 Image.associate(db);
 
+db.Sequelize = Sequelize;
+
 module.exports = db;
