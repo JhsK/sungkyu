@@ -29,9 +29,21 @@ export interface Model {
   updatedAt: string;
 }
 
+export interface PostTag {
+  PostId: number;
+  TagId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Tags extends Model {
+  name: string;
+  PostTag: PostTag;
+}
+
 export interface PostModel extends Model {
   title: string;
   UserId: number;
-  tag?: string[];
+  Tags?: Tags[];
   content: string;
 }

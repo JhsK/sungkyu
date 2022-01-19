@@ -25,7 +25,6 @@ const BlogContainer = styled.div`
 
 const BlogComponent = () => {
   const { data: posts, isLoading } = useQuery('posts', getPostsAPI);
-
   return (
     <>
       {isLoading ? (

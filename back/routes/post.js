@@ -32,6 +32,11 @@ router.get("/:id", async (req, res, next) => {
   try {
     const post = await Post.findOne({
       where: { id: req.params.id },
+      include: [
+        {
+          model: Tag,
+        },
+      ],
     });
     console.log(post);
     res.status(200).json(post);

@@ -10,6 +10,8 @@ import 'moment/locale/ko';
 import { toast, ToastContainer } from 'react-toastify';
 import { useRecoilValueLoadable } from 'recoil';
 import { currentUserSelector } from 'src/atom';
+import 'react-toastify/dist/ReactToastify.css';
+import { TagValue } from 'src/components/Blog/Post';
 
 const Viewer = dynamic(() => import('../../../components/Blog/Post/PostViewer'), { ssr: false });
 
@@ -65,7 +67,6 @@ const PostView = () => {
   });
 
   const deleteMutate = useMutation(postDeleteAPI);
-
   return (
     <>
       <ToastContainer />
@@ -84,7 +85,7 @@ const PostView = () => {
                     if (deleteBoolean) {
                       deleteMutate.mutate(post.id, {
                         onSuccess: () => {
-                          toast.success('로그인에 성공 했습니다!', {
+                          toast.success('게시물을 삭제했습니다', {
                             position: 'top-center',
                             autoClose: 2000,
                             hideProgressBar: true,
@@ -108,9 +109,9 @@ const PostView = () => {
             )}
           </SubTitle>
           <TagList>
-            <span>JS</span>
-            <span>자바스크립트</span>
-            <span>React</span>
+            {post?.Tags.map((tag) => (
+              <TagValue key={tag.id}>{`#${tag.name}`}</TagValue>
+            ))}
           </TagList>
         </TitleContainer>
         <Viewer content={post?.content} />
