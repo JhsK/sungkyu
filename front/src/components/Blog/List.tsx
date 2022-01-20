@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 import { currentUserSelector, currentUserState } from 'src/atom';
 import { PostModel } from 'src/constant';
+import useAuth from 'src/hooks/useAuth';
 
 const Container = styled.div`
   width: 73%;
@@ -121,7 +122,7 @@ interface BlogListProps {
 }
 
 const List = ({ postsData }: BlogListProps) => {
-  const currentUser = useRecoilValueLoadable(currentUserSelector);
+  const currentUser = useAuth();
   const [category, setCategory] = useState<CategoryType>('All');
   const activeCategory = (label: CategoryType) => {
     setCategory(label);
@@ -130,7 +131,7 @@ const List = ({ postsData }: BlogListProps) => {
   return (
     <Container>
       <CreateBtn>
-        {currentUser?.contents?.isAuthenticated && (
+        {currentUser?.isAuthenticated && (
           <Link href="/blog/new">
             <a>작성하기</a>
           </Link>

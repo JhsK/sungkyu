@@ -7,6 +7,7 @@ import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 import { currentUserSelector, currentUserState } from 'src/atom';
 import { logOut } from 'src/api';
 import { toast } from 'react-toastify';
+import useAuth from 'src/hooks/useAuth';
 import Logo from '../Header/Logo';
 
 const FooterContainer = styled.div`
@@ -41,7 +42,7 @@ const Text = styled.div`
 `;
 
 const Footer = () => {
-  const currentUser = useRecoilValueLoadable(currentUserSelector);
+  const currentUser = useAuth();
   const router = useRouter();
 
   return (
@@ -57,7 +58,7 @@ const Footer = () => {
         </Text>
         <Text>
           <span>Copyright &copy; 2021 Sungkyu All Rights Reserved.</span>
-          {currentUser?.contents?.isAuthenticated ? (
+          {currentUser?.isAuthenticated ? (
             <GrLogout
               onClick={async () => {
                 await logOut();

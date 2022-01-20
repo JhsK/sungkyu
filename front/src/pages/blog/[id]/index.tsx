@@ -1,17 +1,16 @@
-import React, { useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
-import Header from 'src/components/Header';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import { getPostAPI, postDeleteAPI } from 'src/api';
-import { useMutation, useQuery } from 'react-query';
 import moment from 'moment';
 import 'moment/locale/ko';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useMutation, useQuery } from 'react-query';
 import { toast, ToastContainer } from 'react-toastify';
-import { useRecoilValueLoadable } from 'recoil';
-import { currentUserSelector } from 'src/atom';
 import 'react-toastify/dist/ReactToastify.css';
+import { getPostAPI, postDeleteAPI } from 'src/api';
 import { TagValue } from 'src/components/Blog/Post';
+import Header from 'src/components/Header';
+import useAuth from 'src/hooks/useAuth';
 
 const Viewer = dynamic(() => import('../../../components/Blog/Post/PostViewer'), { ssr: false });
 
@@ -60,7 +59,7 @@ const UpdateAndDeleteBtn = styled.div`
 const PostView = () => {
   const router = useRouter();
   const { id } = router.query;
-  const currentUser = useRecoilValueLoadable(currentUserSelector);
+  const currentUser = useAuth();
   const { data: post } = useQuery(`post-${id}`, async () => {
     const data = await getPostAPI(String(id));
     return data;
@@ -76,7 +75,7 @@ const PostView = () => {
           <Title>{post?.title}</Title>
           <SubTitle>
             <span>{moment(post?.createdAt).format('LL')}</span>
-            {currentUser?.contents?.isAuthenticated && (
+            {currentUser?.isAuthenticated && (
               <UpdateAndDeleteBtn>
                 <span onClick={() => router.push(`/blog/${id}/update`)}>수정</span>
                 <span
