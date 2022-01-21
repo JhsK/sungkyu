@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import router from 'next/router';
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { currentUserState } from 'src/atom';
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { currentUserSelector, currentUserState } from 'src/atom';
 import { PostModel } from 'src/constant';
+import useAuth from 'src/hooks/useAuth';
 
 const Container = styled.div`
   width: 73%;
@@ -115,13 +117,16 @@ const CreateBtn = styled.div`
 
 type CategoryType = 'All' | '최신순' | '후순위';
 
-const List = ({ postsData }) => {
-  const currentUser = useRecoilValue(currentUserState);
+interface BlogListProps {
+  postsData: PostModel[];
+}
+
+const List = ({ postsData }: BlogListProps) => {
+  const currentUser = useAuth();
   const [category, setCategory] = useState<CategoryType>('All');
   const activeCategory = (label: CategoryType) => {
     setCategory(label);
   };
-  console.log('asf', postsData);
 
   return (
     <Container>
@@ -149,7 +154,7 @@ const List = ({ postsData }) => {
       {postsData &&
         postsData.map((post: PostModel) => (
           <>
-            <ListContainer key={post.id}>
+            <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
               <ContentContainer key={post.id}>
                 <div key={post.id}>
                   <span className="title">{post.title}</span>
@@ -159,9 +164,9 @@ const List = ({ postsData }) => {
                   </div>
                 </div>
                 <TagsContainer>
-                  <span>#자바스크립트</span>
-                  <span>#웹</span>
-                  <span>#자바스크립트</span>
+                  {post?.Tags.map((tag) => (
+                    <span key={tag.id}>{`#${tag.name}`}</span>
+                  ))}
                 </TagsContainer>
               </ContentContainer>
               <img alt="test" src="test.jpg" />

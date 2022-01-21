@@ -1,7 +1,16 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import Header from 'src/components/Header';
+import moment from 'moment';
+import 'moment/locale/ko';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useMutation, useQuery } from 'react-query';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getPostAPI, postDeleteAPI } from 'src/api';
+import { TagValue } from 'src/components/Blog/Post';
+import Header from 'src/components/Header';
+import useAuth from 'src/hooks/useAuth';
 
 const Viewer = dynamic(() => import('../../../components/Blog/Post/PostViewer'), { ssr: false });
 
@@ -17,7 +26,7 @@ const TitleContainer = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
 `;
@@ -34,28 +43,80 @@ const TagList = styled.div`
   align-items: center;
 `;
 
-const PostView = () => (
-  <>
-    <Header logoColor />
-    <Container>
-      <TitleContainer>
-        <Title>테스트 블로그 제목</Title>
-        <SubTitle>
-          <span>2021.08.18</span>
-          <div>
-            <span>수정</span>
-            <span>삭제</span>
-          </div>
-        </SubTitle>
-        <TagList>
-          <span>JS</span>
-          <span>자바스크립트</span>
-          <span>React</span>
-        </TagList>
-      </TitleContainer>
-      <Viewer />
-    </Container>
-  </>
-);
+const UpdateAndDeleteBtn = styled.div`
+  color: ${(props) => props.theme.FONT_COLOR_DARKGRAY};
+
+  span {
+    margin-left: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      color: ${(props) => props.theme.PUBLIC_BLACK};
+    }
+  }
+`;
+
+const PostView = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const currentUser = useAuth();
+  const { data: post } = useQuery(`post-${id}`, async () => {
+    const data = await getPostAPI(String(id));
+    return data;
+  });
+
+  const deleteMutate = useMutation(postDeleteAPI);
+  return (
+    <>
+      <ToastContainer />
+      <Header logoColor />
+      <Container>
+        <TitleContainer>
+          <Title>{post?.title}</Title>
+          <SubTitle>
+            <span>{moment(post?.createdAt).format('LL')}</span>
+            {currentUser?.isAuthenticated && (
+              <UpdateAndDeleteBtn>
+                <span onClick={() => router.push(`/blog/${id}/update`)}>수정</span>
+                <span
+                  onClick={() => {
+                    const deleteBoolean = window.confirm('정말 삭제하시겠습니까?');
+                    if (deleteBoolean) {
+                      deleteMutate.mutate(post.id, {
+                        onSuccess: () => {
+                          toast.success('게시물을 삭제했습니다', {
+                            position: 'top-center',
+                            autoClose: 2000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                          });
+
+                          setTimeout(() => {
+                            router.replace('/blog');
+                          }, 2000);
+                        },
+                      });
+                    }
+                  }}
+                >
+                  삭제
+                </span>
+              </UpdateAndDeleteBtn>
+            )}
+          </SubTitle>
+          <TagList>
+            {post?.Tags.map((tag) => (
+              <TagValue key={tag.id}>{`#${tag.name}`}</TagValue>
+            ))}
+          </TagList>
+        </TitleContainer>
+        <Viewer content={post?.content} />
+      </Container>
+    </>
+  );
+};
 
 export default PostView;

@@ -3,14 +3,13 @@ import router from 'next/router';
 import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { signUp } from 'src/api';
 import Footer from 'src/components/Footer';
 import { Button, Form, FormContainer } from 'src/components/Form';
 import Header from 'src/components/Header';
-import 'react-toastify/dist/ReactToastify.css';
-import { useRecoilState } from 'recoil';
-import { currentUserState } from 'src/atom';
 import { JoinInput } from 'src/constant';
+import useAuth from 'src/hooks/useAuth';
 
 const Page = styled.div`
   width: 100%;
@@ -39,7 +38,7 @@ const validationMessage = {
 };
 
 const Sign_up = () => {
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  const currentUser = useAuth();
   const {
     register,
     handleSubmit,

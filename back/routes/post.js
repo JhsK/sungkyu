@@ -12,18 +12,36 @@ router.get("/", async (req, res, next) => {
     const posts = await Post.findAll({
       where,
       order: [["createdAt", "DESC"]],
-      // include: [
-      //   {
-      //     model: Tag,
-      //     // where: { PostId: Post.id },
-      //     attributes: ["name"],
-      //   },
-      // ],
+      include: [
+        {
+          model: Tag,
+          // where: { PostId: Post.id },
+          // attributes: ["name"],
+        },
+      ],
     });
     console.log(posts);
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
+    next(error);
+  }
+});
+
+router.get("/:id", async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.id },
+      include: [
+        {
+          model: Tag,
+        },
+      ],
+    });
+    console.log(post);
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 });
@@ -54,13 +72,32 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.delete("/:postId", isLoggedIn, async (req, res, next) => {
+router.put("/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    console.log("fasfasfasfsa", req.params);
+    await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
+    res.status(200).json({ result: true });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const deletePost = await Post.findOne({
-      where: { id: req.params.postId },
+      where: { id: req.params.id },
     });
     await deletePost.destroy();
-    res.status(200).json(parseInt(req.params.postId, 10));
+    res.status(200).json(parseInt(req.params.id, 10));
   } catch (error) {
     console.error(error);
     next(error);

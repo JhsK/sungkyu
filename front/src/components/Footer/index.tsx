@@ -3,10 +3,11 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { GrLogin, GrLogout } from 'react-icons/gr';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
-import { currentUserState } from 'src/atom';
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { currentUserSelector, currentUserState } from 'src/atom';
 import { logOut } from 'src/api';
 import { toast } from 'react-toastify';
+import useAuth from 'src/hooks/useAuth';
 import Logo from '../Header/Logo';
 
 const FooterContainer = styled.div`
@@ -41,7 +42,7 @@ const Text = styled.div`
 `;
 
 const Footer = () => {
-  const currentUser = useRecoilValue(currentUserState);
+  const currentUser = useAuth();
   const router = useRouter();
 
   return (
