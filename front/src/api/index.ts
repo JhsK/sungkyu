@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { currentUserType, JoinInput, LogInInput, postCreateType, PostModel } from 'src/constant';
+import { currentUserType, JoinInput, LogInInput, postCreateType, PostModel, TagModel } from 'src/constant';
 import { API } from './api.config';
 
 export const signUp = async (params: JoinInput) => API.post('/user/sign_up', params);
@@ -32,7 +32,11 @@ export const postUpdateAPI: ({ id, values }) => Promise<boolean> = async ({ id, 
 };
 
 export const postDeleteAPI: (id) => Promise<number> = async (id) => {
-  console.log(id);
   const { data } = await API.delete(`/post/${id}`);
+  return data;
+};
+
+export const getTagAPI: () => Promise<TagModel[]> = async () => {
+  const { data } = await API.get('/tag');
   return data;
 };

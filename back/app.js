@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
+const tagRouter = require("./routes/tag");
 const db = require("./models");
 const passportConfig = require("./passport");
 
@@ -56,6 +57,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/tag", tagRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("서버 실행 중");
