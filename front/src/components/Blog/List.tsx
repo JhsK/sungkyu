@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 import { getPostsAPI, getTagFilterAPI } from 'src/api';
-import { currentUserSelector, currentUserState } from 'src/atom';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 
@@ -117,36 +115,39 @@ const CreateBtn = styled.div`
   margin-bottom: 1rem;
 `;
 
-type CategoryType = 'All' | '최신순' | '후순위';
-
-interface BlogListProps {
-  postsData: PostModel[];
+interface CategoryType {
+  name: '최신순' | '후순위' | '태그';
+  option: 'DESC' | 'ASC';
 }
 
 const List = () => {
   const currentUser = useAuth();
   const router = useRouter();
-  const [category, setCategory] = useState<CategoryType>('All');
-  const [tagFilterData, setTagFilterData] = useState<null | PostModel[]>(null);
+  const [posts, setPosts] = useState<PostModel[]>(null);
+  const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
 
-  const { data: posts, isLoading } = useQuery('posts', getPostsAPI);
-
-  const activeCategory = (label: CategoryType) => {
-    setCategory(label);
-  };
+  const {
+    data: postsData,
+    isLoading,
+    refetch,
+  } = useQuery('posts', async () => {
+    const data = await getPostsAPI(categoryRef.current.option);
+    setPosts(data);
+    return data;
+  });
 
   const tagFilter = async (id) => {
     const data = await getTagFilterAPI(id);
-    setTagFilterData(data);
+    setPosts(data);
     return data;
   };
 
   useEffect(() => {
     if (router.query?.tag) {
+      categoryRef.current = { name: '태그', option: 'DESC' };
       tagFilter(router.query.tag);
     }
   }, [router.query]);
-
   return (
     <Container>
       <CreateBtn>
@@ -158,66 +159,53 @@ const List = () => {
       </CreateBtn>
       <LableContainer>
         <div className="filter">
-          <All color={category} onClick={() => activeCategory('All')}>
+          {/* <All color={category} onClick={() => activeCategory('All')}>
             All
-          </All>
-          <Newest color={category} onClick={() => activeCategory('최신순')}>
+          </All> */}
+          <Newest
+            color={categoryRef.current.name}
+            onClick={() => {
+              categoryRef.current = { name: '최신순', option: 'DESC' };
+              refetch();
+            }}
+          >
             최신순
           </Newest>
-          <Latest color={category} onClick={() => activeCategory('후순위')}>
+          <Latest
+            color={categoryRef.current.name}
+            onClick={() => {
+              categoryRef.current = { name: '후순위', option: 'ASC' };
+              refetch();
+            }}
+          >
             후순위
           </Latest>
         </div>
         <input type="text" />
       </LableContainer>
-      {router.query?.tag && tagFilterData
-        ? tagFilterData.map((post) => (
-            <>
-              <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
-                <ContentContainer key={post.id}>
-                  <div key={post.id}>
-                    <span className="title">{post.title}</span>
-                    <div>
-                      네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을
-                      출시했습니다. Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록
-                      Google이
-                    </div>
+      {posts &&
+        posts.map((post) => (
+          <>
+            <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
+              <ContentContainer key={post.id}>
+                <div key={post.id}>
+                  <span className="title">{post.title}</span>
+                  <div>
+                    네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을
+                    출시했습니다. Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
                   </div>
-                  <TagsContainer>
-                    {post?.Tags.map((tag) => (
-                      <span key={tag.id}>{`#${tag.name}`}</span>
-                    ))}
-                  </TagsContainer>
-                </ContentContainer>
-                <img alt="test" src="test.jpg" />
-              </ListContainer>
-              <Hr key={post.createdAt} />
-            </>
-          ))
-        : posts &&
-          posts.map((post) => (
-            <>
-              <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
-                <ContentContainer key={post.id}>
-                  <div key={post.id}>
-                    <span className="title">{post.title}</span>
-                    <div>
-                      네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을
-                      출시했습니다. Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록
-                      Google이
-                    </div>
-                  </div>
-                  <TagsContainer>
-                    {post?.Tags.map((tag) => (
-                      <span key={tag.id}>{`#${tag.name}`}</span>
-                    ))}
-                  </TagsContainer>
-                </ContentContainer>
-                <img alt="test" src="test.jpg" />
-              </ListContainer>
-              <Hr key={post.createdAt} />
-            </>
-          ))}
+                </div>
+                <TagsContainer>
+                  {post?.Tags.map((tag) => (
+                    <span key={tag.id}>{`#${tag.name}`}</span>
+                  ))}
+                </TagsContainer>
+              </ContentContainer>
+              <img alt="test" src="test.jpg" />
+            </ListContainer>
+            <Hr key={post.createdAt} />
+          </>
+        ))}
       <ListContainer>
         <ContentContainer>
           <div>

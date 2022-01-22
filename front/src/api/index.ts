@@ -16,8 +16,8 @@ export const postCreateAPI = async (params: postCreateType) => {
   return data;
 };
 
-export const getPostsAPI: () => Promise<PostModel[]> = async () => {
-  const { data } = await API.get('/post');
+export const getPostsAPI: (option: 'DESC' | 'ASC') => Promise<PostModel[]> = async (option) => {
+  const { data } = await API.get(`/post?category=${option}`);
   return data;
 };
 

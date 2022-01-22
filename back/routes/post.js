@@ -9,14 +9,13 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const where = {};
+    const category = req.query.category;
     const posts = await Post.findAll({
       where,
-      order: [["createdAt", "DESC"]],
+      order: [["createdAt", category]],
       include: [
         {
           model: Tag,
-          // where: { PostId: Post.id },
-          // attributes: ["name"],
         },
       ],
     });
