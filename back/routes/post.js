@@ -74,7 +74,6 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
 
 router.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    console.log("fasfasfasfsa", req.params);
     await Post.update(
       {
         title: req.body.title,

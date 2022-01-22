@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
-import { getTagAPI } from 'src/api';
+import { getTagAPI, getTagFilterAPI } from 'src/api';
+import router, { useRouter } from 'next/router';
 
 const Container = styled.div`
   display: flex;
@@ -34,17 +35,13 @@ const LabelContainer = styled.div`
 const Tags = () => {
   const { data, isSuccess } = useQuery('tagList', getTagAPI);
 
-  const onClickTag = (id) => {
-    console.log(id);
-  };
-
   return (
     <Container>
       <span className="title">인기태그</span>
       <LabelContainer>
         {isSuccess &&
           data.map((tag) => (
-            <span onClick={() => onClickTag(tag?.id)} key={tag?.id}>
+            <span onClick={() => router.push(`/blog?tag=${tag.id}`)} key={tag?.id}>
               {tag?.name}
             </span>
           ))}

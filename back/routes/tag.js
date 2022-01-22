@@ -16,12 +16,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// router.get('/:id', async (req, res, next) => {
-//     try {
-//         const posts = await Post.findAll({
-//             where:
-//         })
-//     }
-// })
+router.get("/filter", async (req, res, next) => {
+  try {
+    const posts = await Post.findAll({
+      include: [
+        {
+          model: Tag,
+          where: { id: req.query.tag },
+        },
+      ],
+    });
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
 
 module.exports = router;

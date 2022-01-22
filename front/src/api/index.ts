@@ -40,3 +40,8 @@ export const getTagAPI: () => Promise<TagModel[]> = async () => {
   const { data } = await API.get('/tag');
   return data;
 };
+
+export const getTagFilterAPI: (id: number) => Promise<PostModel[]> = async (id) => {
+  const { data } = await API.get(`/tag/filter?tag=${id}`);
+  return data;
+};
