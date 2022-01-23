@@ -66,14 +66,23 @@
 // export default ToastEditorComponent;
 
 import React, { Component, useRef, useState } from 'react';
-import 'codemirror/lib/codemirror.css';
+// import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import router from 'next/router';
 import { postCreateAPI } from 'src/api';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import Prism from 'prismjs';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import { BtnContainer, Container, TagInput, TagValue, TitleInput } from '.';
+import 'prismjs/themes/prism.css';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
 
 export interface PostEditorWithForwardedProps extends EditorProps {
   forwardedRef?: React.MutableRefObject<Editor>;
@@ -148,6 +157,7 @@ const PostEditor = () => {
           hideModeSwitch
           initialEditType="markdown"
           initialValue="hello"
+          plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax, tableMergedCell]}
           // onChange={onChangeEditor}
           ref={editorRef}
         />
