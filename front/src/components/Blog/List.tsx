@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import router from 'next/router';
-import React, { useState } from 'react';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
-import { currentUserSelector, currentUserState } from 'src/atom';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
+import { useQuery } from 'react-query';
+import { getPostsAPI, getTagFilterAPI } from 'src/api';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 
@@ -115,19 +115,39 @@ const CreateBtn = styled.div`
   margin-bottom: 1rem;
 `;
 
-type CategoryType = 'All' | '최신순' | '후순위';
-
-interface BlogListProps {
-  postsData: PostModel[];
+interface CategoryType {
+  name: '최신순' | '후순위' | '태그';
+  option: 'DESC' | 'ASC';
 }
 
-const List = ({ postsData }: BlogListProps) => {
+const List = () => {
   const currentUser = useAuth();
-  const [category, setCategory] = useState<CategoryType>('All');
-  const activeCategory = (label: CategoryType) => {
-    setCategory(label);
+  const router = useRouter();
+  const [posts, setPosts] = useState<PostModel[]>(null);
+  const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
+
+  const {
+    data: postsData,
+    isLoading,
+    refetch,
+  } = useQuery('posts', async () => {
+    const data = await getPostsAPI(categoryRef.current.option);
+    setPosts(data);
+    return data;
+  });
+
+  const tagFilter = async (id) => {
+    const data = await getTagFilterAPI(id);
+    setPosts(data);
+    return data;
   };
 
+  useEffect(() => {
+    if (router.query?.tag) {
+      categoryRef.current = { name: '태그', option: 'DESC' };
+      tagFilter(router.query.tag);
+    }
+  }, [router.query]);
   return (
     <Container>
       <CreateBtn>
@@ -139,20 +159,32 @@ const List = ({ postsData }: BlogListProps) => {
       </CreateBtn>
       <LableContainer>
         <div className="filter">
-          <All color={category} onClick={() => activeCategory('All')}>
+          {/* <All color={category} onClick={() => activeCategory('All')}>
             All
-          </All>
-          <Newest color={category} onClick={() => activeCategory('최신순')}>
+          </All> */}
+          <Newest
+            color={categoryRef.current.name}
+            onClick={() => {
+              categoryRef.current = { name: '최신순', option: 'DESC' };
+              refetch();
+            }}
+          >
             최신순
           </Newest>
-          <Latest color={category} onClick={() => activeCategory('후순위')}>
+          <Latest
+            color={categoryRef.current.name}
+            onClick={() => {
+              categoryRef.current = { name: '후순위', option: 'ASC' };
+              refetch();
+            }}
+          >
             후순위
           </Latest>
         </div>
         <input type="text" />
       </LableContainer>
-      {postsData &&
-        postsData.map((post: PostModel) => (
+      {posts &&
+        posts.map((post) => (
           <>
             <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
               <ContentContainer key={post.id}>

@@ -47,3 +47,7 @@ export interface PostModel extends Model {
   Tags?: Tags[];
   content: string;
 }
+
+export interface TagModel extends Model {
+  name: string;
+}

@@ -9,14 +9,13 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const where = {};
+    const category = req.query.category;
     const posts = await Post.findAll({
       where,
-      order: [["createdAt", "DESC"]],
+      order: [["createdAt", category]],
       include: [
         {
           model: Tag,
-          // where: { PostId: Post.id },
-          // attributes: ["name"],
         },
       ],
     });
@@ -74,7 +73,6 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
 
 router.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    console.log("fasfasfasfsa", req.params);
     await Post.update(
       {
         title: req.body.title,
