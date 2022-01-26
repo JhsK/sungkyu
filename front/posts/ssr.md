@@ -64,6 +64,7 @@ document.body.appendChild(document.createTextNode('hello world!')); // reflow, r
 DOM의 CRUD를 하거나, Style을 수정하면 DOM Tree, Style Rules의 발생으로 Attachment가 발생하여 Render Tree가 발생하게 됩니다.
 
 ![브라우저 레이아웃 엔진](https://i.imgur.com/0XdloJi.png)
+<img src="https://i.imgur.com/0XdloJi.png" width="30%" height="30%">
 
 
 <br>
