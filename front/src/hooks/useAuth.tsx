@@ -9,14 +9,13 @@ const useAuth = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getAuth();
-
-      if (Object.keys(data).length === 0) setCurrentUser({ isAuthenticated: false, ...data });
-      else setCurrentUser({ isAuthenticated: true, ...data });
+      if (Object.keys(data).length === 0) {
+        setCurrentUser({ isAuthenticated: false, ...data });
+      } else setCurrentUser({ isAuthenticated: true, ...data });
     };
     fetchData();
   }, []);
-
-  return '';
+  return currentUser;
 };
 
 export default useAuth;

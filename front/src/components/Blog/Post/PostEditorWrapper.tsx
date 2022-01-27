@@ -68,6 +68,7 @@ const PostEditorWrapper = (props) => {
         initialEditType="markdown"
         useCommandShortcut
         ref={editorRef}
+        // plugins={[colorSyntax]}
         // onChange={handleChange}
         // hooks={hooks}
       />

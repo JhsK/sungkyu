@@ -14,7 +14,7 @@ export interface currentUserType {
   username?: string;
   createdAt?: string;
   updatedAt?: string;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 export interface postCreateType {
@@ -29,7 +29,25 @@ export interface Model {
   updatedAt: string;
 }
 
+export interface PostTag {
+  PostId: number;
+  TagId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Tags extends Model {
+  name: string;
+  PostTag: PostTag;
+}
+
 export interface PostModel extends Model {
   title: string;
   UserId: number;
+  Tags?: Tags[];
+  content: string;
+}
+
+export interface TagModel extends Model {
+  name: string;
 }
