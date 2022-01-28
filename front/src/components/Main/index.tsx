@@ -5,7 +5,12 @@ import Intro from './Intro';
 import Projects from './Projects';
 import Blog from './Blog';
 
-const Main = ({ projects, blog }) => (
+interface MainProps {
+  projects: boolean;
+  blog: boolean;
+}
+
+const Main = ({ projects, blog }: MainProps) => (
   <FullPage>
     <Slide>
       <Typing />
