@@ -3,21 +3,21 @@ import ContactComponent from 'src/components/Contact';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
 
 const Contact = () => (
-  <>
+  <Container>
     <Header logoColor />
     <ContactComponent />
-    <div
-      css={css`
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-      `}
-    >
-      <Footer />
-    </div>
-  </>
+    <Footer />
+  </Container>
 );
 
 export default Contact;
