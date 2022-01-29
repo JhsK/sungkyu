@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import React, { useEffect } from 'react';
 import IntroduceText from '../share/IntroduceText';
 
 const Container = styled.div`

@@ -26,7 +26,6 @@ const Home = () => {
     // window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  console.log('home', currentUser);
   return (
     <>
       <Header logoColor={logoColor} />

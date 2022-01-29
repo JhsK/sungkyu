@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { GrGroup } from 'react-icons/gr';
 import { BsPerson } from 'react-icons/bs';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const Container = styled.div`
   width: 1200px;
@@ -36,14 +37,14 @@ const ProjectsContainer = styled.div`
 
     .card {
       width: 23%; /* 반응형으로 적용 필요 */
-      height: 330px;
+      height: 250px;
       border-radius: 15px;
       border: 1px solid rgba(0, 0, 0, 0.1);
       cursor: pointer;
 
       img {
         width: 100%;
-        height: 170px;
+        height: 150px;
         object-fit: cover;
         border-radius: 15px 15px 0 0;
       }
@@ -55,10 +56,10 @@ const ProjectsContainer = styled.div`
           display: block;
           font-size: 1.3rem;
           font-weight: bold;
-          margin-bottom: 0.3rem;
+          margin-bottom: 0.5rem;
         }
         span:nth-child(2) {
-          font-size: 1rem;
+          font-size: 0.9rem;
         }
       }
     }
@@ -75,23 +76,29 @@ const ProjectsComponent = () => (
         <span className="ProjectsTitle">개인 프로젝트</span>
       </div>
       <div className="cardContainer">
-        {tmp.map((item) => (
-          <motion.div
-            className="card"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{
-              scale: 0.8,
-              rotate: -90,
-              borderRadius: '100%',
-            }}
-          >
+        {/* {tmp.map((item) => (
+          <motion.div className="card" whileHover={{ scale: 1.1 }}>
             <img src="test.jpg" alt="cover" />
             <div className="cardTitleContainer">
               <span>title</span>
               <span>content</span>
             </div>
           </motion.div>
-        ))}
+        ))} */}
+        <motion.div className="card" whileHover={{ scale: 1.1 }}>
+          <Link href="/projects/Tre">
+            <a>
+              <img
+                src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                alt="cover"
+              />
+              <div className="cardTitleContainer">
+                <span>Tre</span>
+                <span>To Record Everything - 일정 관리 사이트</span>
+              </div>
+            </a>
+          </Link>
+        </motion.div>
       </div>
     </ProjectsContainer>
     <ProjectsContainer>
@@ -100,23 +107,20 @@ const ProjectsComponent = () => (
         <span className="ProjectsTitle">팀 프로젝트</span>
       </div>
       <div className="cardContainer">
-        {tmp.map((item) => (
-          <motion.div
-            className="card"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{
-              scale: 0.8,
-              rotate: -90,
-              borderRadius: '100%',
-            }}
-          >
-            <img src="test.jpg" alt="cover" />
-            <div className="cardTitleContainer">
-              <span>title</span>
-              <span>content</span>
-            </div>
-          </motion.div>
-        ))}
+        <motion.div className="card" whileHover={{ scale: 1.1 }}>
+          <Link href="/projects/Groupstory">
+            <a>
+              <img
+                src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                alt="cover"
+              />
+              <div className="cardTitleContainer">
+                <span>Groupstory</span>
+                <span>백석대학교 동아리 모집 사이트</span>
+              </div>
+            </a>
+          </Link>
+        </motion.div>
       </div>
     </ProjectsContainer>
   </Container>
