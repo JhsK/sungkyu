@@ -206,42 +206,6 @@ const List = () => {
             <Hr key={post.createdAt} />
           </>
         ))}
-      <ListContainer>
-        <ContentContainer>
-          <div>
-            <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
-            <div>
-              네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
-              Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-            </div>
-          </div>
-          <TagsContainer>
-            <span>#자바스크립트</span>
-            <span>#웹</span>
-            <span>#자바스크립트</span>
-          </TagsContainer>
-        </ContentContainer>
-        <img alt="test" src="test.jpg" />
-      </ListContainer>
-      <Hr />
-      <ListContainer>
-        <ContentContainer>
-          <div>
-            <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
-            <div>
-              네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
-              Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-            </div>
-          </div>
-          <TagsContainer>
-            <span>#자바스크립트</span>
-            <span>#웹</span>
-            <span>#자바스크립트</span>
-          </TagsContainer>
-        </ContentContainer>
-        <img alt="test" src="test.jpg" />
-      </ListContainer>
-      <Hr />
     </Container>
   );
 };
