@@ -74,6 +74,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import router from 'next/router';
 import { postCreateAPI } from 'src/api';
+import ImageUploader from 'src/components/share/ImageUploader';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import Prism from 'prismjs';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
@@ -171,6 +172,7 @@ const PostEditor = () => {
         </BtnContainer>
         {/* </form> */}
       </div>
+      <ImageUploader />
     </Container>
   );
 };
