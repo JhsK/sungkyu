@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
-import { getPostsAPI, getTagFilterAPI } from 'src/api';
+import { getPostsAPI, getPostsSearchAPI, getTagFilterAPI } from 'src/api';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
+import { BiSearch } from 'react-icons/bi';
 
 const Container = styled.div`
   width: 73%;
@@ -115,6 +116,17 @@ const CreateBtn = styled.div`
   margin-bottom: 1rem;
 `;
 
+const SearchContainer = styled.div`
+  position: relative;
+`;
+
+const SearchBtnContainer = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+`;
+
 interface CategoryType {
   name: '최신순' | '후순위' | '태그';
   option: 'DESC' | 'ASC';
@@ -124,6 +136,7 @@ const List = () => {
   const currentUser = useAuth();
   const router = useRouter();
   const [posts, setPosts] = useState<PostModel[]>(null);
+  const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
 
   const {
@@ -135,6 +148,15 @@ const List = () => {
     setPosts(data);
     return data;
   });
+
+  const onChangeSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const onSubmitSearch = async () => {
+    const data = await getPostsSearchAPI(serachValue);
+    setPosts(data);
+  };
 
   const tagFilter = async (id) => {
     const data = await getTagFilterAPI(id);
@@ -181,7 +203,12 @@ const List = () => {
             후순위
           </Latest>
         </div>
-        <input type="text" />
+        <SearchContainer>
+          <input type="text" onChange={onChangeSearch} />
+          <SearchBtnContainer>
+            <BiSearch onClick={onSubmitSearch} />
+          </SearchBtnContainer>
+        </SearchContainer>
       </LableContainer>
       {posts &&
         posts.map((post) => (

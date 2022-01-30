@@ -21,6 +21,11 @@ export const getPostsAPI: (option: 'DESC' | 'ASC') => Promise<PostModel[]> = asy
   return data;
 };
 
+export const getPostsSearchAPI = async (query) => {
+  const { data } = await API.get(`/post?search=${query}`);
+  return data;
+};
+
 export const getPostAPI: (id: string) => Promise<PostModel> = async (id) => {
   const { data } = await API.get(`/post/${id}`);
   return data;

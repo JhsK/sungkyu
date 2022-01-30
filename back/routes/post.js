@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+const sequelize = require("sequelize");
+const Op = sequelize.Op;
 
 const { Post, User, Tag, PostTag } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
@@ -8,11 +10,11 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const where = {};
+    const search = req.query.search;
     const category = req.query.category;
     const posts = await Post.findAll({
-      where,
-      order: [["createdAt", category]],
+      where: search ? { title: { [Op.like]: `%${search}%` } } : {},
+      order: category ? [["createdAt", category]] : [["createdAt", "DESC"]],
       include: [
         {
           model: Tag,
