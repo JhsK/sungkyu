@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ImageUploading from 'react-images-uploading';
 import styled from '@emotion/styled';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { uploadImageAPI } from 'src/api';
+import axios from 'axios';
 
 const Container = styled.div`
   padding-bottom: 2rem;
+  input {
+    display: none;
+  }
 `;
 
 const Button = styled.button`
@@ -34,19 +39,25 @@ const CloseBtn = styled.div`
   position: absolute;
   top: 10px;
   left: 5px;
+  cursor: pointer;
 `;
 
-const ImageUploader = () => {
-  const [image, setImage] = useState([]);
-  const maxNumber = 69;
+const ImageUploader = ({ imagePath, setImagePath }) => {
+  const imageRef = useRef(null);
 
-  const onChangeImage = (imageList) => {
-    setImage(imageList);
+  // const onChangeImage = (imageList) => {
+  //   setImage(imageList);
+  // };
+
+  const onChangeImage = async (e) => {
+    const formData = new FormData();
+    formData.append('img', e.target.files[0]);
+    const data = await uploadImageAPI(formData);
+    setImagePath(data);
   };
-
   return (
     <>
-      <ImageUploading value={image} onChange={onChangeImage} maxNumber={maxNumber} dataURLKey="data_url">
+      {/* <ImageUploading value={image} onChange={onChangeImage} maxNumber={maxNumber} dataURLKey="data_url">
         {({ imageList, onImageUpload, isDragging, onImageRemove, dragProps }) => (
           <div className="upload__image-wrapper">
             <Container>
@@ -67,7 +78,19 @@ const ImageUploader = () => {
             </Container>
           </div>
         )}
-      </ImageUploading>
+      </ImageUploading> */}
+      <Container>
+        <input type="file" accept="image/*" name="img" onChange={onChangeImage} ref={imageRef} />
+        <Button onClick={() => imageRef.current.click()}>클릭 또는 드래그를 통해 이미지 업로드</Button>
+        {imagePath && (
+          <ImageContainer>
+            <img src={`http://localhost:3001/${imagePath}`} alt="sumnail" />
+            <CloseBtn>
+              <AiFillCloseCircle />
+            </CloseBtn>
+          </ImageContainer>
+        )}
+      </Container>
     </>
   );
 };

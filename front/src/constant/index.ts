@@ -45,9 +45,16 @@ export interface PostModel extends Model {
   title: string;
   UserId: number;
   Tags?: Tags[];
+  Images?: ImageModel[];
   content: string;
 }
 
 export interface TagModel extends Model {
   name: string;
+}
+
+export interface ImageModel {
+  id: number;
+  PostId: number;
+  image_url: string;
 }

@@ -170,6 +170,7 @@ const List = () => {
       tagFilter(router.query.tag);
     }
   }, [router.query]);
+
   return (
     <Container>
       <CreateBtn>
@@ -228,7 +229,7 @@ const List = () => {
                   ))}
                 </TagsContainer>
               </ContentContainer>
-              <img alt="test" src="test.jpg" />
+              <img alt="sumnail" src={`http://localhost:3001/${post?.Images[0].image_url}`} />
             </ListContainer>
             <Hr key={post.createdAt} />
           </>

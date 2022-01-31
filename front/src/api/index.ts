@@ -50,3 +50,8 @@ export const getTagFilterAPI: (id: number) => Promise<PostModel[]> = async (id) 
   const { data } = await API.get(`/tag/filter?tag=${id}`);
   return data;
 };
+
+export const uploadImageAPI = async (params) => {
+  const { data } = await API.post('/image', params);
+  return data;
+};

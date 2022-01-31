@@ -3,7 +3,7 @@ const path = require("path");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 
-const { Post, User, Tag, PostTag } = require("../models");
+const { Post, User, Tag, PostTag, Image } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
@@ -18,6 +18,9 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: Tag,
+        },
+        {
+          model: Image,
         },
       ],
     });
@@ -65,6 +68,11 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
         )
       ); // [[노드, true], [리액트, true]]
       await post.addTags(result.map((v) => v[0]));
+    }
+
+    if (req.body.image) {
+      const image = await Image.create({ image_url: req.body.image });
+      await post.addImages(image);
     }
     res.status(200).json("success");
   } catch (error) {
