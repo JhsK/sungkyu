@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getPostAPI, postDeleteAPI } from 'src/api';
 import { TagValue } from 'src/components/Blog/Post';
+import Comment from 'src/components/Blog/Comment';
 import Header from 'src/components/Header';
 import useAuth from 'src/hooks/useAuth';
 
@@ -54,6 +55,13 @@ const UpdateAndDeleteBtn = styled.div`
       color: ${(props) => props.theme.PUBLIC_BLACK};
     }
   }
+`;
+
+const CommentContainer = styled.div`
+  margin-top: 5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 100%;
 `;
 
 const PostView = () => {
@@ -114,6 +122,11 @@ const PostView = () => {
           </TagList>
         </TitleContainer>
         <Viewer content={post?.content} />
+        <CommentContainer>
+          <span>Comments</span>
+          <hr />
+          <Comment repo="JhsK/sungkyu" />
+        </CommentContainer>
       </Container>
     </>
   );

@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 const tagRouter = require("./routes/tag");
+const imageRouter = require("./routes/image");
 const db = require("./models");
 const passportConfig = require("./passport");
 
@@ -31,7 +32,7 @@ app.use(
   })
 );
 
-app.use("/", express.static(path.join(__dirname, "/app/uploads")));
+app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -58,6 +59,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/tag", tagRouter);
+app.use("/image", imageRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("서버 실행 중");

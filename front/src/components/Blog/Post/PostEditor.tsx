@@ -73,7 +73,8 @@ import { Editor, EditorProps } from '@toast-ui/react-editor';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import router from 'next/router';
-import { postCreateAPI } from 'src/api';
+import { postCreateAPI, uploadImageAPI } from 'src/api';
+import ImageUploader from 'src/components/share/ImageUploader';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import Prism from 'prismjs';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
@@ -90,6 +91,7 @@ export interface PostEditorWithForwardedProps extends EditorProps {
 
 const PostEditor = () => {
   const editorRef = React.createRef<Editor>();
+  const [imagePath, setImagePath] = useState(null);
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState([]);
   const [tagInputValue, setTagInputValue] = useState('');
@@ -119,7 +121,8 @@ const PostEditor = () => {
     if (title === '') {
       return alert('제목은 필수 입니다');
     }
-    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag };
+    if (!(imagePath.length > 0)) return alert('이미지는 필수 입니다');
+    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
     console.log(values);
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
@@ -171,6 +174,7 @@ const PostEditor = () => {
         </BtnContainer>
         {/* </form> */}
       </div>
+      <ImageUploader imagePath={imagePath} setImagePath={setImagePath} />
     </Container>
   );
 };
