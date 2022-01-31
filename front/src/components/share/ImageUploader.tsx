@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react';
-import ImageUploading from 'react-images-uploading';
 import styled from '@emotion/styled';
+import React, { useRef } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { uploadImageAPI } from 'src/api';
-import axios from 'axios';
 
 const Container = styled.div`
   padding-bottom: 2rem;
@@ -57,28 +55,6 @@ const ImageUploader = ({ imagePath, setImagePath }) => {
   };
   return (
     <>
-      {/* <ImageUploading value={image} onChange={onChangeImage} maxNumber={maxNumber} dataURLKey="data_url">
-        {({ imageList, onImageUpload, isDragging, onImageRemove, dragProps }) => (
-          <div className="upload__image-wrapper">
-            <Container>
-              <Button onClick={onImageUpload} {...dragProps}>
-                클릭 또는 드래그를 통해 이미지 업로드
-              </Button>
-              {imageList.map((imageData, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <div key={index} className="image-item">
-                  <ImageContainer>
-                    <img src={imageData.data_url} alt="" width="100" />
-                    <CloseBtn>
-                      <AiFillCloseCircle onClick={() => onImageRemove(index)} />
-                    </CloseBtn>
-                  </ImageContainer>
-                </div>
-              ))}
-            </Container>
-          </div>
-        )}
-      </ImageUploading> */}
       <Container>
         <input type="file" accept="image/*" name="img" onChange={onChangeImage} ref={imageRef} />
         <Button onClick={() => imageRef.current.click()}>클릭 또는 드래그를 통해 이미지 업로드</Button>
