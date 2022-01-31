@@ -1,28 +1,24 @@
 import React from 'react';
 import { FullPage, Slide } from 'react-full-page';
+import { useInView } from 'react-intersection-observer';
 import Typing from './Typing';
 import Intro from './Intro';
 import Projects from './Projects';
 import Blog from './Blog';
 
-interface MainProps {
-  projects: boolean;
-  blog: boolean;
-}
-
-const Main = ({ projects, blog }: MainProps) => (
+const Main = ({ setLogoColor }) => (
   <FullPage>
     <Slide>
-      <Typing />
+      <Typing setLogoColor={setLogoColor} />
     </Slide>
     <Slide>
       <Intro />
     </Slide>
     <Slide>
-      <Projects projects={projects} />
+      <Projects />
     </Slide>
     <Slide>
-      <Blog blog={blog} />
+      <Blog />
     </Slide>
   </FullPage>
 );

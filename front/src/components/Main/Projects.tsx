@@ -144,11 +144,7 @@ const ListContainer = styled.div`
   }
 `;
 
-interface ProjectsProps {
-  projects: boolean;
-}
-
-const Projects = ({ projects }: ProjectsProps) => (
+const Projects = () => (
   <Container>
     <Section>
       <Content>
@@ -166,42 +162,38 @@ const Projects = ({ projects }: ProjectsProps) => (
               </div>
             )}
           </div> */}
-          {projects && (
-            <>
-              <motion.div className="card" whileHover={{ scale: 1.1 }}>
-                <ListContainer>
-                  <Link href="/projects/Tre">
-                    <a>
-                      <img
-                        src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
-                        alt="cover"
-                      />
-                      <div className="projects">
-                        <span>Tre</span>
-                        <span>To Record Everything - 일정 관리 사이트</span>
-                      </div>
-                    </a>
-                  </Link>
-                </ListContainer>
-              </motion.div>
-              <motion.div className="card" whileHover={{ scale: 1.1 }}>
-                <ListContainer>
-                  <Link href="/projects/Groupstory">
-                    <a>
-                      <img
-                        src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
-                        alt="cover"
-                      />
-                      <div className="projects">
-                        <span>Groupstory</span>
-                        <span>백석대학교 동아리 모집 사이트</span>
-                      </div>
-                    </a>
-                  </Link>
-                </ListContainer>
-              </motion.div>
-            </>
-          )}
+          <motion.div className="card" whileHover={{ scale: 1.1 }}>
+            <ListContainer>
+              <Link href="/projects/Tre">
+                <a>
+                  <img
+                    src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                    alt="cover"
+                  />
+                  <div className="projects">
+                    <span>Tre</span>
+                    <span>To Record Everything - 일정 관리 사이트</span>
+                  </div>
+                </a>
+              </Link>
+            </ListContainer>
+          </motion.div>
+          <motion.div className="card" whileHover={{ scale: 1.1 }}>
+            <ListContainer>
+              <Link href="/projects/Groupstory">
+                <a>
+                  <img
+                    src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                    alt="cover"
+                  />
+                  <div className="projects">
+                    <span>Groupstory</span>
+                    <span>백석대학교 동아리 모집 사이트</span>
+                  </div>
+                </a>
+              </Link>
+            </ListContainer>
+          </motion.div>
         </div>
       </Content>
     </Section>

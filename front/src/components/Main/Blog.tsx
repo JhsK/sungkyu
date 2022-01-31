@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import { useInView } from 'react-intersection-observer';
 
 const fadeIn = keyframes`
   0% {
@@ -101,42 +102,45 @@ const PostContainer = styled.div`
   }
 `;
 
-const Blog = ({ blog }) => (
-  <Container>
-    <Section>
-      <Content>
-        <div className={blog ? 'activeFade' : 'disableFade'}>
-          <span className="title">BLOG</span>
-          <PostContainer>
-            <div className="post">
-              <div className="postImg" />
-              <span className="postTitle">제목 테스트1</span>
-              <div className="moreContainer">
-                <span className="font">more</span>
-                <MdKeyboardArrowRight className="icon" />
+const Blog = () => {
+  const [ref, inView] = useInView({ threshold: 0 });
+  return (
+    <Container>
+      <Section>
+        <Content>
+          <div ref={ref} className={inView ? 'activeFade' : 'disableFade'}>
+            <span className="title">BLOG</span>
+            <PostContainer>
+              <div className="post">
+                <div className="postImg" />
+                <span className="postTitle">제목 테스트1</span>
+                <div className="moreContainer">
+                  <span className="font">more</span>
+                  <MdKeyboardArrowRight className="icon" />
+                </div>
               </div>
-            </div>
-            <div className="post">
-              <div className="postImg" />
-              <span className="postTitle">제목 테스트1</span>
-              <div className="moreContainer">
-                <span className="font">more</span>
-                <MdKeyboardArrowRight className="icon" />
+              <div className="post">
+                <div className="postImg" />
+                <span className="postTitle">제목 테스트1</span>
+                <div className="moreContainer">
+                  <span className="font">more</span>
+                  <MdKeyboardArrowRight className="icon" />
+                </div>
               </div>
-            </div>
-            <div className="post">
-              <div className="postImg" />
-              <span className="postTitle">제목 테스트1</span>
-              <div className="moreContainer">
-                <span className="font">more</span>
-                <MdKeyboardArrowRight className="icon" />
+              <div className="post">
+                <div className="postImg" />
+                <span className="postTitle">제목 테스트1</span>
+                <div className="moreContainer">
+                  <span className="font">more</span>
+                  <MdKeyboardArrowRight className="icon" />
+                </div>
               </div>
-            </div>
-          </PostContainer>
-        </div>
-      </Content>
-    </Section>
-  </Container>
-);
+            </PostContainer>
+          </div>
+        </Content>
+      </Section>
+    </Container>
+  );
+};
 
 export default Blog;
