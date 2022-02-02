@@ -6,7 +6,7 @@ import useAuth from 'src/hooks/useAuth';
 const Home = () => {
   const [logoColor, setLogoColor] = useState(false);
   const currentUser = useAuth();
-
+  console.log(currentUser);
   return (
     <>
       <Header logoColor={logoColor} />
