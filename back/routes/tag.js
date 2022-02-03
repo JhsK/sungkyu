@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 
-const { Post, User, Tag, PostTag } = require("../models");
+const { Post, User, Tag, PostTag, Image } = require("../models");
 
 const router = express.Router();
 
@@ -23,6 +23,9 @@ router.get("/filter", async (req, res, next) => {
         {
           model: Tag,
           where: { id: req.query.tag },
+        },
+        {
+          model: Image,
         },
       ],
     });
