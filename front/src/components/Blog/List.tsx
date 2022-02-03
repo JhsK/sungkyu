@@ -218,10 +218,7 @@ const List = () => {
               <ContentContainer key={post.id}>
                 <div key={post.id}>
                   <span className="title">{post.title}</span>
-                  <div>
-                    네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을
-                    출시했습니다. Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-                  </div>
+                  <div>{post?.content.length > 180 ? `${post?.content.substring(0, 180)}...` : post?.content}</div>
                 </div>
                 <TagsContainer>
                   {post?.Tags.map((tag) => (
