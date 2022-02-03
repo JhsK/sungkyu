@@ -170,7 +170,7 @@ const List = () => {
       tagFilter(router.query.tag);
     }
   }, [router.query]);
-
+  console.log(posts);
   return (
     <Container>
       <CreateBtn>

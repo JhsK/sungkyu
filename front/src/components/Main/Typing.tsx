@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Global, css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useInView } from 'react-intersection-observer';
 
 const typing = keyframes`
     0% {
@@ -47,7 +48,7 @@ const H1 = styled.h1`
   white-space: nowrap;
 
   &::before {
-    color: #000;
+    color: ${(props) => props.theme.PUBLIC_BLACK};
     position: absolute;
     top: 3.3rem;
     left: 0;
@@ -58,16 +59,25 @@ const H1 = styled.h1`
   }
 `;
 
-const Typing = () => (
-  <Container>
-    <Section>
-      <Content>
-        <h1>저는</h1>
-        <H1>불편함을 해소하기 위해 고민하는</H1>
-        <h1>개발자 입니다.</h1>
-      </Content>
-    </Section>
-  </Container>
-);
+const Typing = ({ setLogoColor }) => {
+  const [ref, inView] = useInView({
+    threshold: 0,
+  });
+
+  useEffect(() => {
+    setLogoColor(!inView);
+  }, [inView]);
+  return (
+    <Container>
+      <Section>
+        <Content ref={ref}>
+          <h1>저는</h1>
+          <H1>불편함을 해소하기 위해 고민하는</H1>
+          <h1>개발자 입니다.</h1>
+        </Content>
+      </Section>
+    </Container>
+  );
+};
 
 export default Typing;
