@@ -9,12 +9,15 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
+  const search = req.query.search;
+  const category = req.query.category;
+
   try {
-    const search = req.query.search;
-    const category = req.query.category;
+    const where = {};
     const posts = await Post.findAll({
       where: search ? { title: { [Op.like]: `%${search}%` } } : {},
       order: category ? [["createdAt", category]] : [["createdAt", "DESC"]],
+      limit: 4,
       include: [
         {
           model: Tag,
