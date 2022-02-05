@@ -8,7 +8,7 @@ const Comment = ({ repo }) => {
     const attributes = {
       src: 'https://utteranc.es/client.js',
       repo,
-      'issue-term': 'title',
+      'issue-term': 'pathname',
       label: 'comment',
       theme: 'github-light',
       crossOrigin: 'anonymous',

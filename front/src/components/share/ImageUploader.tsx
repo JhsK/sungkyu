@@ -43,10 +43,6 @@ const CloseBtn = styled.div`
 const ImageUploader = ({ imagePath, setImagePath }) => {
   const imageRef = useRef(null);
 
-  // const onChangeImage = (imageList) => {
-  //   setImage(imageList);
-  // };
-
   const onChangeImage = async (e) => {
     const formData = new FormData();
     formData.append('img', e.target.files[0]);
