@@ -13,7 +13,7 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
+  background-color: ${(props) => props.theme.PUBLIC_WHITE};
 `;
 
 const Content = styled.div`

@@ -50,7 +50,7 @@ const All = styled.span`
 `;
 
 const Newest = styled.span`
-  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
+  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.PUBLIC_DARKGRAY)};
 `;
 
 const Latest = styled.span`

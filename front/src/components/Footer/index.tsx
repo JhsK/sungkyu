@@ -13,7 +13,7 @@ import Logo from '../Header/Logo';
 const FooterContainer = styled.div`
   width: 100%;
   padding: 2rem 0;
-  background-color: ${(props) => props.theme.BACKGROUND_PROJECTS_COLOR};
+  background-color: ${(props) => props.theme.FOOTER_GRAY};
 `;
 
 const Content = styled.div`

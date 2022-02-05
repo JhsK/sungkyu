@@ -22,7 +22,7 @@ const StickyContainer = styled.div<StickyContainerProps>`
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: ${(props) => props.logoColor && props.theme.BACKGROUND_INTRO_COLOR};
+  background-color: ${(props) => props.logoColor && props.theme.PUBLIC_WHITE};
   padding: ${(props) => (props.headerPadding ? '0' : '1rem 0')};
 `;
 

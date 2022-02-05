@@ -45,7 +45,7 @@ const TagList = styled.div`
 `;
 
 const UpdateAndDeleteBtn = styled.div`
-  color: ${(props) => props.theme.FONT_COLOR_DARKGRAY};
+  color: ${(props) => props.theme.PUBLIC_DARKGRAY};
 
   span {
     margin-left: 0.5rem;
