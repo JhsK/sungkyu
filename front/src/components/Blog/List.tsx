@@ -140,15 +140,6 @@ const List = () => {
   const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
   const [ref, inView] = useInView();
-  // const {
-  //   data: postsData,
-  //   isLoading,
-  //   refetch,
-  // } = useQuery('posts', async () => {
-  //   const data = await getPostsAPI(categoryRef.current.option);
-  //   setPosts(data);
-  //   return data;
-  // });
 
   const {
     data: postsData,
@@ -171,7 +162,7 @@ const List = () => {
     setSearchValue(e.target.value);
   };
 
-  const onSubmitSearch = async () => {
+  const onSubmitSearch = () => {
     refetch();
   };
 
