@@ -19,7 +19,7 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: auto;
-  background-color: ${(props) => props.theme.BACKGROUND_TYPING_COLOR};
+  background-color: ${(props) => props.theme.MAIN_BACKGROUND_COLOR};
   background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
 `;
 

@@ -16,7 +16,7 @@ const Button = styled.button`
   text-align: center;
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  background-color: ${(props) => props.theme.BACKGROUND_PROJECTS_COLOR};
+  background-color: ${(props) => props.theme.FOOTER_GRAY};
   border: none;
   font-size: 1rem;
   cursor: pointer;

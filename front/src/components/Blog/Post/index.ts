@@ -53,7 +53,7 @@ export const BtnContainer = styled.div`
 
   button:nth-of-type(1) {
     background-color: ${(props) => props.theme.POST_EDIT_BUTTON_COLOR};
-    color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
+    color: ${(props) => props.theme.PUBLIC_WHITE};
   }
 
   button:nth-of-type(2) {
