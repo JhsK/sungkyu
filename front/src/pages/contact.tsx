@@ -6,18 +6,26 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
+  min-height: calc(100% - 170px);
+`;
+
+const FlexContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5rem;
 `;
 
 const Contact = () => (
-  <Container>
-    <Header logoColor />
-    <ContactComponent />
+  <>
+    <Container>
+      <Header logoColor />
+      <FlexContainer>
+        <ContactComponent />
+      </FlexContainer>
+    </Container>
     <Footer />
-  </Container>
+  </>
 );
 
 export default Contact;

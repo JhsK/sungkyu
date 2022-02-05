@@ -15,7 +15,7 @@ const BlogContainer = styled.div`
   display: flex;
   align-items: flex-start;
   width: 1200px;
-  margin: 9rem auto 0 auto;
+  margin: 5rem auto 0 auto;
   gap: 2rem;
 `;
 

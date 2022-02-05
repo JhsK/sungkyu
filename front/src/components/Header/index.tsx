@@ -7,15 +7,18 @@ type HeaderProps = {
   logoColor: boolean;
   logoSize?: number;
   headerPadding?: boolean;
+  mainBool?: boolean;
 };
 
 type StickyContainerProps = {
   logoColor: boolean;
   headerPadding?: boolean;
+  mainBool?: boolean;
 };
 
 const StickyContainer = styled.div<StickyContainerProps>`
-  position: fixed;
+  // position: fixed;
+  position: ${(props) => (props.mainBool ? 'fixed;' : 'sticky;')}
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -45,8 +48,8 @@ const MenuLi = styled.ul`
   }
 `;
 
-const Header = ({ logoColor, logoSize, headerPadding = false }: HeaderProps) => (
-  <StickyContainer logoColor={logoColor} headerPadding={headerPadding}>
+const Header = ({ logoColor, logoSize, headerPadding = false, mainBool }: HeaderProps) => (
+  <StickyContainer mainBool={mainBool} logoColor={logoColor} headerPadding={headerPadding}>
     <Container>
       <Link href="/">
         <a>
