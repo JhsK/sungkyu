@@ -14,8 +14,14 @@ router.get("/", async (req, res, next) => {
 
   try {
     const where = {};
+    if (search !== "") {
+      where.title = { [Op.substring]: `${search}` };
+    }
+    if (Number(req.query.lastId)) {
+      where.id = { [Op.lt]: Number(req.query.lastId) };
+    }
     const posts = await Post.findAll({
-      where: search ? { title: { [Op.like]: `%${search}%` } } : {},
+      where,
       order: category ? [["createdAt", category]] : [["createdAt", "DESC"]],
       limit: 4,
       include: [

@@ -2,11 +2,12 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import { getPostsAPI, getPostsSearchAPI, getTagFilterAPI } from 'src/api';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 import { BiSearch } from 'react-icons/bi';
+import { useInView } from 'react-intersection-observer';
 
 const Container = styled.div`
   width: 73%;
@@ -135,27 +136,43 @@ interface CategoryType {
 const List = () => {
   const currentUser = useAuth();
   const router = useRouter();
-  const [posts, setPosts] = useState<PostModel[]>(null);
+  const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
+  const [ref, inView] = useInView();
+  // const {
+  //   data: postsData,
+  //   isLoading,
+  //   refetch,
+  // } = useQuery('posts', async () => {
+  //   const data = await getPostsAPI(categoryRef.current.option);
+  //   setPosts(data);
+  //   return data;
+  // });
 
   const {
     data: postsData,
     isLoading,
+    fetchNextPage,
     refetch,
-  } = useQuery('posts', async () => {
-    const data = await getPostsAPI(categoryRef.current.option);
-    setPosts(data);
-    return data;
-  });
+    hasNextPage,
+  } = useInfiniteQuery(
+    'posts',
+    ({ pageParam = 0 }) => getPostsAPI(categoryRef.current.option, pageParam, serachValue),
+    {
+      onSuccess: (data) => setPosts(data?.pages.flat()),
+      getNextPageParam: (lastPage) => lastPage?.[lastPage.length - 1]?.id,
+    },
+  );
+
+  const infiniteBool = !isLoading && hasNextPage;
 
   const onChangeSearch = (e) => {
     setSearchValue(e.target.value);
   };
 
   const onSubmitSearch = async () => {
-    const data = await getPostsSearchAPI(serachValue);
-    setPosts(data);
+    refetch();
   };
 
   const tagFilter = async (id) => {
@@ -170,7 +187,12 @@ const List = () => {
       tagFilter(router.query.tag);
     }
   }, [router.query]);
-  console.log(posts);
+
+  useEffect(() => {
+    if (inView && infiniteBool) {
+      fetchNextPage();
+    }
+  }, [inView, infiniteBool, fetchNextPage]);
   return (
     <Container>
       <CreateBtn>
@@ -182,9 +204,6 @@ const List = () => {
       </CreateBtn>
       <LableContainer>
         <div className="filter">
-          {/* <All color={category} onClick={() => activeCategory('All')}>
-            All
-          </All> */}
           <Newest
             color={categoryRef.current.name}
             onClick={() => {
@@ -234,6 +253,7 @@ const List = () => {
             <Hr key={post.createdAt} />
           </>
         ))}
+      <div ref={infiniteBool ? ref : undefined} />
     </Container>
   );
 };
