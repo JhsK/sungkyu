@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import Head from 'next/head';
-import GlobalStyle from 'src/theme/globalStyle';
-import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@emotion/react';
-import { lightTheme } from 'src/theme';
-import { RecoilRoot } from 'recoil';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import React from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import { configs } from 'src/config';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { RecoilRoot } from 'recoil';
+import { configs } from 'src/config';
+import { lightTheme } from 'src/theme';
+import GlobalStyle from 'src/theme/globalStyle';
 
 const isProduction = configs.ENV === 'production';
 
@@ -44,4 +44,5 @@ const App = ({ Component, pageProps }: AppProps) => {
     </>
   );
 };
+
 export default App;

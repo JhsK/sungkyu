@@ -40,7 +40,7 @@ const Section = styled.section`
   width: 100%;
   height: 100%;
   scroll-snap-type: start;
-  background-color: ${(props) => props.theme.BACKGROUND_PROJECTS_COLOR};
+  background-color: ${(props) => props.theme.FOOTER_GRAY};
   background-blend-mode: multiply;
   background-attachment: fixed;
 `;
@@ -99,7 +99,7 @@ const Content = styled.div`
         width: 400px;
         height: 140px;
         margin-bottom: 4.5rem;
-        background-color: ${(props) => props.theme.FONT_COLOR_WHITE};
+        background-color: ${(props) => props.theme.PUBLIC_WHITE};
 
         img {
           width: 40%;
@@ -117,7 +117,7 @@ const ListContainer = styled.div`
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  background-color: ${(props) => props.theme.FONT_COLOR_WHITE};
+  background-color: ${(props) => props.theme.PUBLIC_WHITE};
   margin-bottom: 2rem;
   animation: ${fadeInAnimation} 1s linear;
 

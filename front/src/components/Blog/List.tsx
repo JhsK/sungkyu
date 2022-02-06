@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
-import { getPostsAPI, getPostsSearchAPI, getTagFilterAPI } from 'src/api';
-import { PostModel } from 'src/constant';
-import useAuth from 'src/hooks/useAuth';
+import React, { useEffect, useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { useInView } from 'react-intersection-observer';
+import { dehydrate, QueryClient, useInfiniteQuery } from 'react-query';
+import { getPostsAPI, getTagFilterAPI } from 'src/api';
+import { PostModel } from 'src/constant';
+import useAuth from 'src/hooks/useAuth';
 
 const Container = styled.div`
   width: 73%;
@@ -248,4 +249,17 @@ const List = () => {
     </Container>
   );
 };
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const queryClient = new QueryClient();
+
+//   await queryClient.prefetchInfiniteQuery('posts', () => getPostsAPI('DESC', 0, ''));
+
+//   return {
+//     props: {
+//       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+//     },
+//   };
+// };
+
 export default List;

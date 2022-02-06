@@ -5,8 +5,6 @@
 // import React, { useRef } from 'react';
 // import { EditorProps } from '@toast-ui/react-editor';
 
-// const Editor = dynamic<EditorProps>(() => import('@toast-ui/react-editor').then((m) => m.Editor), { ssr: false });
-
 // const PostEditor = () => {
 //   const editorRef = useRef(null);
 //   console.log(editorRef.current); // {retry: ƒ}
@@ -74,6 +72,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import router from 'next/router';
 import { postCreateAPI, uploadImageAPI } from 'src/api';
+import dynamic from 'next/dynamic';
 import ImageUploader from 'src/components/share/ImageUploader';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import Prism from 'prismjs';
@@ -84,6 +83,8 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
+
+// const Editor = dynamic<EditorProps>(() => import('@toast-ui/react-editor').then((m) => m.Editor), { ssr: false });
 
 export interface PostEditorWithForwardedProps extends EditorProps {
   forwardedRef?: React.MutableRefObject<Editor>;
@@ -137,7 +138,6 @@ const PostEditor = () => {
   };
   return (
     <Container>
-      {/* <form onSubmit={onSubmitPost}> */}
       <div>
         <TitleInput onChange={onChangeTitle} name="title" type="text" placeholder="제목을 입력해주세요" />
         {tag &&
@@ -172,7 +172,6 @@ const PostEditor = () => {
             </Link>
           </button>
         </BtnContainer>
-        {/* </form> */}
       </div>
       <ImageUploader imagePath={imagePath} setImagePath={setImagePath} />
     </Container>
