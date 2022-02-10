@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
     const posts = await Post.findAll({
       where,
       order: category ? [["createdAt", category]] : [["createdAt", "DESC"]],
-      limit: 4,
+      limit: 5,
       include: [
         {
           model: Tag,
