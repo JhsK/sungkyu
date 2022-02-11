@@ -66,8 +66,6 @@ const ProjectsContainer = styled.div`
   }
 `;
 
-const tmp = [1, 2, 3, 4];
-
 const ProjectsComponent = () => (
   <Container>
     <ProjectsContainer>
@@ -76,15 +74,6 @@ const ProjectsComponent = () => (
         <span className="ProjectsTitle">개인 프로젝트</span>
       </div>
       <div className="cardContainer">
-        {/* {tmp.map((item) => (
-          <motion.div className="card" whileHover={{ scale: 1.1 }}>
-            <img src="test.jpg" alt="cover" />
-            <div className="cardTitleContainer">
-              <span>title</span>
-              <span>content</span>
-            </div>
-          </motion.div>
-        ))} */}
         <motion.div className="card" whileHover={{ scale: 1.1 }}>
           <Link href="/projects/Tre">
             <a>

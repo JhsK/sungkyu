@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
     const posts = await Post.findAll({
       where,
       order: category ? [["createdAt", category]] : [["createdAt", "DESC"]],
-      limit: 4,
+      limit: 5,
       include: [
         {
           model: Tag,
@@ -38,6 +38,22 @@ router.get("/", async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(error);
+  }
+});
+
+router.get("/main", async (req, res, next) => {
+  try {
+    const posts = await Post.findAll({
+      limit: 3,
+      include: [
+        {
+          model: Image,
+        },
+      ],
+    });
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
   }
 });
 

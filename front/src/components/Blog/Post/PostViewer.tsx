@@ -7,7 +7,7 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import Prism from 'prismjs';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 
-const PostViewer = ({ content }) => {
+const PostViewer = ({ content = '' }) => {
   const viwerRef = React.createRef<Viewer>();
 
   useEffect(() => {

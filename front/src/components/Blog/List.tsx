@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
-import { getPostsAPI, getPostsSearchAPI, getTagFilterAPI } from 'src/api';
-import { PostModel } from 'src/constant';
-import useAuth from 'src/hooks/useAuth';
+import React, { useEffect, useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { useInView } from 'react-intersection-observer';
+import { dehydrate, QueryClient, useInfiniteQuery, useQuery } from 'react-query';
+import { getPostsAPI, getTagFilterAPI } from 'src/api';
+import { PostModel } from 'src/constant';
+import useAuth from 'src/hooks/useAuth';
 
 const Container = styled.div`
   width: 73%;
@@ -153,6 +154,7 @@ const List = () => {
     {
       onSuccess: (data) => setPosts(data?.pages.flat()),
       getNextPageParam: (lastPage) => lastPage?.[lastPage.length - 1]?.id,
+      staleTime: 1000,
     },
   );
 
@@ -184,6 +186,7 @@ const List = () => {
       fetchNextPage();
     }
   }, [inView, infiniteBool, fetchNextPage]);
+
   return (
     <Container>
       <CreateBtn>
@@ -248,4 +251,5 @@ const List = () => {
     </Container>
   );
 };
+
 export default List;

@@ -12,7 +12,6 @@ const Container = styled.div`
 `;
 
 export default function ProjectsItem({ projectsData }) {
-  console.log(projectsData);
   return (
     <>
       <Header logoColor />
