@@ -13,7 +13,6 @@ const Blog = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  console.log('fasfsf');
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery('posts', () => getPostsAPI('DESC', 0, ''), { staleTime: 1000 });
