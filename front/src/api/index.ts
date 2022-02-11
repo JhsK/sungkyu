@@ -59,3 +59,8 @@ export const uploadImageAPI = async (params) => {
   const { data } = await API.post('/image', params);
   return data;
 };
+
+export const getMainPostsAPI = async () => {
+  const { data } = await API.get<PostModel[]>('/post/main');
+  return data;
+};
