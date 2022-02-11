@@ -23,6 +23,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
         />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="main icon" href="favicon.ico" />
         <link
           rel="stylesheet"
           type="text/css"
