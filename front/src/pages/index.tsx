@@ -1,38 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { GetStaticProps } from 'next';
+import React, { useState } from 'react';
+import { dehydrate, QueryClient } from 'react-query';
+import { getMainPostsAPI } from 'src/api';
 import Header from 'src/components/Header';
 import Main from 'src/components/Main';
-import useAuth from 'src/hooks/useAuth';
 
 const Home = () => {
   const [logoColor, setLogoColor] = useState(false);
-  const [projectsAnimation, setProjectsAnimation] = useState(false);
-  const [blogAnimation, setBlogAnimation] = useState(false);
-  const currentUser = useAuth();
-
-  useEffect(() => {
-    const handleScroll = (e) => {
-      const line = e.target.scrollingElement.scrollTop;
-      // console.log(e.target.scrollingElement.scrollTop);
-      // console.log(window.scrollY);
-
-      if (line < 300) setLogoColor(false);
-      if (line > 500) setLogoColor(true);
-      if (line > 1300) setProjectsAnimation(true);
-      else setProjectsAnimation(false);
-      if (line > 2650) setBlogAnimation(true);
-      else setBlogAnimation(false);
-    };
-    window.addEventListener('scroll', handleScroll);
-    // window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  console.log('home', currentUser);
   return (
     <>
-      <Header logoColor={logoColor} />
-      <Main projects={projectsAnimation} blog={blogAnimation} />
+      <Header logoColor={logoColor} mainBool />
+      <Main setLogoColor={setLogoColor} />
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery('main', getMainPostsAPI, { staleTime: 5000 });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 };
 
 export default Home;

@@ -1,7 +1,11 @@
-import React from 'react';
-import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
+import Link from 'next/link';
+import React from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import { useInView } from 'react-intersection-observer';
+import { useQuery } from 'react-query';
+import { getMainPostsAPI } from 'src/api';
 
 const fadeIn = keyframes`
   0% {
@@ -31,7 +35,7 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: ${(props) => props.theme.BACKGROUND_INTRO_COLOR};
+  background-color: ${(props) => props.theme.PUBLIC_WHITE};
 `;
 
 const Content = styled.div`
@@ -78,6 +82,12 @@ const PostContainer = styled.div`
       background-color: gray;
       height: 200px;
       margin-bottom: 1.5rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     .postTitle {
@@ -88,7 +98,7 @@ const PostContainer = styled.div`
     .moreContainer {
       display: flex;
       align-items: center;
-      color: ${(props) => props.theme.FONT_COLOR_DARKGRAY};
+      color: ${(props) => props.theme.PUBLIC_DARKGRAY};
       margin-top: 1rem;
 
       .font {
@@ -101,42 +111,42 @@ const PostContainer = styled.div`
   }
 `;
 
-const Blog = ({ blog }) => (
-  <Container>
-    <Section>
-      <Content>
-        <div className={blog ? 'activeFade' : 'disableFade'}>
-          <span className="title">BLOG</span>
-          <PostContainer>
-            <div className="post">
-              <div className="postImg" />
-              <span className="postTitle">제목 테스트1</span>
-              <div className="moreContainer">
-                <span className="font">more</span>
-                <MdKeyboardArrowRight className="icon" />
-              </div>
-            </div>
-            <div className="post">
-              <div className="postImg" />
-              <span className="postTitle">제목 테스트1</span>
-              <div className="moreContainer">
-                <span className="font">more</span>
-                <MdKeyboardArrowRight className="icon" />
-              </div>
-            </div>
-            <div className="post">
-              <div className="postImg" />
-              <span className="postTitle">제목 테스트1</span>
-              <div className="moreContainer">
-                <span className="font">more</span>
-                <MdKeyboardArrowRight className="icon" />
-              </div>
-            </div>
-          </PostContainer>
-        </div>
-      </Content>
-    </Section>
-  </Container>
-);
+const Blog = () => {
+  const [ref, inView] = useInView({ threshold: 0 });
+  const { data: posts } = useQuery('main', getMainPostsAPI, {
+    staleTime: 5000,
+  });
+
+  return (
+    <Container>
+      <Section>
+        <Content>
+          <div ref={ref} className={inView ? 'activeFade' : 'disableFade'}>
+            <span className="title">BLOG</span>
+            <PostContainer>
+              {posts &&
+                posts.map((post) => (
+                  <div className="post" key={post.id}>
+                    <div className="postImg">
+                      {post?.Images && <img src={`http://localhost:3001/${post?.Images[0].image_url}`} alt="post" />}
+                    </div>
+                    <span className="postTitle">{post.title}</span>
+                    <Link href={`/blog/${post.id}`}>
+                      <a>
+                        <div className="moreContainer">
+                          <span className="font">more</span>
+                          <MdKeyboardArrowRight className="icon" />
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
+                ))}
+            </PostContainer>
+          </div>
+        </Content>
+      </Section>
+    </Container>
+  );
+};
 
 export default Blog;

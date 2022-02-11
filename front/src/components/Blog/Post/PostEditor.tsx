@@ -5,8 +5,6 @@
 // import React, { useRef } from 'react';
 // import { EditorProps } from '@toast-ui/react-editor';
 
-// const Editor = dynamic<EditorProps>(() => import('@toast-ui/react-editor').then((m) => m.Editor), { ssr: false });
-
 // const PostEditor = () => {
 //   const editorRef = useRef(null);
 //   console.log(editorRef.current); // {retry: ƒ}
@@ -73,7 +71,9 @@ import { Editor, EditorProps } from '@toast-ui/react-editor';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import router from 'next/router';
-import { postCreateAPI } from 'src/api';
+import { postCreateAPI, uploadImageAPI } from 'src/api';
+import dynamic from 'next/dynamic';
+import ImageUploader from 'src/components/share/ImageUploader';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import Prism from 'prismjs';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
@@ -84,12 +84,15 @@ import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
 
+// const Editor = dynamic<EditorProps>(() => import('@toast-ui/react-editor').then((m) => m.Editor), { ssr: false });
+
 export interface PostEditorWithForwardedProps extends EditorProps {
   forwardedRef?: React.MutableRefObject<Editor>;
 }
 
 const PostEditor = () => {
   const editorRef = React.createRef<Editor>();
+  const [imagePath, setImagePath] = useState(null);
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState([]);
   const [tagInputValue, setTagInputValue] = useState('');
@@ -119,7 +122,8 @@ const PostEditor = () => {
     if (title === '') {
       return alert('제목은 필수 입니다');
     }
-    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag };
+    if (!(imagePath.length > 0)) return alert('이미지는 필수 입니다');
+    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
     console.log(values);
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
@@ -134,7 +138,6 @@ const PostEditor = () => {
   };
   return (
     <Container>
-      {/* <form onSubmit={onSubmitPost}> */}
       <div>
         <TitleInput onChange={onChangeTitle} name="title" type="text" placeholder="제목을 입력해주세요" />
         {tag &&
@@ -169,8 +172,8 @@ const PostEditor = () => {
             </Link>
           </button>
         </BtnContainer>
-        {/* </form> */}
       </div>
+      <ImageUploader imagePath={imagePath} setImagePath={setImagePath} />
     </Container>
   );
 };

@@ -13,7 +13,7 @@ export const FormContainer = styled.div`
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.FONT_COLOR_WHITE};
+  background-color: ${(props) => props.theme.PUBLIC_WHITE};
 `;
 
 export const Form = styled.form`
@@ -33,7 +33,7 @@ export const Form = styled.form`
   input {
     padding: 0.6rem;
     border-radius: 8px;
-    border: 1px solid ${(props) => props.theme.FONT_COLOR_DARKGRAY};
+    border: 1px solid ${(props) => props.theme.PUBLIC_DARKGRAY};
   }
 
   span {
@@ -59,6 +59,6 @@ export const Button = styled.button`
   font-size: 0.9rem;
   cursor: pointer;
   background-color: ${(props: FormButtonProps) =>
-    props.submitType ? props.theme.PUBLIC_BLACK : props.theme.FONT_COLOR_WHITE};
-  color: ${(props: FormButtonProps) => (props.submitType ? props.theme.FONT_COLOR_WHITE : props.theme.PUBLIC_BLACK)};
+    props.submitType ? props.theme.PUBLIC_BLACK : props.theme.PUBLIC_WHITE};
+  color: ${(props: FormButtonProps) => (props.submitType ? props.theme.PUBLIC_WHITE : props.theme.PUBLIC_BLACK)};
 `;

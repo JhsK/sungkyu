@@ -1,21 +1,35 @@
 const express = require("express");
 const path = require("path");
+const sequelize = require("sequelize");
+const Op = sequelize.Op;
 
-const { Post, User, Tag, PostTag } = require("../models");
+const { Post, User, Tag, PostTag, Image } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
+  const search = req.query.search;
+  const category = req.query.category;
+
   try {
     const where = {};
-    const category = req.query.category;
+    if (search !== "") {
+      where.title = { [Op.substring]: `${search}` };
+    }
+    if (Number(req.query.lastId)) {
+      where.id = { [Op.lt]: Number(req.query.lastId) };
+    }
     const posts = await Post.findAll({
       where,
-      order: [["createdAt", category]],
+      order: category ? [["createdAt", category]] : [["createdAt", "DESC"]],
+      limit: 5,
       include: [
         {
           model: Tag,
+        },
+        {
+          model: Image,
         },
       ],
     });
@@ -24,6 +38,22 @@ router.get("/", async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(error);
+  }
+});
+
+router.get("/main", async (req, res, next) => {
+  try {
+    const posts = await Post.findAll({
+      limit: 3,
+      include: [
+        {
+          model: Image,
+        },
+      ],
+    });
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -63,6 +93,11 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
         )
       ); // [[노드, true], [리액트, true]]
       await post.addTags(result.map((v) => v[0]));
+    }
+
+    if (req.body.image) {
+      const image = await Image.create({ image_url: req.body.image });
+      await post.addImages(image);
     }
     res.status(200).json("success");
   } catch (error) {

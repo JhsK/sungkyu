@@ -15,7 +15,7 @@ const BlogContainer = styled.div`
   display: flex;
   align-items: flex-start;
   width: 1200px;
-  margin: 9rem auto 0 auto;
+  margin: 5rem auto 0 auto;
   gap: 2rem;
 `;
 
@@ -30,28 +30,3 @@ const BlogComponent = () => (
 );
 
 export default BlogComponent;
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <>
-{isLoading ? (
-  <ClipLoader
-    css={css`
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    `}
-    size={200}
-  />
-) : (
-  <Container>
-    <BlogContainer>
-      <List />
-      <Tags />
-    </BlogContainer>
-    <Footer />
-  </Container>
-)}
-</> */
-}

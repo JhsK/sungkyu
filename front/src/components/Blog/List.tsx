@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
-import { useQuery } from 'react-query';
+import { BiSearch } from 'react-icons/bi';
+import { useInView } from 'react-intersection-observer';
+import { dehydrate, QueryClient, useInfiniteQuery, useQuery } from 'react-query';
 import { getPostsAPI, getTagFilterAPI } from 'src/api';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
@@ -48,7 +51,7 @@ const All = styled.span`
 `;
 
 const Newest = styled.span`
-  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
+  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.PUBLIC_DARKGRAY)};
 `;
 
 const Latest = styled.span`
@@ -115,6 +118,17 @@ const CreateBtn = styled.div`
   margin-bottom: 1rem;
 `;
 
+const SearchContainer = styled.div`
+  position: relative;
+`;
+
+const SearchBtnContainer = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+`;
+
 interface CategoryType {
   name: '최신순' | '후순위' | '태그';
   option: 'DESC' | 'ASC';
@@ -123,18 +137,36 @@ interface CategoryType {
 const List = () => {
   const currentUser = useAuth();
   const router = useRouter();
-  const [posts, setPosts] = useState<PostModel[]>(null);
+  const [posts, setPosts] = useState<PostModel[]>([]);
+  const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
+  const [ref, inView] = useInView();
 
   const {
     data: postsData,
     isLoading,
+    fetchNextPage,
     refetch,
-  } = useQuery('posts', async () => {
-    const data = await getPostsAPI(categoryRef.current.option);
-    setPosts(data);
-    return data;
-  });
+    hasNextPage,
+  } = useInfiniteQuery(
+    'posts',
+    ({ pageParam = 0 }) => getPostsAPI(categoryRef.current.option, pageParam, serachValue),
+    {
+      onSuccess: (data) => setPosts(data?.pages.flat()),
+      getNextPageParam: (lastPage) => lastPage?.[lastPage.length - 1]?.id,
+      staleTime: 1000,
+    },
+  );
+
+  const infiniteBool = !isLoading && hasNextPage;
+
+  const onChangeSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const onSubmitSearch = () => {
+    refetch();
+  };
 
   const tagFilter = async (id) => {
     const data = await getTagFilterAPI(id);
@@ -148,6 +180,13 @@ const List = () => {
       tagFilter(router.query.tag);
     }
   }, [router.query]);
+
+  useEffect(() => {
+    if (inView && infiniteBool) {
+      fetchNextPage();
+    }
+  }, [inView, infiniteBool, fetchNextPage]);
+
   return (
     <Container>
       <CreateBtn>
@@ -159,9 +198,6 @@ const List = () => {
       </CreateBtn>
       <LableContainer>
         <div className="filter">
-          {/* <All color={category} onClick={() => activeCategory('All')}>
-            All
-          </All> */}
           <Newest
             color={categoryRef.current.name}
             onClick={() => {
@@ -181,7 +217,12 @@ const List = () => {
             후순위
           </Latest>
         </div>
-        <input type="text" />
+        <SearchContainer>
+          <input type="text" onChange={onChangeSearch} />
+          <SearchBtnContainer>
+            <BiSearch onClick={onSubmitSearch} />
+          </SearchBtnContainer>
+        </SearchContainer>
       </LableContainer>
       {posts &&
         posts.map((post) => (
@@ -190,10 +231,7 @@ const List = () => {
               <ContentContainer key={post.id}>
                 <div key={post.id}>
                   <span className="title">{post.title}</span>
-                  <div>
-                    네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을
-                    출시했습니다. Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-                  </div>
+                  <div>{post?.content.length > 180 ? `${post?.content.substring(0, 180)}...` : post?.content}</div>
                 </div>
                 <TagsContainer>
                   {post?.Tags.map((tag) => (
@@ -201,48 +239,17 @@ const List = () => {
                   ))}
                 </TagsContainer>
               </ContentContainer>
-              <img alt="test" src="test.jpg" />
+              <img
+                alt="sumnail"
+                src={post?.Images ? `http://localhost:3001/${post?.Images[0].image_url}` : 'default.png'}
+              />
             </ListContainer>
             <Hr key={post.createdAt} />
           </>
         ))}
-      <ListContainer>
-        <ContentContainer>
-          <div>
-            <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
-            <div>
-              네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
-              Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-            </div>
-          </div>
-          <TagsContainer>
-            <span>#자바스크립트</span>
-            <span>#웹</span>
-            <span>#자바스크립트</span>
-          </TagsContainer>
-        </ContentContainer>
-        <img alt="test" src="test.jpg" />
-      </ListContainer>
-      <Hr />
-      <ListContainer>
-        <ContentContainer>
-          <div>
-            <span className="title">지식iN 앱을 Flutter로 개발하는 이유</span>
-            <div>
-              네이버는 2019년 10월에 국내 최초로 엔터프라이즈급 서비스에 Flutter를 도입해 지식인iN 앱을 출시했습니다.
-              Flutter는 모바일 앱과 데스트톱 앱 웹 앱을 단일 코드 베이스로 개발할 수 있도록 Google이
-            </div>
-          </div>
-          <TagsContainer>
-            <span>#자바스크립트</span>
-            <span>#웹</span>
-            <span>#자바스크립트</span>
-          </TagsContainer>
-        </ContentContainer>
-        <img alt="test" src="test.jpg" />
-      </ListContainer>
-      <Hr />
+      <div ref={infiniteBool ? ref : undefined} />
     </Container>
   );
 };
+
 export default List;
