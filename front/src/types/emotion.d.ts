@@ -18,5 +18,6 @@ declare module '@emotion/react' {
     TABLET_SM: string;
     PC: string;
     HDPC: string;
+    MOBILE_SM: string;
   }
 }

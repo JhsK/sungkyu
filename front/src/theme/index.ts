@@ -6,6 +6,7 @@ const responsiveView = {
   TABLET: '768px',
   TABLET_SM: '650px',
   MOBILE: '480px',
+  MOBILE_SM: '400px',
 };
 
 export const lightTheme = {
@@ -25,6 +26,7 @@ export const lightTheme = {
   TABLET_SM: `(max-width: ${responsiveView.TABLET_SM})`,
   PC: `(max-width: ${responsiveView.PC})`,
   HDPC: `(max-width: ${responsiveView.HDPC})`,
+  MOBILE_SM: `(max-width: ${responsiveView.MOBILE_SM})`,
 };
 
 export type ThemeType = typeof lightTheme;
