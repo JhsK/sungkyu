@@ -9,20 +9,41 @@ const IntroduceContainer = styled.div`
   .title {
     font-size: 2.3rem;
     margin-bottom: 2rem;
+
+    @media ${(props) => props.theme.TABLET_SM} {
+      font-size: 1.8rem;
+    }
+    @media ${(props) => props.theme.MOBILE} {
+      font-size: 1.5rem;
+    }
   }
 
   .subTitle {
     font-size: 1.8rem;
     margin-bottom: 1.2rem;
+
+    @media ${(props) => props.theme.TABLET_SM} {
+      font-size: 1.3rem;
+    }
+    @media ${(props) => props.theme.MOBILE} {
+      font-size: 1rem;
+    }
   }
 
   ul {
     list-style: disc outside none;
-    margin-left: 1.9rem;
+    margin-left: 1.7rem;
   }
 
   li {
     margin-bottom: 1rem;
+
+    @media ${(props) => props.theme.TABLET_SM} {
+      font-size: 0.7rem;
+    }
+    @media ${(props) => props.theme.MOBILE} {
+      font-size: 0.5rem;
+    }
   }
 `;
 
