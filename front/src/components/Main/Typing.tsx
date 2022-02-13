@@ -40,6 +40,14 @@ const Content = styled.div`
   & h1 {
     margin-bottom: 1rem;
   }
+
+  @media ${(props) => props.theme.TABLET_SM} {
+    font-size: 1.8rem;
+  }
+
+  @media ${(props) => props.theme.MOBILE} {
+    font-size: 1.5rem;
+  }
 `;
 
 const H1 = styled.h1`
@@ -56,6 +64,14 @@ const H1 = styled.h1`
     overflow: hidden;
     border-right: 3px solid black;
     animation: ${typing} 6s steps(30) infinite;
+
+    @media ${(props) => props.theme.TABLET_SM} {
+      top: 2.8rem;
+    }
+
+    @media ${(props) => props.theme.MOBILE} {
+      top: 2.3rem;
+    }
   }
 `;
 

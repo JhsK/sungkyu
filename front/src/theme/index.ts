@@ -4,7 +4,9 @@ const responsiveView = {
   HDPC: '1200px',
   PC: '980px',
   TABLET: '768px',
+  TABLET_SM: '650px',
   MOBILE: '480px',
+  MOBILE_SM: '400px',
 };
 
 export const lightTheme = {
@@ -19,6 +21,12 @@ export const lightTheme = {
   POST_EDIT_TITLE_BORDER_COLOR: '#989898',
   POST_EDIT_BUTTON_COLOR: '#a3cfcd',
   BACKGROUND_USER_COLOR: '#fafafa',
+  MOBILE: `(max-width: ${responsiveView.MOBILE})`,
+  TABLET: `(max-width: ${responsiveView.TABLET})`,
+  TABLET_SM: `(max-width: ${responsiveView.TABLET_SM})`,
+  PC: `(max-width: ${responsiveView.PC})`,
+  HDPC: `(max-width: ${responsiveView.HDPC})`,
+  MOBILE_SM: `(max-width: ${responsiveView.MOBILE_SM})`,
 };
 
 export type ThemeType = typeof lightTheme;
