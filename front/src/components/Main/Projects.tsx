@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper';
+import 'swiper/css';
 
 const verticalScroll = keyframes`
     0% { 
@@ -40,32 +43,45 @@ const Section = styled.section`
   width: 100%;
   height: 100%;
   scroll-snap-type: start;
-  background-color: ${(props) => props.theme.BACKGROUND_PROJECTS_COLOR};
+  background-color: ${(props) => props.theme.FOOTER_GRAY};
   background-blend-mode: multiply;
   background-attachment: fixed;
 `;
 
 const Content = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+
+  @media ${(props) => props.theme.TABLET_SM} {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin-top: 3rem;
+  }
 
   span {
     font-size: 2rem;
     font-weight: bold;
     display: block;
     margin-bottom: 2.3rem;
+
+    @media ${(props) => props.theme.TABLET_SM} {
+      font-size: 1.5rem;
+    }
+
+    @media ${(props) => props.theme.MOBILE_SM} {
+      margin-top: 1.2rem;
+    }
   }
 
   .textContainer {
-    transform: translateX(-30%);
+    /* transform: translateX(-30%); */
   }
 
   .projectsContainer {
-    transform: translateX(+30%);
+    /* transform: translateX(+30%); */
     /* height: 100vh; */
     vertical-align: middle;
 
@@ -99,7 +115,7 @@ const Content = styled.div`
         width: 400px;
         height: 140px;
         margin-bottom: 4.5rem;
-        background-color: ${(props) => props.theme.FONT_COLOR_WHITE};
+        background-color: ${(props) => props.theme.PUBLIC_WHITE};
 
         img {
           width: 40%;
@@ -117,9 +133,13 @@ const ListContainer = styled.div`
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  background-color: ${(props) => props.theme.FONT_COLOR_WHITE};
+  background-color: ${(props) => props.theme.PUBLIC_WHITE};
   margin-bottom: 2rem;
   animation: ${fadeInAnimation} 1s linear;
+
+  @media ${(props) => props.theme.MOBILE_SM} {
+    width: 100%;
+  }
 
   img {
     width: 100%;
@@ -144,60 +164,116 @@ const ListContainer = styled.div`
   }
 `;
 
-const Projects = () => (
-  <Container>
-    <Section>
-      <Content>
-        <div className="textContainer">
-          <span>개인 &sdot; 팀 프로젝트를</span>
-          <span>통해 진행한</span>
-          <span>프로젝트입니다.</span>
-        </div>
-        <div className="projectsContainer">
-          {/* <div className={projects ? 'containerActive' : 'container'}>
-            {projects && (
-              <div className="containerActive">
-                <div className="projects" />
-                <div className="projects" />
-              </div>
-            )}
-          </div> */}
-          <motion.div className="card" whileHover={{ scale: 1.1 }}>
-            <ListContainer>
-              <Link href="/projects/Tre">
-                <a>
-                  <img
-                    src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
-                    alt="cover"
-                  />
-                  <div className="projects">
-                    <span>Tre</span>
-                    <span>To Record Everything - 일정 관리 사이트</span>
-                  </div>
-                </a>
-              </Link>
-            </ListContainer>
-          </motion.div>
-          <motion.div className="card" whileHover={{ scale: 1.1 }}>
-            <ListContainer>
-              <Link href="/projects/Groupstory">
-                <a>
-                  <img
-                    src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
-                    alt="cover"
-                  />
-                  <div className="projects">
-                    <span>Groupstory</span>
-                    <span>백석대학교 동아리 모집 사이트</span>
-                  </div>
-                </a>
-              </Link>
-            </ListContainer>
-          </motion.div>
-        </div>
-      </Content>
-    </Section>
-  </Container>
-);
+const SwiperContainer = styled.div`
+  width: 85%;
+`;
+
+const Projects = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth < 400) {
+      setIsMobile(true);
+    } else setIsMobile(false);
+  });
+
+  return (
+    <Container>
+      <Section>
+        <Content>
+          <div className="textContainer">
+            <span>개인 &sdot; 팀 프로젝트를</span>
+            <span>통해 진행한</span>
+            <span>프로젝트입니다.</span>
+          </div>
+          {isMobile ? (
+            <SwiperContainer>
+              <Swiper
+                modules={[Autoplay]}
+                loop
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+              >
+                <SwiperSlide>
+                  <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                    <ListContainer>
+                      <Link href="/projects/Tre">
+                        <a>
+                          <img
+                            src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                            alt="cover"
+                          />
+                          <div className="projects">
+                            <span>Tre</span>
+                            <span>To Record Everything - 일정 관리 사이트</span>
+                          </div>
+                        </a>
+                      </Link>
+                    </ListContainer>
+                  </motion.div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                    <ListContainer>
+                      <Link href="/projects/Groupstory">
+                        <a>
+                          <img
+                            src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                            alt="cover"
+                          />
+                          <div className="projects">
+                            <span>Groupstory</span>
+                            <span>백석대학교 동아리 모집 사이트</span>
+                          </div>
+                        </a>
+                      </Link>
+                    </ListContainer>
+                  </motion.div>
+                </SwiperSlide>
+              </Swiper>
+            </SwiperContainer>
+          ) : (
+            <div className="projectsContainer">
+              <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                <ListContainer>
+                  <Link href="/projects/Tre">
+                    <a>
+                      <img
+                        src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                        alt="cover"
+                      />
+                      <div className="projects">
+                        <span>Tre</span>
+                        <span>To Record Everything - 일정 관리 사이트</span>
+                      </div>
+                    </a>
+                  </Link>
+                </ListContainer>
+              </motion.div>
+              <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                <ListContainer>
+                  <Link href="/projects/Groupstory">
+                    <a>
+                      <img
+                        src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                        alt="cover"
+                      />
+                      <div className="projects">
+                        <span>Groupstory</span>
+                        <span>백석대학교 동아리 모집 사이트</span>
+                      </div>
+                    </a>
+                  </Link>
+                </ListContainer>
+              </motion.div>
+            </div>
+          )}
+        </Content>
+      </Section>
+    </Container>
+  );
+};
 
 export default Projects;
