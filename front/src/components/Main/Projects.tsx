@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
+import useDevice from 'src/hooks/useDevice';
 
 const verticalScroll = keyframes`
     0% { 
@@ -169,13 +170,7 @@ const SwiperContainer = styled.div`
 `;
 
 const Projects = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    if (window.innerWidth < 400) {
-      setIsMobile(true);
-    } else setIsMobile(false);
-  });
+  const isMobile = useDevice(400);
 
   return (
     <Container>

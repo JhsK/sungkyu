@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { motion, useCycle } from 'framer-motion';
+import useDevice from 'src/hooks/useDevice';
 import Logo from './Logo';
 import MenuItem from './MenuItem';
 
@@ -90,12 +91,7 @@ const MotionContainer = styled(motion.div)`
 
 const Header = ({ logoColor, logoSize, headerPadding = false, mainBool }: HeaderProps) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    if (window.innerWidth <= 650) setIsMobile(true);
-    else setIsMobile(false);
-  }, []);
+  const isMobile = useDevice(650);
 
   const sidebar = {
     open: (height = 1000) => ({

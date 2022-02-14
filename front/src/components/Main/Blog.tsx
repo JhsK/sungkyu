@@ -9,6 +9,7 @@ import { getMainPostsAPI } from 'src/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
+import useDevice from 'src/hooks/useDevice';
 import PostCard from './PostCard';
 
 const fadeIn = keyframes`
@@ -149,16 +150,10 @@ const PostContainer = styled.div`
 `;
 
 const Blog = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useDevice(768);
   const [ref, inView] = useInView({ threshold: 0 });
   const { data: posts } = useQuery('main', getMainPostsAPI, {
     staleTime: 5000,
-  });
-
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setIsMobile(true);
-    } else setIsMobile(false);
   });
 
   return (
