@@ -14,16 +14,37 @@ const Container = styled.div`
 const BlogContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   margin: 5rem auto 0 auto;
   gap: 2rem;
+
+  @media ${(props) => props.theme.HDPC} {
+    max-width: 1000px;
+  }
+
+  @media ${(props) => props.theme.PC} {
+    max-width: 700px;
+  }
+
+  @media ${(props) => props.theme.TABLET} {
+    justify-content: center;
+  }
+
+  .tagContainer {
+    @media ${(props) => props.theme.TABLET} {
+      display: none;
+    }
+  }
 `;
 
 const BlogComponent = () => (
   <Container>
     <BlogContainer>
       <List />
-      <Tags />
+      <div className="tagContainer">
+        <Tags />
+      </div>
     </BlogContainer>
     <Footer />
   </Container>

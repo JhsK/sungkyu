@@ -9,6 +9,7 @@ import { dehydrate, QueryClient, useInfiniteQuery, useQuery } from 'react-query'
 import { getPostsAPI, getTagFilterAPI } from 'src/api';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
+import useDevice from 'src/hooks/useDevice';
 
 const Container = styled.div`
   width: 73%;
@@ -30,6 +31,10 @@ const LableContainer = styled.div`
       font-weight: 800;
       font-size: 1rem;
       cursor: pointer;
+
+      /* @media ${(props) => props.theme.MOBILE_SM} {
+        font-size: 0.8rem;
+      } */
     }
   }
 
@@ -39,6 +44,10 @@ const LableContainer = styled.div`
     border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding-left: 0.5rem;
+
+    @media ${(props) => props.theme.MOBILE_SM} {
+      width: 120px;
+    }
   }
 
   input:focus {
@@ -75,6 +84,10 @@ const ListContainer = styled.div`
     width: 30%;
     height: 100%;
     object-fit: cover;
+
+    @media ${(props) => props.theme.MOBILE} {
+      width: 50%;
+    }
   }
 `;
 
@@ -86,11 +99,19 @@ const ContentContainer = styled.div`
   justify-content: space-around;
   height: 100%;
 
+  @media ${(props) => props.theme.MOBILE} {
+    width: 50%;
+  }
+
   .title {
     display: block;
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1.3rem;
+
+    @media ${(props) => props.theme.MOBILE} {
+      font-size: 1.3rem;
+    }
   }
 
   div {
@@ -137,6 +158,8 @@ interface CategoryType {
 const List = () => {
   const currentUser = useAuth();
   const router = useRouter();
+  const isMobile = useDevice(650);
+  const [textLength, setTextLength] = useState(180);
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
@@ -187,6 +210,10 @@ const List = () => {
     }
   }, [inView, infiniteBool, fetchNextPage]);
 
+  useEffect(() => {
+    if (isMobile) setTextLength(30);
+  }, [isMobile]);
+
   return (
     <Container>
       <CreateBtn>
@@ -230,8 +257,10 @@ const List = () => {
             <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
               <ContentContainer key={post.id}>
                 <div key={post.id}>
-                  <span className="title">{post.title}</span>
-                  <div>{post?.content.length > 180 ? `${post?.content.substring(0, 180)}...` : post?.content}</div>
+                  <span className="title">{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</span>
+                  <div>
+                    {post?.content.length > textLength ? `${post?.content.substring(0, textLength)}...` : post?.content}
+                  </div>
                 </div>
                 <TagsContainer>
                   {post?.Tags.map((tag) => (
