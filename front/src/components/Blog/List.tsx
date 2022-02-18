@@ -10,6 +10,7 @@ import { getPostsAPI, getTagFilterAPI } from 'src/api';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 import useDevice from 'src/hooks/useDevice';
+import MobileTags from './MobileTags';
 
 const Container = styled.div`
   width: 73%;
@@ -31,10 +32,6 @@ const LableContainer = styled.div`
       font-weight: 800;
       font-size: 1rem;
       cursor: pointer;
-
-      /* @media ${(props) => props.theme.MOBILE_SM} {
-        font-size: 0.8rem;
-      } */
     }
   }
 
@@ -223,6 +220,7 @@ const List = () => {
           </Link>
         )}
       </CreateBtn>
+      {isMobile && <MobileTags />}
       <LableContainer>
         <div className="filter">
           <Newest

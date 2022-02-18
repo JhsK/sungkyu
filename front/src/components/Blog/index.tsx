@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import useDevice from 'src/hooks/useDevice';
 import Footer from '../Footer';
 import List from './List';
 import Tags from './Tags';
@@ -29,6 +30,7 @@ const BlogContainer = styled.div`
 
   @media ${(props) => props.theme.TABLET} {
     justify-content: center;
+    margin: 2rem auto 0 auto;
   }
 
   .tagContainer {
@@ -38,16 +40,22 @@ const BlogContainer = styled.div`
   }
 `;
 
-const BlogComponent = () => (
-  <Container>
-    <BlogContainer>
-      <List />
-      <div className="tagContainer">
-        <Tags />
-      </div>
-    </BlogContainer>
-    <Footer />
-  </Container>
-);
+const BlogComponent = () => {
+  const isMobile = useDevice(768);
+
+  return (
+    <Container>
+      <BlogContainer>
+        <List />
+        {!isMobile && (
+          <div className="tagContainer">
+            <Tags />
+          </div>
+        )}
+      </BlogContainer>
+      <Footer />
+    </Container>
+  );
+};
 
 export default BlogComponent;
