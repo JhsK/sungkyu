@@ -1,4 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import styled from '@emotion/styled';
+
+const StyledComment = styled.div`
+  width: 100%;
+`;
 
 const Comment = ({ repo }) => {
   const commentRef = useRef(null);
@@ -20,7 +25,7 @@ const Comment = ({ repo }) => {
     commentRef.current.appendChild(utterances);
   }, [repo]);
 
-  return <div ref={commentRef} />;
+  return <StyledComment ref={commentRef} />;
 };
 
 export default Comment;
