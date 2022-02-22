@@ -27,16 +27,16 @@ const Container = styled.div`
   @media ${(props) => props.theme.PC} {
     max-width: 700px;
   }
+
+  @media ${(props) => props.theme.TABLET_SM} {
+    width: 80%;
+  }
 `;
 
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 3rem;
-
-  @media ${(props) => props.theme.TABLET_SM} {
-    align-items: center;
-  }
 `;
 
 const Title = styled.div`
