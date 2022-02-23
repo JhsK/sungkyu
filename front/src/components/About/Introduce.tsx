@@ -3,8 +3,23 @@ import styled from '@emotion/styled';
 import IntroduceText from '../share/IntroduceText';
 
 const AboutContainer = styled.div`
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   margin: 5rem auto 0 auto;
+
+  @media ${(props) => props.theme.HDPC} {
+    max-width: 1000px;
+  }
+
+  @media ${(props) => props.theme.PC} {
+    max-width: 700px;
+  }
+
+  @media ${(props) => props.theme.TABLET_SM} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   span {
     font-weight: bold;
@@ -24,12 +39,14 @@ const TextContainer = styled.div`
 const Introduce = () => (
   <>
     <AboutContainer>
-      <span role="img" aria-labelledby="sunglass">
-        😎 About me
-      </span>
-      <TextContainer>
-        <IntroduceText />
-      </TextContainer>
+      <div>
+        <span role="img" aria-labelledby="sunglass">
+          😎 About me
+        </span>
+        <TextContainer>
+          <IntroduceText />
+        </TextContainer>
+      </div>
     </AboutContainer>
   </>
 );
