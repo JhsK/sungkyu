@@ -1,11 +1,16 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 import { useQuery } from 'react-query';
 import { getMainPostsAPI } from 'src/api';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper';
+import 'swiper/css';
+import useDevice from 'src/hooks/useDevice';
+import PostCard from './PostCard';
 
 const fadeIn = keyframes`
   0% {
@@ -39,13 +44,22 @@ const Section = styled.section`
 `;
 
 const Content = styled.div`
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
+  @media ${(props) => props.theme.HDPC} {
+    max-width: 1000px;
+  }
+
+  @media ${(props) => props.theme.PC} {
+    max-width: 700px;
+  }
 
   .activeFade {
     width: 100%;
@@ -64,11 +78,24 @@ const Content = styled.div`
 `;
 
 const PostContainer = styled.div`
+  max-width: 1200px;
   width: 100%;
   padding-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media ${(props) => props.theme.HDPC} {
+    max-width: 1000px;
+  }
+
+  @media ${(props) => props.theme.PC} {
+    max-width: 700px;
+  }
+
+  @media ${(props) => props.theme.TABLET} {
+    width: 100%;
+  }
 
   .post {
     width: 30%;
@@ -76,6 +103,10 @@ const PostContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
+
+    @media ${(props) => props.theme.TABLET} {
+      width: 100%;
+    }
 
     .postImg {
       width: 100%;
@@ -109,9 +140,17 @@ const PostContainer = styled.div`
       }
     }
   }
+
+  .swiperContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const Blog = () => {
+  const isMobile = useDevice(768);
   const [ref, inView] = useInView({ threshold: 0 });
   const { data: posts } = useQuery('main', getMainPostsAPI, {
     staleTime: 5000,
@@ -124,23 +163,41 @@ const Blog = () => {
           <div ref={ref} className={inView ? 'activeFade' : 'disableFade'}>
             <span className="title">BLOG</span>
             <PostContainer>
-              {posts &&
-                posts.map((post) => (
-                  <div className="post" key={post.id}>
-                    <div className="postImg">
-                      {post?.Images && <img src={`http://localhost:3001/${post?.Images[0].image_url}`} alt="post" />}
-                    </div>
-                    <span className="postTitle">{post.title}</span>
-                    <Link href={`/blog/${post.id}`}>
-                      <a>
-                        <div className="moreContainer">
-                          <span className="font">more</span>
-                          <MdKeyboardArrowRight className="icon" />
+              {posts && isMobile ? (
+                <Swiper
+                  className="swiperContainer"
+                  modules={[Autoplay]}
+                  loop
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }}
+                >
+                  {posts &&
+                    posts.map((post) => (
+                      <SwiperSlide>
+                        <div className="post" key={post.id}>
+                          <div className="postImg">
+                            {post?.Images && (
+                              <img src={`http://localhost:3001/${post?.Images[0].image_url}`} alt="post" />
+                            )}
+                          </div>
+                          <span className="postTitle">{post.title}</span>
+                          <Link href={`/blog/${post.id}`}>
+                            <a>
+                              <div className="moreContainer">
+                                <span className="font">more</span>
+                                <MdKeyboardArrowRight className="icon" />
+                              </div>
+                            </a>
+                          </Link>
                         </div>
-                      </a>
-                    </Link>
-                  </div>
-                ))}
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+              ) : (
+                <PostCard posts={posts} />
+              )}
             </PostContainer>
           </div>
         </Content>

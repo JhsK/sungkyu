@@ -19,40 +19,45 @@ import notionIcon from '../../../public/skill/notion.png';
 import slackIcon from '../../../public/skill/slack.png';
 import vscodeIcon from '../../../public/skill/vscode.png';
 
-const FRONT_SKILL_ONE = [
+const FRONT_SKILL = [
   { icon: htmlIcon, title: 'HTML5' },
   { icon: cssIcon, title: 'CSS3' },
   { icon: javascriptIcon, title: 'JavaScript' },
   { icon: typescriptIcon, title: 'TypeScript' },
   { icon: reactIcon, title: 'React' },
   { icon: reduxIcon, title: 'Redux' },
-] as const;
-const FRONT_SKILL_TWO = [{ icon: tailwindIcon, title: 'TailWindCSS' }] as const;
-const FRONT_SKILL_THREE = [
+  { icon: tailwindIcon, title: 'TailWindCSS' },
   { icon: eslintIcon, title: 'ESLint' },
   { icon: preitterIcon, title: 'Preitter' },
 ] as const;
 
-const BACK_SKILL_ONE = [
+const BACK_SKILL = [
   { icon: nodeIcon, title: 'Node.js' },
   { icon: expressIcon, title: 'Express' },
   { icon: sequelizeIcon, title: 'Sequelize' },
   { icon: mysqlIcon, title: 'MySQL' },
 ] as const;
 
-const TOOL_SKILL_ONE = [
+const TOOL_SKILL = [
   { icon: vscodeIcon, title: 'VSCode' },
   { icon: gitIcon, title: 'Git' },
   { icon: slackIcon, title: 'Slack' },
   { icon: notionIcon, title: 'Notion' },
 ] as const;
 
-const FRONT_SKILL = [FRONT_SKILL_ONE, FRONT_SKILL_TWO, FRONT_SKILL_THREE] as const;
-
 const SkillContainer = styled.div`
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding-bottom: 2rem;
+
+  @media ${(props) => props.theme.HDPC} {
+    max-width: 1000px;
+  }
+
+  @media ${(props) => props.theme.PC} {
+    max-width: 700px;
+  }
 
   span {
     display: block;
@@ -86,6 +91,15 @@ const Skills = styled.div`
   flex-direction: column;
   align-items: center;
   width: 16.5%;
+  margin-bottom: 1.5rem;
+
+  @media ${(props) => props.theme.TABLET_SM} {
+    width: 23%;
+  }
+
+  @media ${(props) => props.theme.MOBILE} {
+    width: 30%;
+  }
 
   span {
     font-weight: bold;
@@ -106,20 +120,17 @@ const Skill = () => (
       🔨 Skills
     </span>
     <span className="subTitle">Front-end</span>
-    {FRONT_SKILL.map((field, index) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <IconContainer key={index}>
-        {field.map((image, i) => (
-          <Skills key={image.title}>
-            <Image src={image.icon} alt="front-end skill" />
-            <span>{image.title}</span>
-          </Skills>
-        ))}
-      </IconContainer>
-    ))}
+    <IconContainer>
+      {FRONT_SKILL.map((image, i) => (
+        <Skills key={image.title}>
+          <Image src={image.icon} alt="front-end skill" />
+          <span>{image.title}</span>
+        </Skills>
+      ))}
+    </IconContainer>
     <SubTitle>Back-end</SubTitle>
     <IconContainer>
-      {BACK_SKILL_ONE.map((image) => (
+      {BACK_SKILL.map((image) => (
         <Skills key={image.title}>
           <Image src={image.icon} alt="front-end skill" />
           <span>{image.title}</span>
@@ -128,7 +139,7 @@ const Skill = () => (
     </IconContainer>
     <SubTitle>Collaboration & Tools</SubTitle>
     <IconContainer>
-      {TOOL_SKILL_ONE.map((image) => (
+      {TOOL_SKILL.map((image) => (
         <Skills key={image.title}>
           <Image src={image.icon} alt="front-end skill" />
           <span>{image.title}</span>
