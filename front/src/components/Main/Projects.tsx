@@ -153,13 +153,13 @@ const ListContainer = styled.div`
     padding: 1rem 0 0 1rem;
     height: 100%;
 
-    span:nth-child(1) {
+    span:nth-of-type(1) {
       display: block;
       font-size: 1.3rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
-    span:nth-child(2) {
+    span:nth-of-type(2) {
       font-size: 0.9rem;
     }
   }
