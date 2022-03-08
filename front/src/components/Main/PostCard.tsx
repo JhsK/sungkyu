@@ -2,6 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import styled from '@emotion/styled';
+import { configs } from 'src/config';
+
+const { API_URL } = configs;
 
 const PostCardContainer = styled.div`
     width: 30%;
@@ -52,7 +55,7 @@ const PostCard = ({ posts }) => (
       posts.map((post) => (
         <PostCardContainer className="post" key={post.id}>
           <div className="postImg">
-            {post?.Images && <img src={`http://localhost:3001/${post?.Images[0].image_url}`} alt="post" />}
+            {post?.Images && <img src={`${API_URL}/${post?.Images[0].image_url}`} alt="post" />}
           </div>
           <span className="postTitle">{post.title}</span>
           <Link href={`/blog/${post.id}`}>

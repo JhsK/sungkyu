@@ -2,6 +2,9 @@ import styled from '@emotion/styled';
 import React, { useRef } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { uploadImageAPI } from 'src/api';
+import { configs } from 'src/config';
+
+const { API_URL } = configs;
 
 const Container = styled.div`
   padding-bottom: 2rem;
@@ -56,7 +59,7 @@ const ImageUploader = ({ imagePath, setImagePath }) => {
         <Button onClick={() => imageRef.current.click()}>클릭 또는 드래그를 통해 이미지 업로드</Button>
         {imagePath && (
           <ImageContainer>
-            <img src={`http://localhost:3001/${imagePath}`} alt="sumnail" />
+            <img src={`${API_URL}/${imagePath}`} alt="sumnail" />
             <CloseBtn>
               <AiFillCloseCircle />
             </CloseBtn>

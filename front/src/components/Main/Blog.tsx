@@ -10,7 +10,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 import useDevice from 'src/hooks/useDevice';
+import { configs } from 'src/config';
 import PostCard from './PostCard';
+
+const { API_URL } = configs;
 
 const fadeIn = keyframes`
   0% {
@@ -178,9 +181,7 @@ const Blog = () => {
                       <SwiperSlide>
                         <div className="post" key={post.id}>
                           <div className="postImg">
-                            {post?.Images && (
-                              <img src={`http://localhost:3001/${post?.Images[0].image_url}`} alt="post" />
-                            )}
+                            {post?.Images && <img src={`${API_URL}/${post?.Images[0].image_url}`} alt="post" />}
                           </div>
                           <span className="postTitle">{post.title}</span>
                           <Link href={`/blog/${post.id}`}>
