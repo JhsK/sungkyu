@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: ["http://localhost:3000", "sungkyu.dev"],
+    origin: ["http://localhost:3000", "sungkyu.dev", "http://52.79.233.233"],
     credentials: true,
   })
 );
