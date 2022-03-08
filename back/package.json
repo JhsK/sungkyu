@@ -38,7 +38,8 @@
   },
   "scripts": {
     "test": "nodemon app",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "start": "node app"
   },
   "author": "JhsK",
   "license": "ISC"
