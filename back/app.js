@@ -30,17 +30,21 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
   app.use(hpp());
   app.use(helmet());
+  app.use(
+    cors({
+      origin: "http://sungkyu.info",
+      credentials: true,
+    })
+  );
 } else {
   app.use(morgan("dev"));
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
 }
-
-app.use(morgan("dev"));
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "sungkyu.dev", "http://52.79.233.233"],
-    credentials: true,
-  })
-);
 
 app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
@@ -52,10 +56,11 @@ app.use(
     resave: false,
     secret: process.env.COOKIE_SECRET,
     // proxy: true,
-    // cookie: {
-    //   httpOnly: true,
-    //   secure: true,
-    // },
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      domain: process.env.NODE_ENV === "production" && ".sungkyu.info",
+    },
   })
 );
 
