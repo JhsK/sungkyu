@@ -266,10 +266,7 @@ const List = () => {
                   ))}
                 </TagsContainer>
               </ContentContainer>
-              <img
-                alt="sumnail"
-                src={post?.Images ? `http://localhost:3001/${post?.Images[0].image_url}` : 'default.png'}
-              />
+              <img alt="sumnail" src={post?.Images ? `${post?.Images[0].image_url}` : 'default.png'} />
             </ListContainer>
             <Hr key={post.createdAt} />
           </>
