@@ -5,7 +5,7 @@ module.exports = class Image extends Sequelize.Model {
     return super.init(
       {
         image_url: {
-          type: Sequelize.STRING(200),
+          type: Sequelize.TEXT,
           allowNull: false,
         },
       },
