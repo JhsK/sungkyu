@@ -65,6 +65,9 @@ router.get("/:id", async (req, res, next) => {
         {
           model: Tag,
         },
+        {
+          model: Image,
+        },
       ],
     });
     console.log(post);
