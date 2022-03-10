@@ -12,6 +12,7 @@ import { TagValue } from 'src/components/Blog/Post';
 import Comment from 'src/components/Blog/Comment';
 import Header from 'src/components/Header';
 import useAuth from 'src/hooks/useAuth';
+import Head from 'next/head';
 
 const Viewer = dynamic(() => import('../../../components/Blog/Post/PostViewer'), { ssr: false });
 
@@ -89,6 +90,13 @@ const PostView = () => {
   const deleteMutate = useMutation(postDeleteAPI);
   return (
     <>
+      <Head>
+        <meta name="description" content={post?.content} />
+        <meta property="og:title" content={post?.title} />
+        <meta property="og:description" content={post?.content} />
+        <meta property="og:image" content={post?.Images[0].image_url} />
+        <meta property="og:url" content={`http://sungkyu.info/blog/${id}`} />
+      </Head>
       <ToastContainer />
       <Header logoColor />
       <Container>

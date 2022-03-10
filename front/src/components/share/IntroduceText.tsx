@@ -50,7 +50,7 @@ const IntroduceContainer = styled.div`
 const IntroduceText = () => (
   <IntroduceContainer data-aos="fade-up">
     <span className="title" role="img" aria-labelledby="smile">
-      안녕하세요 개발자 000입니다 😁
+      안녕하세요 개발자 임성규입니다 😁
     </span>
     <span className="subTitle" role="img" aria-labelledby="computer">
       💻 Frontend Engineer, Web Developer
