@@ -31,7 +31,7 @@ export default function ErrorPage() {
   return (
     <>
       <Container>
-        <img src="error.png" alt="error" />
+        <img src="./error.png" alt="error" />
         <div>
           <span>에러가 발생했습니다.</span>
           <span>문의사항은 qwe6293@nate.com으로 부탁드립니다.</span>
