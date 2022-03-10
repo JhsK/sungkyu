@@ -56,7 +56,7 @@ const ImageUploader = ({ imagePath, setImagePath }) => {
         <Button onClick={() => imageRef.current.click()}>클릭 또는 드래그를 통해 이미지 업로드</Button>
         {imagePath && (
           <ImageContainer>
-            <img src={`${imagePath}`} alt="sumnail" />
+            <img src={`${imagePath.replace(/\/thumb\//, '/original/')}`} alt="sumnail" />
             <CloseBtn>
               <AiFillCloseCircle />
             </CloseBtn>

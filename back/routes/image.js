@@ -52,7 +52,7 @@ const upload = multer({
 
 router.post("/", isLoggedIn, upload.single("img"), (req, res, next) => {
   // res.json(req.file.filename);
-  res.json(req.file.location);
+  res.json(req.file.location.replace(/\/original\//, "/thumb/"));
 });
 
 // router.post("/", isLoggedIn, upload.single("img"), async (req, res, next) => {
