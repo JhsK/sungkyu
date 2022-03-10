@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(helmet());
   app.use(
     cors({
-      origin: "http://sungkyu.info",
+      origin: "https://sungkyu.info",
       credentials: true,
     })
   );
@@ -58,7 +58,7 @@ app.use(
     // proxy: true,
     cookie: {
       httpOnly: true,
-      secure: false,
+      secure: true, // https 설정시 true
       domain: process.env.NODE_ENV === "production" && ".sungkyu.info",
     },
   })

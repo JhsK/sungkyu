@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true;
 
 const headerConfig = {
   // baseURL: API_URL,
-  baseURL: 'http://api.sungkyu.info',
+  baseURL: 'https://api.sungkyu.info',
   headers: {
     'Content-Type': 'application/json',
     'Accept-Version': `v${VERSION}`,
