@@ -1,4 +1,5 @@
 import { GetServerSideProps, GetStaticProps } from 'next';
+import Head from 'next/head';
 import React from 'react';
 import { dehydrate, QueryClient } from 'react-query';
 import { getPostsAPI } from 'src/api';
@@ -7,6 +8,12 @@ import Header from 'src/components/Header';
 
 const Blog = () => (
   <>
+    <Head>
+      <title>Sungkyu - Blog</title>
+      <meta name="description" content="프론트엔드 개발자 임성규의 공부 기록입니다." />
+      <meta name="og:title" content="Sungkyu Blog" />
+      <meta name="og:description" content="프론트엔드 개발자 임성규의 공부 기록입니다." />"
+    </Head>
     <Header logoColor />
     <BlogComponent />
   </>

@@ -17,7 +17,14 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
+        <title>Sungkyu</title>
         <meta charSet="utf-8" />
+        <meta name="google-site-verification" content="NZMjmiyn6NYG5M3Wlk7alXrjPWE4ROQx3U_MHWFq1SA" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="프론트엔드 개발자 Sungkyu의 기술 블로그 입니다." />
         <meta name="keywords" content="HTML, CSS, Javascript, React, Next, Frontend, Blog" />
         <meta name="author" content="SungKyu" />
@@ -30,19 +37,12 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta property="og:image:width" content="285" />
         <meta property="og:image:height" content="167" />
         <meta property="og:locale" content="ko_KR" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
-        />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google-site-verification" content="NZMjmiyn6NYG5M3Wlk7alXrjPWE4ROQx3U_MHWFq1SA" />
         <link rel="main icon" href="favicon.ico" />
         <link
           rel="stylesheet"
           type="text/css"
           href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"
         />
-        <title>Sungkyu</title>
       </Head>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
