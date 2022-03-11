@@ -95,7 +95,7 @@ const PostView = () => {
         <meta property="og:title" content={post?.title} />
         <meta property="og:description" content={post?.content} />
         <meta property="og:image" content={post?.Images[0].image_url} />
-        <meta property="og:url" content={`http://sungkyu.info/blog/${id}`} />
+        <meta property="og:url" content={`https://sungkyu.info/blog/${id}`} />
       </Head>
       <ToastContainer />
       <Header logoColor />

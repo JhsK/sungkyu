@@ -23,18 +23,19 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="author" content="SungKyu" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sungkyu.info" />
-        <meta property="og:title" content="Content Title" />
+        <meta property="og:title" content="Sungkyu Blog" />
         <meta property="og:image" content="https://github.com/JhsK/sungkyu/blob/master/front/public/profile.jpeg" />
         <meta property="og:description" content="프론트엔드 개발자 Sungkyu의 기술 블로그 입니다." />
         <meta property="og:site_name" content="Sungkyu" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content="285" />
+        <meta property="og:image:height" content="167" />
         <meta property="og:locale" content="ko_KR" />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
         />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="google-site-verification" content="NZMjmiyn6NYG5M3Wlk7alXrjPWE4ROQx3U_MHWFq1SA" />
         <link rel="main icon" href="favicon.ico" />
         <link
           rel="stylesheet"
