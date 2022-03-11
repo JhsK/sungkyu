@@ -27,6 +27,7 @@ db.sequelize
 passportConfig();
 
 if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
   app.use(morgan("combined"));
   app.use(hpp());
   app.use(helmet());
@@ -55,9 +56,9 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
-    // proxy: true,
     cookie: {
       httpOnly: true,
+      proxy: true, // https 설정시 true
       secure: true, // https 설정시 true
       domain: process.env.NODE_ENV === "production" && ".sungkyu.info",
     },
