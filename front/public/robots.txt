@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sungyku.info
+
+# Sitemaps
+Sitemap: https://sungyku.info/sitemap.xml
+Sitemap: https://sungkyu.info/server-sitemap.xml
