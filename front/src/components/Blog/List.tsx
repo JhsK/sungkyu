@@ -111,6 +111,12 @@ const ContentContainer = styled.div`
     }
   }
 
+  .content {
+    @media ${(props) => props.theme.PC} {
+      font-size: 0.9rem;
+    }
+  }
+
   div {
     line-height: 1.5rem;
   }
@@ -155,8 +161,9 @@ interface CategoryType {
 const List = () => {
   const currentUser = useAuth();
   const router = useRouter();
+  const isTablet = useDevice(980);
   const isMobile = useDevice(650);
-  const [textLength, setTextLength] = useState(180);
+  const [textLength, setTextLength] = useState(160);
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
@@ -208,6 +215,10 @@ const List = () => {
   }, [inView, infiniteBool, fetchNextPage]);
 
   useEffect(() => {
+    if (isTablet) setTextLength(100);
+  }, [isTablet]);
+
+  useEffect(() => {
     if (isMobile) setTextLength(30);
   }, [isMobile]);
 
@@ -256,7 +267,7 @@ const List = () => {
               <ContentContainer key={post.id}>
                 <div key={post.id}>
                   <span className="title">{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</span>
-                  <div>
+                  <div className="content">
                     {post?.content.length > textLength ? `${post?.content.substring(0, textLength)}...` : post?.content}
                   </div>
                 </div>
