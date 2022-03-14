@@ -52,10 +52,6 @@ const LableContainer = styled.div`
   }
 `;
 
-const All = styled.span`
-  color: ${(props) => (props.color === 'All' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
-`;
-
 const Newest = styled.span`
   color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.PUBLIC_DARKGRAY)};
 `;
@@ -70,11 +66,11 @@ const ListContainer = styled.div`
   cursor: pointer;
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   transition: box-shadow 0.3s ease 0s, border-color 0.3s ease 0s;
 
   &:hover {
     box-shadow: 4px 4px 1px -1px rgba(0, 0, 0, 0.12);
-    /* transition: box-shadow 0.3s ease 0s, border-color 0.3s ease 0s; */
   }
 
   img {
@@ -83,13 +79,17 @@ const ListContainer = styled.div`
     object-fit: cover;
 
     @media ${(props) => props.theme.MOBILE} {
-      width: 50%;
+      width: 45%;
+    }
+
+    @media ${(props) => props.theme.MOBILE_SM} {
+      width: 100%;
     }
   }
 `;
 
 const ContentContainer = styled.div`
-  width: 70%;
+  width: 65%;
   padding-right: 0.8rem;
   display: flex;
   flex-direction: column;
@@ -100,15 +100,8 @@ const ContentContainer = styled.div`
     width: 50%;
   }
 
-  .title {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 1.3rem;
-
-    @media ${(props) => props.theme.MOBILE} {
-      font-size: 1.3rem;
-    }
+  @media ${(props) => props.theme.MOBILE_SM} {
+    display: none;
   }
 
   .content {
@@ -119,6 +112,21 @@ const ContentContainer = styled.div`
 
   div {
     line-height: 1.5rem;
+  }
+`;
+
+const PostTitle = styled.span`
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1.3rem;
+
+  @media ${(props) => props.theme.MOBILE} {
+    font-size: 1.3rem;
+  }
+
+  @media ${(props) => props.theme.MOBILE_SM} {
+    margin-top: 0.7rem;
   }
 `;
 
@@ -136,6 +144,10 @@ const TagsContainer = styled.div`
 const Hr = styled.hr`
   opacity: 0.2;
   margin: 2rem 0;
+
+  @media ${(props) => props.theme.MOBILE_SM} {
+    margin: 3rem 0;
+  }
 `;
 
 const CreateBtn = styled.div`
@@ -163,6 +175,7 @@ const List = () => {
   const router = useRouter();
   const isTablet = useDevice(980);
   const isMobile = useDevice(650);
+  const isMobileSM = useDevice(400);
   const [textLength, setTextLength] = useState(160);
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
@@ -214,13 +227,18 @@ const List = () => {
     }
   }, [inView, infiniteBool, fetchNextPage]);
 
-  useEffect(() => {
-    if (isTablet) setTextLength(100);
-  }, [isTablet]);
+  // useEffect(() => {
+  //   if (isTablet) setTextLength(100);
+  // }, [isTablet]);
+
+  // useEffect(() => {
+  //   if (isMobile) setTextLength(40);
+  // }, [isMobile]);
 
   useEffect(() => {
-    if (isMobile) setTextLength(30);
-  }, [isMobile]);
+    if (isTablet) setTextLength(100);
+    if (isMobile) setTextLength(40);
+  }, [isTablet, isMobile]);
 
   return (
     <Container>
@@ -266,7 +284,7 @@ const List = () => {
             <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
               <ContentContainer key={post.id}>
                 <div key={post.id}>
-                  <span className="title">{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</span>
+                  <PostTitle>{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</PostTitle>
                   <div className="content">
                     {post?.content.length > textLength ? `${post?.content.substring(0, textLength)}...` : post?.content}
                   </div>
@@ -278,6 +296,9 @@ const List = () => {
                 </TagsContainer>
               </ContentContainer>
               <img alt="sumnail" src={post?.Images ? `${post?.Images[0].image_url}` : 'default.png'} />
+              {isMobileSM && (
+                <PostTitle>{post?.title.length > 20 ? `${post?.title.substring(0, 20)}...` : post?.title}</PostTitle>
+              )}
             </ListContainer>
             <Hr key={post.createdAt} />
           </>
