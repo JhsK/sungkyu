@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useRecoilValue } from 'recoil';
+import { postsInfinite } from 'src/atom';
 import useDevice from 'src/hooks/useDevice';
 import Footer from '../Footer';
 import List from './List';
@@ -41,18 +44,21 @@ const BlogContainer = styled.div`
 `;
 
 const BlogComponent = () => {
+  const [ref, inView] = useInView();
+  const infiniteBool = useRecoilValue(postsInfinite);
   const isMobile = useDevice(768);
 
   return (
     <Container>
       <BlogContainer>
-        <List />
+        <List inView={inView} />
         {!isMobile && (
           <div className="tagContainer">
             <Tags />
           </div>
         )}
       </BlogContainer>
+      <div ref={infiniteBool ? ref : undefined} />
       <Footer />
     </Container>
   );
