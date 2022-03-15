@@ -18,7 +18,8 @@ router.get("/", async (req, res, next) => {
       where.title = { [Op.substring]: `${search}` };
     }
     if (Number(req.query.lastId)) {
-      where.id = { [Op.lt]: Number(req.query.lastId) };
+      if (category === "ASC") where.id = { [Op.gt]: Number(req.query.lastId) };
+      else where.id = { [Op.lt]: Number(req.query.lastId) };
     }
     const posts = await Post.findAll({
       where,
@@ -33,7 +34,7 @@ router.get("/", async (req, res, next) => {
         },
       ],
     });
-    console.log(posts);
+    console.log(posts.length);
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);

@@ -122,7 +122,7 @@ const PostEditor = () => {
     if (title === '') {
       return alert('제목은 필수 입니다');
     }
-    if (!(imagePath.length > 0)) return alert('이미지는 필수 입니다');
+    // if (!(imagePath.length > 0)) return alert('이미지는 필수 입니다');
     const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
     console.log(values);
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
@@ -179,40 +179,3 @@ const PostEditor = () => {
 };
 
 export default PostEditor;
-
-// class App extends Component {
-//   editorRef = React.createRef();
-
-//   handleClick = () => {
-//     this.editorRef.current.getInstance().exec('Bold');
-//   };
-
-//   render() {
-//     return (
-//       <>
-//         <Editor
-//           previewStyle="vertical"
-//           height="400px"
-//           initialEditType="markdown"
-//           initialValue="hello"
-//           ref={this.editorRef}
-//         />
-//         <button onClick={this.handleClick}>make bold</button>
-//       </>
-//     );
-//   }
-// }
-
-// export default App;
-
-// import React from 'react';
-// import '@toast-ui/editor/dist/toastui-editor.css';
-// import { Editor, EditorProps } from '@toast-ui/react-editor';
-
-// const PostEditor = (props: PostEditorWithForwardedProps) => (
-//   <>
-//     <Editor {...props} ref={props.forwardedRef} />
-//   </>
-// );
-
-// export default PostEditor;
