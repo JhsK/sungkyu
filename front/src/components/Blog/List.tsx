@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
-import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
-import { useInView } from 'react-intersection-observer';
-import { dehydrate, QueryClient, useInfiniteQuery, useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
+import { useRecoilState } from 'recoil';
 import { getPostsAPI, getTagFilterAPI } from 'src/api';
+import { postsInfinite } from 'src/atom';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 import useDevice from 'src/hooks/useDevice';
@@ -170,17 +170,17 @@ interface CategoryType {
   option: 'DESC' | 'ASC';
 }
 
-const List = () => {
+const List = ({ inView }) => {
   const currentUser = useAuth();
   const router = useRouter();
   const isTablet = useDevice(980);
   const isMobile = useDevice(650);
   const isMobileSM = useDevice(400);
+  const [infiniteBool, setInfiniteBool] = useRecoilState(postsInfinite);
   const [textLength, setTextLength] = useState(160);
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
-  const [ref, inView] = useInView();
 
   const {
     data: postsData,
@@ -198,8 +198,6 @@ const List = () => {
     },
   );
 
-  const infiniteBool = !isLoading && hasNextPage;
-
   const onChangeSearch = (e) => {
     setSearchValue(e.target.value);
   };
@@ -211,8 +209,11 @@ const List = () => {
   const tagFilter = async (id) => {
     const data = await getTagFilterAPI(id);
     setPosts(data);
-    return data;
   };
+
+  useEffect(() => {
+    setInfiniteBool(!isLoading && hasNextPage);
+  }, [isLoading, hasNextPage]);
 
   useEffect(() => {
     if (router.query?.tag) {
@@ -223,17 +224,10 @@ const List = () => {
 
   useEffect(() => {
     if (inView && infiniteBool) {
+      console.log('fasf');
       fetchNextPage();
     }
   }, [inView, infiniteBool, fetchNextPage]);
-
-  // useEffect(() => {
-  //   if (isTablet) setTextLength(100);
-  // }, [isTablet]);
-
-  // useEffect(() => {
-  //   if (isMobile) setTextLength(40);
-  // }, [isMobile]);
 
   useEffect(() => {
     if (isTablet) setTextLength(100);
@@ -263,7 +257,8 @@ const List = () => {
           </Newest>
           <Latest
             color={categoryRef.current.name}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               categoryRef.current = { name: '후순위', option: 'ASC' };
               refetch();
             }}
@@ -295,7 +290,7 @@ const List = () => {
                   ))}
                 </TagsContainer>
               </ContentContainer>
-              <img alt="sumnail" src={post?.Images ? `${post?.Images[0].image_url}` : 'default.png'} />
+              <img alt="sumnail" src={post?.Images.length > 0 ? `${post?.Images[0].image_url}` : 'default.png'} />
               {isMobileSM && (
                 <PostTitle>{post?.title.length > 20 ? `${post?.title.substring(0, 20)}...` : post?.title}</PostTitle>
               )}
@@ -303,7 +298,6 @@ const List = () => {
             <Hr key={post.createdAt} />
           </>
         ))}
-      <div ref={infiniteBool ? ref : undefined} />
     </Container>
   );
 };

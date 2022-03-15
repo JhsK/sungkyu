@@ -21,3 +21,8 @@ export const currentUserSelector = selector({
     return data;
   },
 });
+
+export const postsInfinite = atom({
+  key: 'postsInfinite',
+  default: false,
+});

@@ -51,7 +51,11 @@ const PostCard = ({ posts }) => (
     {posts &&
       posts.map((post) => (
         <PostCardContainer className="post" key={post.id}>
-          <div className="postImg">{post?.Images && <img src={`${post?.Images[0].image_url}`} alt="post" />}</div>
+          <div className="postImg">
+            {post?.Images && (
+              <img src={post?.Images.length > 0 ? `${post?.Images[0].image_url}` : 'default.png'} alt="post" />
+            )}
+          </div>
           <span className="postTitle">{post.title}</span>
           <Link href={`/blog/${post.id}`}>
             <a>
