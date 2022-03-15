@@ -91,9 +91,7 @@ const PostView = () => {
   return (
     <>
       <Head>
-        <title>Sungkyu - Blog</title>
-        <meta name="description" content={post?.title} />
-        <meta name="og:title" content="Sungkyu Contact" />
+        <title>{`${post?.title} - Sungkyu`}</title>
         <meta name="description" content={post?.content} />
         <meta property="og:title" content={post?.title} />
         <meta property="og:description" content={post?.content} />

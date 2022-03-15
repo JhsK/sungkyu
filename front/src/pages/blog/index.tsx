@@ -11,8 +11,9 @@ const Blog = () => (
     <Head>
       <title>Sungkyu - Blog</title>
       <meta name="description" content="프론트엔드 개발자 임성규의 공부 기록입니다." />
-      <meta name="og:title" content="Sungkyu Blog" />
-      <meta name="og:description" content="프론트엔드 개발자 임성규의 공부 기록입니다." />"
+      <meta property="og:title" content="Sungkyu Blog" />
+      <meta property="og:description" content="프론트엔드 개발자 임성규의 공부 기록입니다." />
+      <meta property="og:url" content="https://sungkyu.info/blog" />
     </Head>
     <Header logoColor />
     <BlogComponent />

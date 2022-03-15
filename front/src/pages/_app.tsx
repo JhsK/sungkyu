@@ -25,15 +25,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
         />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="프론트엔드 개발자 Sungkyu의 기술 블로그 입니다." />
-        <meta name="keywords" content="HTML, CSS, Javascript, React, Next, Frontend, Blog" />
-        <meta name="author" content="SungKyu" />
+        <meta name="keywords" content="HTML, CSS, Javascript, React, Next, Frontend, Blog, Sungkyu, sungkyu" />
+        <meta name="author" content="sungkyu" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sungkyu.info" />
-        <meta property="og:title" content="Sungkyu Blog" />
         <meta property="og:image" content="https://github.com/JhsK/sungkyu/blob/master/front/public/profile.jpeg" />
-        <meta property="og:description" content="프론트엔드 개발자 Sungkyu의 기술 블로그 입니다." />
-        <meta property="og:site_name" content="Sungkyu" />
+        <meta property="og:site_name" content="sungkyu" />
         <meta property="og:image:width" content="285" />
         <meta property="og:image:height" content="167" />
         <meta property="og:locale" content="ko_KR" />
