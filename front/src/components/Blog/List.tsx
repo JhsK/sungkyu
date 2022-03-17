@@ -67,6 +67,7 @@ const ListContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
+  justify-content: space-between;
   transition: box-shadow 0.3s ease 0s, border-color 0.3s ease 0s;
 
   &:hover {
