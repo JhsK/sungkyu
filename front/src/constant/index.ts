@@ -51,6 +51,7 @@ export interface PostModel extends Model {
 
 export interface TagModel extends Model {
   name: string;
+  count: number;
 }
 
 export interface ImageModel {

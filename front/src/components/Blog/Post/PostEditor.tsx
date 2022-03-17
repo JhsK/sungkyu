@@ -124,7 +124,6 @@ const PostEditor = () => {
     }
     // if (!(imagePath.length > 0)) return alert('이미지는 필수 입니다');
     const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
-    console.log(values);
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
       await postCreateAPI(values);
