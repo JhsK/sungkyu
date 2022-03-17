@@ -97,6 +97,18 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
         )
       ); // [[노드, true], [리액트, true]]
       await post.addTags(result.map((v) => v[0]));
+      await result.map(async (v) => {
+        if (v[1] == false) {
+          await Tag.update(
+            {
+              count: v[0].dataValues.count + 1,
+            },
+            {
+              where: { name: v[0].dataValues.name.toLowerCase() },
+            }
+          );
+        }
+      });
     }
 
     if (req.body.image) {
@@ -130,10 +142,30 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
 
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
+    const tags = await Post.findOne({
+      where: { id: req.params.id },
+      include: Tag,
+    });
+    await tags.dataValues.Tags.map(async (v) => {
+      if (v.dataValues.count === 1) {
+        await Tag.destroy({ where: { id: v.dataValues.id } });
+      } else {
+        await Tag.update(
+          {
+            count: v.dataValues.count - 1,
+          },
+          {
+            where: { id: v.dataValues.id },
+          }
+        );
+      }
+    });
     const deletePost = await Post.findOne({
       where: { id: req.params.id },
     });
+
     await deletePost.destroy();
+
     res.status(200).json(parseInt(req.params.id, 10));
   } catch (error) {
     console.error(error);

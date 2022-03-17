@@ -9,6 +9,11 @@ module.exports = class Tag extends Model {
           type: DataTypes.STRING(20),
           allowNull: false,
         },
+        count: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          defaultValue: 1,
+        },
       },
       {
         modelName: "Tag",

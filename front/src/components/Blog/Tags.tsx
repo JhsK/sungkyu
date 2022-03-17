@@ -34,7 +34,6 @@ const LabelContainer = styled.div`
 
 const Tags = () => {
   const { data, isSuccess } = useQuery('tagList', getTagAPI);
-
   return (
     <Container>
       <span className="title">인기태그</span>
@@ -42,7 +41,7 @@ const Tags = () => {
         {isSuccess &&
           data.map((tag) => (
             <span onClick={() => router.push(`/blog?tag=${tag.id}`)} key={tag?.id}>
-              {tag?.name}
+              {`${tag?.name} (${tag?.count})`}
             </span>
           ))}
       </LabelContainer>
