@@ -20,6 +20,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <title>Sungkyu</title>
         <meta charSet="utf-8" />
         <meta name="google-site-verification" content="NZMjmiyn6NYG5M3Wlk7alXrjPWE4ROQx3U_MHWFq1SA" />
+        <meta name="naver-site-verification" content="2e8020e1c65ced9b3bcb4265892dbae75d272cf3" />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
