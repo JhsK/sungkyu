@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import { BtnContainer, Container, TagInput, TagValue, TitleInput } from 'src/components/Blog/Post';
 import { useRouter } from 'next/router';
@@ -23,6 +23,13 @@ const PostUpdateEditor = () => {
   const [title, setTitle] = useState(post?.title);
   const [tag, setTag] = useState([]);
   const [tagInputValue, setTagInputValue] = useState('');
+
+  useEffect(() => {
+    if (post) {
+      const tagData = post?.Tags.map((item) => item.name);
+      setTag([...tagData]);
+    }
+  }, [post]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -92,7 +99,6 @@ const PostUpdateEditor = () => {
           onChange={onChangeTag}
           placeholder="태그를 입력하세요"
           type="text"
-          // onKeyUp={onKeyUpTag}
           onKeyDown={onKeyUpTag}
         />
         <Editor
@@ -101,7 +107,6 @@ const PostUpdateEditor = () => {
           hideModeSwitch
           initialEditType="markdown"
           initialValue={post?.content}
-          // onChange={onChangeEditor}
           ref={editorRef}
         />
         <BtnContainer>
@@ -112,7 +117,6 @@ const PostUpdateEditor = () => {
             </Link>
           </button>
         </BtnContainer>
-        {/* </form> */}
       </div>
     </Container>
   );
