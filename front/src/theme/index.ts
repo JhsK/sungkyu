@@ -7,11 +7,13 @@ const responsiveView = {
   TABLET_SM: '650px',
   MOBILE: '480px',
   MOBILE_SM: '400px',
+  MOBILE_FOLD: '300px',
 };
 
 export const lightTheme = {
   PUBLIC_BLACK: '#000000',
   PUBLIC_WHITE: '#ffffff',
+  PUBLIC_BLUE: '#007fff',
   MAIN_BACKGROUND_COLOR: '#ffdee9',
   FOOTER_GRAY: '#F5F5F5',
   PUBLIC_DARKGRAY: '#727272',
@@ -27,6 +29,7 @@ export const lightTheme = {
   PC: `(max-width: ${responsiveView.PC})`,
   HDPC: `(max-width: ${responsiveView.HDPC})`,
   MOBILE_SM: `(max-width: ${responsiveView.MOBILE_SM})`,
+  MOBILE_FOLD: `(max-width: ${responsiveView.MOBILE_FOLD})`,
 };
 
 export type ThemeType = typeof lightTheme;
