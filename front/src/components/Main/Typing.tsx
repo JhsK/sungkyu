@@ -48,6 +48,10 @@ const Content = styled.div`
   @media ${(props) => props.theme.MOBILE} {
     font-size: 1.5rem;
   }
+
+  @media ${(props) => props.theme.MOBILE_FOLD} {
+    font-size: 1.2rem;
+  }
 `;
 
 const H1 = styled.h1`
