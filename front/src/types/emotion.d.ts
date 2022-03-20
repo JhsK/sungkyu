@@ -4,6 +4,7 @@ declare module '@emotion/react' {
   export interface Theme {
     PUBLIC_BLACK: string;
     PUBLIC_WHITE: string;
+    PUBLIC_BLUEL: string;
     MAIN_BACKGROUND_COLOR: string;
     FOOTER_GRAY: string;
     PUBLIC_DARKGRAY: string;
@@ -19,5 +20,6 @@ declare module '@emotion/react' {
     PC: string;
     HDPC: string;
     MOBILE_SM: string;
+    MOBILE_FOLD: string;
   }
 }

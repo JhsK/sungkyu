@@ -2,7 +2,9 @@ import styled from '@emotion/styled';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import React, { useEffect } from 'react';
+import useDevice from 'src/hooks/useDevice';
 import IntroduceText from '../share/IntroduceText';
+import MobileIntroduceText from '../share/MobileIntroduceText';
 
 const Container = styled.div`
   width: 100%;
@@ -27,6 +29,8 @@ const Content = styled.div`
 `;
 
 const Intro = () => {
+  const isFold = useDevice(300);
+
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -36,9 +40,7 @@ const Intro = () => {
   return (
     <Container>
       <Section>
-        <Content>
-          <IntroduceText />
-        </Content>
+        <Content>{isFold ? <MobileIntroduceText /> : <IntroduceText />}</Content>
       </Section>
     </Container>
   );

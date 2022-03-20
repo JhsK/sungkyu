@@ -33,6 +33,10 @@ const LableContainer = styled.div`
       font-size: 1rem;
       cursor: pointer;
     }
+
+    @media ${(props) => props.theme.MOBILE_SM} {
+      margin-bottom: 1rem;
+    }
   }
 
   input {
@@ -41,14 +45,14 @@ const LableContainer = styled.div`
     border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding-left: 0.5rem;
-
-    @media ${(props) => props.theme.MOBILE_SM} {
-      width: 120px;
-    }
   }
 
   input:focus {
     outline: none;
+  }
+
+  @media ${(props) => props.theme.MOBILE_SM} {
+    flex-wrap: wrap;
   }
 `;
 
