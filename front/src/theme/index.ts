@@ -7,7 +7,7 @@ const responsiveView = {
   TABLET_SM: '650px',
   MOBILE: '480px',
   MOBILE_SM: '400px',
-  MOBILE_FOLD: '300px',
+  MOBILE_FOLD: '320px',
 };
 
 export const lightTheme = {
