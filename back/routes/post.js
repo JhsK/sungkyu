@@ -11,11 +11,17 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   const search = req.query.search;
   const category = req.query.category;
+  const tag = req.query.tag;
 
   try {
     const where = {};
+    const whereTag = {};
+
     if (search !== "") {
       where.title = { [Op.substring]: `${search}` };
+    }
+    if (tag !== "") {
+      whereTag.id = tag;
     }
     if (Number(req.query.lastId)) {
       if (category === "ASC") where.id = { [Op.gt]: Number(req.query.lastId) };
@@ -28,6 +34,7 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: Tag,
+          where: whereTag,
         },
         {
           model: Image,

@@ -15,24 +15,4 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/filter", async (req, res, next) => {
-  try {
-    const posts = await Post.findAll({
-      include: [
-        {
-          model: Tag,
-          where: { id: req.query.tag },
-        },
-        {
-          model: Image,
-        },
-      ],
-    });
-    res.status(200).json(posts);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-});
-
 module.exports = router;

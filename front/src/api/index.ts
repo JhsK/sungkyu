@@ -16,12 +16,15 @@ export const postCreateAPI = async (params: postCreateType) => {
   return data;
 };
 
-export const getPostsAPI: (option: 'DESC' | 'ASC', lastId?: number, search?: string) => Promise<PostModel[]> = async (
-  option,
-  lastId,
-  search,
-) => {
-  const { data } = await API.get(`/post?category=${option}&lastId=${lastId || 0}&search=${search || ''}`);
+export const getPostsAPI: (
+  option: 'DESC' | 'ASC',
+  lastId?: number,
+  search?: string,
+  tagId?: number,
+) => Promise<PostModel[]> = async (option, lastId, search, tagId) => {
+  const { data } = await API.get(
+    `/post?category=${option}&lastId=${lastId || 0}&search=${search || ''}&tag=${tagId || ''}`,
+  );
   return data;
 };
 
@@ -47,11 +50,6 @@ export const postDeleteAPI: (id) => Promise<number> = async (id) => {
 
 export const getTagAPI: () => Promise<TagModel[]> = async () => {
   const { data } = await API.get('/tag');
-  return data;
-};
-
-export const getTagFilterAPI: (id: number) => Promise<PostModel[]> = async (id) => {
-  const { data } = await API.get(`/tag/filter?tag=${id}`);
   return data;
 };
 

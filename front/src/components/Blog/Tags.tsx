@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
-import { getTagAPI, getTagFilterAPI } from 'src/api';
+import { getTagAPI } from 'src/api';
 import router, { useRouter } from 'next/router';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 25%; */
 
   .title {
     font-size: 1rem;
@@ -26,14 +25,13 @@ const LabelContainer = styled.div`
   }
 
   span:hover {
-    /* background-color: #82a0aa; */
-    /* color: #fff; */
     border-bottom: 2px solid ${(props) => props.theme.POST_TAG_BORDER_COLOR};
   }
 `;
 
 const Tags = () => {
   const { data, isSuccess } = useQuery('tagList', getTagAPI);
+
   return (
     <Container>
       <span className="title">인기태그</span>
