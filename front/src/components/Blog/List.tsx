@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { getPostsAPI, getTagFilterAPI } from 'src/api';
+import { getPostsAPI } from 'src/api';
 import { postsInfinite } from 'src/atom';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
@@ -186,6 +186,7 @@ const List = ({ inView }) => {
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
+  const [tagId, setTagId] = useState(null);
 
   const {
     data: postsData,
@@ -194,8 +195,8 @@ const List = ({ inView }) => {
     refetch,
     hasNextPage,
   } = useInfiniteQuery(
-    'posts',
-    ({ pageParam = 0 }) => getPostsAPI(categoryRef.current.option, pageParam, serachValue),
+    ['posts', tagId],
+    ({ pageParam = 0 }) => getPostsAPI(categoryRef.current.option, pageParam, serachValue, tagId),
     {
       onSuccess: (data) => setPosts(data?.pages.flat()),
       getNextPageParam: (lastPage) => lastPage?.[lastPage.length - 1]?.id,
@@ -211,11 +212,6 @@ const List = ({ inView }) => {
     refetch();
   };
 
-  const tagFilter = async (id) => {
-    const data = await getTagFilterAPI(id);
-    setPosts(data);
-  };
-
   useEffect(() => {
     setInfiniteBool(!isLoading && hasNextPage);
   }, [isLoading, hasNextPage]);
@@ -223,7 +219,7 @@ const List = ({ inView }) => {
   useEffect(() => {
     if (router.query?.tag) {
       categoryRef.current = { name: '태그', option: 'DESC' };
-      tagFilter(router.query.tag);
+      setTagId(router.query?.tag);
     }
   }, [router.query]);
 
