@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { getPostsAPI } from 'src/api';
@@ -11,6 +10,7 @@ import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 import useDevice from 'src/hooks/useDevice';
 import MobileTags from './MobileTags';
+import Search from './Search';
 
 const Container = styled.div`
   width: 73%;
@@ -159,17 +159,6 @@ const CreateBtn = styled.div`
   margin-bottom: 1rem;
 `;
 
-const SearchContainer = styled.div`
-  position: relative;
-`;
-
-const SearchBtnContainer = styled.div`
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-`;
-
 interface CategoryType {
   name: '최신순' | '후순위' | '태그';
   option: 'DESC' | 'ASC';
@@ -195,7 +184,7 @@ const List = ({ inView }) => {
     refetch,
     hasNextPage,
   } = useInfiniteQuery(
-    ['posts', tagId],
+    ['posts', tagId, serachValue],
     ({ pageParam = 0 }) => getPostsAPI(categoryRef.current.option, pageParam, serachValue, tagId),
     {
       onSuccess: (data) => setPosts(data?.pages.flat()),
@@ -203,14 +192,6 @@ const List = ({ inView }) => {
       staleTime: 1000,
     },
   );
-
-  const onChangeSearch = (e) => {
-    setSearchValue(e.target.value);
-  };
-
-  const onSubmitSearch = () => {
-    refetch();
-  };
 
   useEffect(() => {
     setInfiniteBool(!isLoading && hasNextPage);
@@ -225,7 +206,6 @@ const List = ({ inView }) => {
 
   useEffect(() => {
     if (inView && infiniteBool) {
-      console.log('fasf');
       fetchNextPage();
     }
   }, [inView, infiniteBool, fetchNextPage]);
@@ -267,12 +247,7 @@ const List = ({ inView }) => {
             후순위
           </Latest>
         </div>
-        <SearchContainer>
-          <input type="text" onChange={onChangeSearch} />
-          <SearchBtnContainer>
-            <BiSearch onClick={onSubmitSearch} />
-          </SearchBtnContainer>
-        </SearchContainer>
+        <Search setSearchValue={setSearchValue} />
       </LableContainer>
       {posts &&
         posts.map((post) => (

@@ -140,7 +140,16 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
         where: { id: req.params.id },
       }
     );
-    res.status(200).json({ result: true });
+
+    const post = await Post.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (req.body.image) {
+      const image = await Image.create({ image_url: req.body.image });
+      await post.setImages(image);
+    }
+    res.status(200).json("success");
   } catch (error) {
     console.error(error);
     next(error);

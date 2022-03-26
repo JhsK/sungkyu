@@ -7,10 +7,12 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPostAPI, postUpdateAPI } from 'src/api';
 // import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import ImageUploader from 'src/components/share/ImageUploader';
 
 const PostUpdateEditor = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [imagePath, setImagePath] = useState('');
   const queryClient = useQueryClient();
   const updatePostMutation = useMutation(postUpdateAPI);
   const editorRef = React.createRef<Editor>();
@@ -56,8 +58,7 @@ const PostUpdateEditor = () => {
     if (title === '') {
       return alert('제목은 필수 입니다');
     }
-    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag };
-    console.log(values);
+    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
       updatePostMutation.mutate(
@@ -118,6 +119,7 @@ const PostUpdateEditor = () => {
           </button>
         </BtnContainer>
       </div>
+      <ImageUploader imagePath={imagePath} setImagePath={setImagePath} />
     </Container>
   );
 };
