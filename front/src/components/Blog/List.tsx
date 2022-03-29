@@ -26,6 +26,10 @@ const LableContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 2rem;
 
+  @media ${(props) => props.theme.MOBILE} {
+    justify-content: center;
+  }
+
   .filter {
     span {
       margin-right: 1.5rem;
@@ -34,7 +38,7 @@ const LableContainer = styled.div`
       cursor: pointer;
     }
 
-    @media ${(props) => props.theme.MOBILE_SM} {
+    @media ${(props) => props.theme.MOBILE} {
       margin-bottom: 1rem;
     }
   }
@@ -45,23 +49,31 @@ const LableContainer = styled.div`
     border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding-left: 0.5rem;
+
+    @media ${(props) => props.theme.MOBILE} {
+      width: 200px;
+    }
   }
 
   input:focus {
     outline: none;
   }
 
-  @media ${(props) => props.theme.MOBILE_SM} {
+  @media ${(props) => props.theme.MOBILE} {
     flex-wrap: wrap;
   }
 `;
 
 const Newest = styled.span`
-  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.PUBLIC_DARKGRAY)};
+  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const Latest = styled.span`
   color: ${(props) => (props.color === '후순위' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
+`;
+
+const All = styled.span`
+  color: ${(props) => (props.color === 'All' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
 `;
 
 const ListContainer = styled.div`
@@ -160,7 +172,7 @@ const CreateBtn = styled.div`
 `;
 
 interface CategoryType {
-  name: '최신순' | '후순위' | '태그';
+  name: '최신순' | '후순위' | '태그' | 'All';
   option: 'DESC' | 'ASC';
 }
 
@@ -174,7 +186,7 @@ const List = ({ inView }) => {
   const [textLength, setTextLength] = useState(160);
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
-  const categoryRef = useRef<CategoryType>({ name: '최신순', option: 'DESC' });
+  const categoryRef = useRef<CategoryType>({ name: 'All', option: 'DESC' });
   const [tagId, setTagId] = useState(null);
 
   const {
@@ -215,6 +227,12 @@ const List = ({ inView }) => {
     if (isMobile) setTextLength(40);
   }, [isTablet, isMobile]);
 
+  const onClickAll = () => {
+    categoryRef.current = { name: 'All', option: 'DESC' };
+    setTagId(null);
+    setSearchValue('');
+  };
+
   return (
     <Container>
       <CreateBtn>
@@ -227,6 +245,9 @@ const List = ({ inView }) => {
       {isMobile && <MobileTags />}
       <LableContainer>
         <div className="filter">
+          <All onClick={onClickAll} color={categoryRef.current.name}>
+            All
+          </All>
           <Newest
             color={categoryRef.current.name}
             onClick={() => {
