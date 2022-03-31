@@ -145,6 +145,30 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
       where: { id: req.params.id },
     });
 
+    if (req.body.tag.length > 0) {
+      const tags = req.body.tag;
+      const result = await Promise.all(
+        tags.map((tag) =>
+          Tag.findOrCreate({
+            where: { name: tag.toLowerCase() },
+          })
+        )
+      ); // [[노드, true], [리액트, true]]
+      await post.addTags(result.map((v) => v[0]));
+      await result.map(async (v) => {
+        if (v[1] == false) {
+          await Tag.update(
+            {
+              count: v[0].dataValues.count + 1,
+            },
+            {
+              where: { name: v[0].dataValues.name.toLowerCase() },
+            }
+          );
+        }
+      });
+    }
+
     if (req.body.image) {
       const image = await Image.create({ image_url: req.body.image });
       await post.setImages(image);
