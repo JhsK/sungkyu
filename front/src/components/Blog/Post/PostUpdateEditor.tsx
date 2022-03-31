@@ -69,7 +69,6 @@ const PostUpdateEditor = () => {
           },
         },
       );
-      //   router.back();
       router.push(`/blog/${id}`);
     } catch (error) {
       console.log(error);
