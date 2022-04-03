@@ -51,7 +51,7 @@ const ProjectsContainer = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 5rem;
     flex-wrap: wrap;
 
     @media ${(props) => props.theme.TABLET} {
@@ -76,6 +76,19 @@ const ProjectsContainer = styled.div`
 
       @media ${(props) => props.theme.TABLET} {
         width: 250px;
+      }
+
+      @media ${(props) => props.theme.TABLET_SM} {
+        width: 300px;
+        margin: 0 auto;
+      }
+
+      @media ${(props) => props.theme.MOBILE_SM} {
+        width: 300px;
+      }
+
+      @media ${(props) => props.theme.MOBILE_FOLD} {
+        width: 200px;
       }
 
       img {
@@ -104,12 +117,10 @@ const ProjectsContainer = styled.div`
 
 const SwiperConatiner = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
 `;
 
 const ProjectsComponent = () => {
-  const isMobile = useDevice(768);
+  const isMobile = useDevice(650);
 
   return (
     <Container>
@@ -145,23 +156,55 @@ const ProjectsComponent = () => {
                     </Link>
                   </motion.div>
                 </SwiperSlide>
+                <SwiperSlide>
+                  <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                    <Link href="/projects/Sungkyu">
+                      <a>
+                        <img
+                          src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                          alt="cover"
+                        />
+                        <div className="cardTitleContainer">
+                          <span>Sungkyu</span>
+                          <span>프론트엔드 개발자 임성규 블로그</span>
+                        </div>
+                      </a>
+                    </Link>
+                  </motion.div>
+                </SwiperSlide>
               </Swiper>
             </SwiperConatiner>
           ) : (
-            <motion.div className="card" whileHover={{ scale: 1.1 }}>
-              <Link href="/projects/Tre">
-                <a>
-                  <img
-                    src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
-                    alt="cover"
-                  />
-                  <div className="cardTitleContainer">
-                    <span>Tre</span>
-                    <span>To Record Everything - 일정 관리 사이트</span>
-                  </div>
-                </a>
-              </Link>
-            </motion.div>
+            <>
+              <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                <Link href="/projects/Tre">
+                  <a>
+                    <img
+                      src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                      alt="cover"
+                    />
+                    <div className="cardTitleContainer">
+                      <span>Tre</span>
+                      <span>To Record Everything - 일정 관리 사이트</span>
+                    </div>
+                  </a>
+                </Link>
+              </motion.div>
+              <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                <Link href="/projects/Sungkyu">
+                  <a>
+                    <img
+                      src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                      alt="cover"
+                    />
+                    <div className="cardTitleContainer">
+                      <span>Sungkyu</span>
+                      <span>프론트엔드 개발자 임성규 블로그</span>
+                    </div>
+                  </a>
+                </Link>
+              </motion.div>
+            </>
           )}
         </div>
       </ProjectsContainer>

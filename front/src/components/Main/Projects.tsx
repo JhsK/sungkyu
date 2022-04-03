@@ -82,8 +82,6 @@ const Content = styled.div`
   }
 
   .projectsContainer {
-    /* transform: translateX(+30%); */
-    /* height: 100vh; */
     vertical-align: middle;
 
     .container {
@@ -91,7 +89,6 @@ const Content = styled.div`
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      /* min-height: 100vh; */
       height: 100vh;
 
       .projects {
@@ -107,10 +104,7 @@ const Content = styled.div`
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      /* min-height: 100vh; */
       height: calc(280px * 4);
-      /* animation: ${verticalScroll} 180s linear infinite;
-      -ms-animation: ${verticalScroll} 180s linear infinite; */
 
       .projects {
         width: 400px;
@@ -138,8 +132,18 @@ const ListContainer = styled.div`
   margin-bottom: 2rem;
   animation: ${fadeInAnimation} 1s linear;
 
+  @media ${(props) => props.theme.TABLET_SM} {
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   @media ${(props) => props.theme.MOBILE_SM} {
-    width: 100%;
+    width: 300px;
+  }
+
+  @media ${(props) => props.theme.MOBILE_FOLD} {
+    width: 250px;
   }
 
   img {
@@ -166,11 +170,11 @@ const ListContainer = styled.div`
 `;
 
 const SwiperContainer = styled.div`
-  width: 85%;
+  width: 100%;
 `;
 
 const Projects = () => {
-  const isMobile = useDevice(400);
+  const isMobile = useDevice(650);
 
   return (
     <Container>
@@ -186,6 +190,7 @@ const Projects = () => {
               <Swiper
                 modules={[Autoplay]}
                 loop
+                slidesPerView={1}
                 autoplay={{
                   delay: 2500,
                   disableOnInteraction: false,
@@ -227,6 +232,24 @@ const Projects = () => {
                     </ListContainer>
                   </motion.div>
                 </SwiperSlide>
+                <SwiperSlide>
+                  <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                    <ListContainer>
+                      <Link href="/projects/Sungkyu">
+                        <a>
+                          <img
+                            src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                            alt="cover"
+                          />
+                          <div className="projects">
+                            <span>Sungkyu</span>
+                            <span>프론트엔드 개발자 임성규 블로그</span>
+                          </div>
+                        </a>
+                      </Link>
+                    </ListContainer>
+                  </motion.div>
+                </SwiperSlide>
               </Swiper>
             </SwiperContainer>
           ) : (
@@ -258,6 +281,22 @@ const Projects = () => {
                       <div className="projects">
                         <span>Groupstory</span>
                         <span>백석대학교 동아리 모집 사이트</span>
+                      </div>
+                    </a>
+                  </Link>
+                </ListContainer>
+              </motion.div>
+              <motion.div className="card" whileHover={{ scale: 1.1 }}>
+                <ListContainer>
+                  <Link href="/projects/Sungkyu">
+                    <a>
+                      <img
+                        src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                        alt="cover"
+                      />
+                      <div className="projects">
+                        <span>Sungkyu</span>
+                        <span>프론트엔드 개발자 임성규 블로그</span>
                       </div>
                     </a>
                   </Link>
