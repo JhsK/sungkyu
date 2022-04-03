@@ -74,6 +74,10 @@ const Content = styled.div`
   .title {
     font-size: 2rem;
     font-weight: bold;
+
+    @media ${(props) => props.theme.TABLET} {
+      margin-left: 1rem;
+    }
   }
 `;
 
@@ -105,7 +109,16 @@ const PostContainer = styled.div`
     align-self: stretch;
 
     @media ${(props) => props.theme.TABLET} {
-      width: 100%;
+      width: 450px;
+      margin: 0 auto;
+    }
+
+    @media ${(props) => props.theme.MOBILE} {
+      width: 300px;
+    }
+
+    @media ${(props) => props.theme.MOBILE_FOLD} {
+      width: 200px;
     }
 
     .postImg {
@@ -113,6 +126,18 @@ const PostContainer = styled.div`
       background-color: gray;
       height: 200px;
       margin-bottom: 1.5rem;
+
+      @media ${(props) => props.theme.TABLET} {
+        height: 300px;
+      }
+
+      @media ${(props) => props.theme.MOBILE} {
+        height: 250px;
+      }
+
+      @media ${(props) => props.theme.MOBILE_FOLD} {
+        height: 200px;
+      }
 
       img {
         width: 100%;
@@ -143,9 +168,9 @@ const PostContainer = styled.div`
 
   .swiperContainer {
     width: 100%;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
   }
 `;
 

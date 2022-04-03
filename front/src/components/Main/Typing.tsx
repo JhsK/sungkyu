@@ -47,6 +47,7 @@ const Content = styled.div`
 
   @media ${(props) => props.theme.MOBILE} {
     font-size: 1.5rem;
+    transform: translate(-40%, -50%);
   }
 
   @media ${(props) => props.theme.MOBILE_FOLD} {
