@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Global, css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useInView } from 'react-intersection-observer';
+import MouseScrollAni from '../share/MouseScrollAni';
 
 const typing = keyframes`
     0% {
@@ -96,6 +97,7 @@ const Typing = ({ setLogoColor }) => {
           <H1>불편함을 해소하기 위해 고민하는</H1>
           <h1>개발자 입니다.</h1>
         </Content>
+        <MouseScrollAni />
       </Section>
     </Container>
   );
