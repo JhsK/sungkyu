@@ -5,9 +5,10 @@ import Introduce from './Introduce';
 import Skill from './Skill';
 import Footer from '../Footer';
 import MobileIntroduceText from '../share/MobileIntroduceText';
+import Experience from './Experience';
 
 const Container = styled.div`
-  height: 100%;
+  /* height: 100%; */
 `;
 
 const AboutComponent = () => {
@@ -16,7 +17,8 @@ const AboutComponent = () => {
   return (
     <Container>
       {isFold ? <MobileIntroduceText /> : <Introduce />}
-      <Skill />
+      <Experience />
+      {/* <Skill /> */}
       <Footer />
     </Container>
   );
