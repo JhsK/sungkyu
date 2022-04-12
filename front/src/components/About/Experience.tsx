@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { lightTheme } from 'src/theme';
-import { Skill } from './style';
+import { Skill, SkillContainer } from './style';
 
 const Container = styled.div`
   width: 100%;
@@ -17,9 +17,19 @@ const Container = styled.div`
     max-width: 700px;
   }
 
+  @media ${(props) => props.theme.TABLET_SM} {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+  }
+
   .title {
     font-weight: bold;
     font-size: 1.4rem;
+
+    @media ${(props) => props.theme.TABLET_SM} {
+      padding: 0 2rem;
+    }
   }
 
   .experienceContainer {
@@ -28,18 +38,44 @@ const Container = styled.div`
     gap: 2rem;
     margin-bottom: 1rem;
 
+    @media ${(props) => props.theme.TABLET_SM} {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media ${(props) => props.theme.MOBILE} {
+      gap: 1rem;
+    }
+
     .period {
       font-size: 1.4rem;
       font-weight: bold;
       color: ${(props) => props.theme.NO_ACTIVE_CATEGORY_COLOR};
+
+      @media ${(props) => props.theme.MOBILE} {
+        font-size: 1.2rem;
+      }
     }
 
     .content {
+      @media ${(props) => props.theme.MOBILE} {
+        ul {
+          font-size: 0.9rem;
+        }
+      }
       .top {
         margin-bottom: 1rem;
+
+        @media ${(props) => props.theme.MOBILE} {
+          font-size: 0.9rem;
+        }
         h1 {
           font-size: 1.4rem;
           margin-bottom: 1rem;
+
+          @media ${(props) => props.theme.MOBILE} {
+            font-size: 1.2rem;
+          }
         }
 
         span {
@@ -51,12 +87,12 @@ const Container = styled.div`
 
       .project {
         padding-left: 1.5rem;
-        padding-top: 1rem;
         margin: 1rem 0;
 
         li {
           list-style-type: disc;
           margin-bottom: 1rem;
+          line-height: 1.2rem;
         }
       }
 
@@ -92,7 +128,7 @@ const Experience = () => (
     <span className="title" role="img" aria-labelledby="expreience">
       💼 Experience
     </span>
-    <div className="experienceContainer">
+    <div className="experienceContainer" data-aos="flip-left">
       <span className="period">2022.01 ~ 2022.02</span>
       <div className="content">
         <div className="top">
@@ -100,9 +136,13 @@ const Experience = () => (
           <span>스타트업 전문 외주 개발사입니다. 고객사 프로젝트에 참여하여 기능 구현을 담당하였습니다.</span>
           <span>Full Stack Developer</span>
         </div>
-        {INSOMENIA_FREE.map((skill) => (
-          <Skill bgColor={skill.color}>{skill.name}</Skill>
-        ))}
+        <SkillContainer>
+          {INSOMENIA_FREE.map((skill) => (
+            <Skill key={skill.name} bgColor={skill.color}>
+              {skill.name}
+            </Skill>
+          ))}
+        </SkillContainer>
         <ul className="project">
           <li>[밀리앱] 내가 자주 가는 지점을 선택하고 해당 지점에 상품을 픽업할 수 있도록 예약/주문 웹앱 개발</li>
           <ul className="task">
@@ -119,7 +159,7 @@ const Experience = () => (
         </ul>
       </div>
     </div>
-    <div className="experienceContainer">
+    <div className="experienceContainer" data-aos="flip-left">
       <span className="period">2021.09 ~ 2022.12</span>
       <div className="content">
         <div className="top">
@@ -127,9 +167,11 @@ const Experience = () => (
           <span>ICT 학점연계 프로젝트 인턴쉽을 통해 인썸니아에서 4개월동안 인턴으로 참여하였습니다.</span>
           <span>Full Stack Developer</span>
         </div>
-        {INSOMENIA_INTERN.map((skill) => (
-          <Skill bgColor={skill.color}>{skill.name}</Skill>
-        ))}
+        <SkillContainer>
+          {INSOMENIA_INTERN.map((skill) => (
+            <Skill bgColor={skill.color}>{skill.name}</Skill>
+          ))}
+        </SkillContainer>
         <ul className="project">
           <li>회사 내 기술 스택 적응을 위한 상거래 웹앱 프로젝트 진행(1개월)</li>
           <li>실제 고객사 프로젝트 서브 개발자 투입(3개월)</li>

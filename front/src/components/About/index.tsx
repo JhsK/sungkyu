@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import useDevice from 'src/hooks/useDevice';
+import AOS from 'aos';
 import Introduce from './Introduce';
 import Skill from './Skill';
 import Footer from '../Footer';
@@ -12,7 +13,11 @@ const Container = styled.div`
 `;
 
 const AboutComponent = () => {
-  const isFold = useDevice(300);
+  const isFold = useDevice(400);
+
+  useEffect(() => {
+    AOS.init({});
+  }, []);
 
   return (
     <Container>
