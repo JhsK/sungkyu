@@ -14,6 +14,10 @@ declare module '@emotion/react' {
     POST_EDIT_TITLE_BORDER_COLOR: string;
     POST_EDIT_BUTTON_COLOR: string;
     BACKGROUND_USER_COLOR: string;
+    REACT_SKY_BLUE_COLOR: string;
+    ROR_RED_COLOR: string;
+    F7_ORANGE_COLOR: string;
+    NODE_GREEN_COLOR: string;
     MOBILE: string;
     TABLET: string;
     TABLET_SM: string;
