@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
 
 const IntroduceContainer = styled.div`
   span {
@@ -63,5 +64,4 @@ const IntroduceText = () => (
     </ul>
   </IntroduceContainer>
 );
-
 export default IntroduceText;
