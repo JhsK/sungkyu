@@ -20,7 +20,6 @@ const GlobalStyle = () => (
       body {
         overflow-x: hidden;
         width: 100%;
-        background-color: ${lightTheme.PUBLIC_WHITE};
         font-family: NanumSquare, 'Noto Sans KR', notokr, 'Nanum Gothic', 'Malgun Gothic', sans-serif;
       }
 

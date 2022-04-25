@@ -84,11 +84,13 @@ const H1 = styled.h1`
 const Typing = ({ setLogoColor }) => {
   const [ref, inView] = useInView({
     threshold: 0,
+    initialInView: true,
   });
 
   useEffect(() => {
     setLogoColor(!inView);
   }, [inView]);
+
   return (
     <Container>
       <Section>
