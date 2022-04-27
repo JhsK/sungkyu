@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -278,7 +279,9 @@ const List = ({ inView }) => {
                 <div key={post.id}>
                   <PostTitle>{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</PostTitle>
                   <div className="content">
-                    {post?.content.length > textLength ? `${post?.content.substring(0, textLength)}...` : post?.content}
+                    {post?.content.length > textLength
+                      ? `${post?.content.substring(0, textLength).replaceAll(/<[^>]*>?|[#<>*_\+\[\]-`]/gm, '')}...`
+                      : post?.content.replaceAll(/<[^>]*>?|[#<>*_\+\[\]-`]/gm, '')}
                   </div>
                 </div>
                 <TagsContainer>
