@@ -25,6 +25,7 @@ const PostUpdateEditor = () => {
   const [title, setTitle] = useState(post?.title);
   const [tag, setTag] = useState([]);
   const [tagInputValue, setTagInputValue] = useState('');
+  const [newTag, setNewTag] = useState([]);
 
   useEffect(() => {
     if (post) {
@@ -45,6 +46,7 @@ const PostUpdateEditor = () => {
     if (e.keyCode === 13) {
       const addTagValue = e.target.value;
       setTag((prev) => [...prev, addTagValue]);
+      setNewTag((prev) => [...prev, addTagValue]);
       setTagInputValue('');
     } else setTag((prev) => [...prev]);
   };
@@ -58,8 +60,7 @@ const PostUpdateEditor = () => {
     if (title === '') {
       return alert('제목은 필수 입니다');
     }
-    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
-    // console.log(editorRef.current?.getInstance()?.getMarkdown());
+    const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag: newTag, image: imagePath };
     try {
       updatePostMutation.mutate(
         { id, values },
