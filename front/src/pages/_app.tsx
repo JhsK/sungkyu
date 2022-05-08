@@ -1,18 +1,31 @@
 import { ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 import { configs } from 'src/config';
 import { lightTheme } from 'src/theme';
 import GlobalStyle from 'src/theme/globalStyle';
+import { useRouter } from 'next/router';
+import * as gtag from '../lib/gtag';
 
 const isProduction = configs.ENV === 'production';
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
   const [queryClient] = React.useState(() => new QueryClient());
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <>
