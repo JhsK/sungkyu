@@ -18,7 +18,32 @@ sungkyu는 프론트엔드 개발자 임성규의 포트폴리오 및 기술 블
 
 ## 기능 추가 및 버그 수정
 
-## 22.03
+<details>
+    <summary>22.04</summary>
+<br />
+
+#### .27 블로그 게시물 미리보기 텍스트 마크다운 문법 제거
+- 블로그 게시물 리스트에서 미리보기 부분 텍스트에 마크다운 문법이 그대로 나오는 현상, 정규 표현식으로 버그 수정 [#102](https://github.com/JhsK/sungkyu/issues/102)
+
+#### .25 메인 페이지 접속시 색상 버그 수정
+- 메인 페이지 처음 접근할 경우 화이트로 나타난 후 의도된 배경 색상 적용으로 인해 UX가 좋지 않아 버그 수정 [#100](https://github.com/JhsK/sungkyu/issues/100)
+
+#### .20 블로그 게시물 글자 크기 변경
+- 게시물 자세히 보기 화면 시 글자 크기가 작아 가독성이 좋지 않아서 기존 에디터 css 오버라이드를 통해 글자 크기 변경 [#97](https://github.com/JhsK/sungkyu/issues/97)
+
+#### .12 About 페이지 리뉴얼
+- About 페이지 디자인 및 기존에 작성된 기술 스택 모두 제거 및 인턴 경력 내용 추가 [#94](https://github.com/JhsK/sungkyu/issues/94)
+
+#### .05 마우스 스크롤 애니메이션 추가
+- 메인 페이지 하단에 스크롤을 유도하기 위한 마우스 스크롤 애니메이션 추가 [#91](https://github.com/JhsK/sungkyu/issues/91)
+
+#### .03 완성된 Sungkyu 프로젝트 관련 데이터 추가
+- 메인 페이지 및 포트폴리오 페이지에 들어가는 프로젝트 데이터 추가 [#88](https://github.com/JhsK/sungkyu/issues/88)
+</details>
+
+<details>
+    <summary>22.03</summary>
+    <br />
 
 #### .31 태그 수정 버그
 - 블로그 게시물을 수정할 경우 새롭게 태그 추가가 안되는 버그 발생 [#83](https://github.com/JhsK/sungkyu/issues/83)
@@ -47,6 +72,8 @@ sungkyu는 프론트엔드 개발자 임성규의 포트폴리오 및 기술 블
 #### .14 모바일 반응형 글자 깨짐 버그
 - 블로그 게시물 리스트에서 태그 글자 짤림 및 날짜순 필터링와 게시물 제목 겹치는 반응형 버그 수정 [#58](https://github.com/JhsK/sungkyu/issues/58)
 
+</details>
+
 <br>
 
 ## Stack
@@ -68,7 +95,7 @@ sungkyu는 프론트엔드 개발자 임성규의 포트폴리오 및 기술 블
 
 ### About page
 
-<img src='https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png'>
+<img src='https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/screencapture-sungkyu-info-about-2022-05-10-11_26_02.png'>
 
 <br><br>
 
