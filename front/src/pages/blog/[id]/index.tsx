@@ -1,18 +1,17 @@
 import styled from '@emotion/styled';
-import moment from 'moment';
-import 'moment/locale/ko';
+import dayjs from 'dayjs';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getPostAPI, postDeleteAPI } from 'src/api';
-import { TagValue } from 'src/components/Blog/Post';
 import Comment from 'src/components/Blog/Comment';
+import { TagValue } from 'src/components/Blog/Post';
 import Header from 'src/components/Header';
 import useAuth from 'src/hooks/useAuth';
-import Head from 'next/head';
 
 const Viewer = dynamic(() => import('../../../components/Blog/Post/PostViewer'), { ssr: false });
 
@@ -104,7 +103,7 @@ const PostView = () => {
         <TitleContainer>
           <Title>{post?.title}</Title>
           <SubTitle>
-            <span>{moment(post?.createdAt).format('LL')}</span>
+            <span>{dayjs(post?.createdAt).format('YY년 M월 D일')}</span>
             {currentUser?.isAuthenticated && (
               <UpdateAndDeleteBtn>
                 <span onClick={() => router.push(`/blog/${id}/update`)}>수정</span>
