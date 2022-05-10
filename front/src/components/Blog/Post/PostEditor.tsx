@@ -1,88 +1,20 @@
-// // import React, { createRef } from 'react';
-// import '@toast-ui/editor/dist/toastui-editor.css';
-// // import { Editor } from '@toast-ui/react-editor';
-// import dynamic from 'next/dynamic';
-// import React, { useRef } from 'react';
-// import { EditorProps } from '@toast-ui/react-editor';
-
-// const PostEditor = () => {
-//   const editorRef = useRef(null);
-//   console.log(editorRef.current); // {retry: ƒ}
-//   return (
-//     <>
-//       <Editor
-//         initialValue="hello react editor world!"
-//         previewStyle="vertical"
-//         height="600px"
-//         initialEditType="markdown"
-//         useCommandShortcut={false}
-//         ref={editorRef}
-//       />
-//     </>
-//   );
-// };
-// export default PostEditor;
-
-// import React, { useState, forwardRef, useRef, useCallback } from 'react';
-// import dynamic from 'next/dynamic';
-
-// const Editor = dynamic(() => import('./test'), { ssr: false });
-// // 2. Pass down to child components using forwardRef
-// const EditorWithForwardedRef = React.forwardRef((props, ref) => <Editor {...props} forwardedRef={ref} />);
-
-// const ToastEditorComponent = (props) => {
-//   const { heightMin, onChange } = props;
-
-//   const editorRef = useRef(null);
-//   console.log(editorRef);
-
-//   const handleChange = useCallback(() => {
-//     if (!editorRef.current) {
-//       return;
-//     }
-
-//     console.log(editorRef.current);
-//     const instance = editorRef.current.getInstance();
-//     onChange(instance.getHTML()); // maximum call stack error at the moment(2021.07.02)
-//   }, [editorRef, onChange]);
-
-//   return (
-//     // 1. Pass down ref
-//     <EditorWithForwardedRef
-//       {...props}
-//       placeholder="필수 입력사항 입니다."
-//       previewStyle="vertical"
-//       setMinHeight={heightMin || 250}
-//       setHeight="600px"
-//       initialEditType="markdown"
-//       useCommandShortcut
-//       ref={editorRef}
-//     />
-//   );
-// };
-
-// export default ToastEditorComponent;
-
-import React, { Component, useRef, useState } from 'react';
-// import 'codemirror/lib/codemirror.css';
-import '@toast-ui/editor/dist/toastui-editor.css';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
+import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
-import styled from '@emotion/styled';
 import Link from 'next/link';
 import router from 'next/router';
-import { postCreateAPI, uploadImageAPI } from 'src/api';
-import dynamic from 'next/dynamic';
-import ImageUploader from 'src/components/share/ImageUploader';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import Prism from 'prismjs';
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import { BtnContainer, Container, TagInput, TagValue, TitleInput } from '.';
 import 'prismjs/themes/prism.css';
-import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import React, { useState } from 'react';
+import { postCreateAPI } from 'src/api';
+import ImageUploader from 'src/components/share/ImageUploader';
 import 'tui-color-picker/dist/tui-color-picker.css';
-import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
-import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
+import { BtnContainer, Container, TagInput, TagValue, TitleInput } from '.';
 
 // const Editor = dynamic<EditorProps>(() => import('@toast-ui/react-editor').then((m) => m.Editor), { ssr: false });
 

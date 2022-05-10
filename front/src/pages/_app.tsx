@@ -9,13 +9,16 @@ import { configs } from 'src/config';
 import { lightTheme } from 'src/theme';
 import GlobalStyle from 'src/theme/globalStyle';
 import { useRouter } from 'next/router';
+import dayjs from 'dayjs';
 import * as gtag from '../lib/gtag';
+import 'dayjs/locale/ko';
 
 const isProduction = configs.ENV === 'production';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
   const [queryClient] = React.useState(() => new QueryClient());
+  dayjs.locale('ko');
 
   useEffect(() => {
     const handleRouteChange = (url) => {
