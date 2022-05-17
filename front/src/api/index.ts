@@ -20,7 +20,7 @@ export const getPostsAPI: (
   option: 'DESC' | 'ASC',
   lastId?: number,
   search?: string,
-  tagId?: number,
+  tagId?: string,
 ) => Promise<PostModel[]> = async (option, lastId, search, tagId) => {
   const { data } = await API.get(
     `/post?category=${option}&lastId=${lastId || 0}&search=${search || ''}&tag=${tagId || ''}`,

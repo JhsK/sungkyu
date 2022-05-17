@@ -1,111 +1,6 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { lightTheme } from 'src/theme';
-import { Skill, SkillContainer } from './style';
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 100%;
-
-  @media ${(props) => props.theme.HDPC} {
-    max-width: 1000px;
-  }
-
-  @media ${(props) => props.theme.PC} {
-    max-width: 700px;
-  }
-
-  @media ${(props) => props.theme.TABLET_SM} {
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-  }
-
-  .title {
-    font-weight: bold;
-    font-size: 1.4rem;
-
-    @media ${(props) => props.theme.TABLET_SM} {
-      padding: 0 2rem;
-    }
-  }
-
-  .experienceContainer {
-    padding: 1rem 2rem;
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 1rem;
-
-    @media ${(props) => props.theme.TABLET_SM} {
-      display: flex;
-      flex-direction: column;
-    }
-
-    @media ${(props) => props.theme.MOBILE} {
-      gap: 1rem;
-    }
-
-    .period {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: ${(props) => props.theme.NO_ACTIVE_CATEGORY_COLOR};
-
-      @media ${(props) => props.theme.MOBILE} {
-        font-size: 1.2rem;
-      }
-    }
-
-    .content {
-      @media ${(props) => props.theme.MOBILE} {
-        ul {
-          font-size: 0.9rem;
-        }
-      }
-      .top {
-        margin-bottom: 1rem;
-
-        @media ${(props) => props.theme.MOBILE} {
-          font-size: 0.9rem;
-        }
-        h1 {
-          font-size: 1.4rem;
-          margin-bottom: 1rem;
-
-          @media ${(props) => props.theme.MOBILE} {
-            font-size: 1.2rem;
-          }
-        }
-
-        span {
-          opacity: 0.5;
-          margin-bottom: 0.5rem;
-          display: block;
-        }
-      }
-
-      .project {
-        padding-left: 1.5rem;
-        margin: 1rem 0;
-
-        li {
-          list-style-type: disc;
-          margin-bottom: 1rem;
-          line-height: 1.2rem;
-        }
-      }
-
-      .task {
-        padding-left: 1rem;
-
-        li {
-          list-style-type: circle;
-        }
-      }
-    }
-  }
-`;
+import { Container, Skill, SkillContainer } from './style';
 
 const INSOMENIA_FREE = [
   { name: 'React', color: lightTheme.REACT_SKY_BLUE_COLOR },
@@ -148,13 +43,12 @@ const Experience = () => (
           <ul className="task">
             <li>상품 결제 시 사용할 수 있는 쿠폰 및 포인트 기능 구현</li>
             <li>리뷰 기능 구현</li>
-            <li>카드 등록 후 자동결제 기능 구현</li>
-            <li>카드 등록 없이 카드 정보 및 간편 결제 기능 구현</li>
+            <li>토스 API를 이용한 카드 등록 후 자동결제 기능 구현</li>
+            <li>토스 API를 이용한 카드 등록 없이 카드 정보 및 간편 결제 기능 구현</li>
           </ul>
           <li>[배낭버스] 여행을 위한 버스 예약 서비스 웹앱 개발</li>
           <ul className="task">
-            <li>카카오톡 공유하기 딥링크 기능 프론트 구현</li>
-            <li>토스 지급대행 API 이용한 버스기사 예약금 전달 기능 구현</li>
+            <li>토스 지급대행 API를 이용한 버스기사 예약금 전달 기능 구현</li>
           </ul>
         </ul>
       </div>
