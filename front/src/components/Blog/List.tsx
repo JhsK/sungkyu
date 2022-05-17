@@ -188,7 +188,7 @@ const List = ({ inView }) => {
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [serachValue, setSearchValue] = useState('');
   const categoryRef = useRef<CategoryType>({ name: 'All', option: 'DESC' });
-  const [tagId, setTagId] = useState(null);
+  const [tagId, setTagId] = useState<string>(null);
 
   const {
     data: postsData,
@@ -213,7 +213,7 @@ const List = ({ inView }) => {
   useEffect(() => {
     if (router.query?.tag) {
       categoryRef.current = { name: '태그', option: 'DESC' };
-      setTagId(router.query?.tag);
+      setTagId(router.query?.tag as string);
     }
   }, [router.query]);
 

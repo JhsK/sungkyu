@@ -13,6 +13,7 @@ import 'prismjs/themes/prism.css';
 import React, { useState } from 'react';
 import { postCreateAPI } from 'src/api';
 import ImageUploader from 'src/components/share/ImageUploader';
+import usePostEditMutation from 'src/components/Blog/hooks/usePostEditMutation';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import { BtnContainer, Container, TagInput, TagValue, TitleInput } from '.';
 
@@ -24,6 +25,7 @@ export interface PostEditorWithForwardedProps extends EditorProps {
 
 const PostEditor = () => {
   const editorRef = React.createRef<Editor>();
+  const { mutate } = usePostEditMutation();
   const [imagePath, setImagePath] = useState(null);
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState([]);
@@ -58,7 +60,7 @@ const PostEditor = () => {
     const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
-      await postCreateAPI(values);
+      mutate(values);
       router.replace('/blog');
     } catch (error) {
       console.log(error);
@@ -82,7 +84,6 @@ const PostEditor = () => {
           onChange={onChangeTag}
           placeholder="태그를 입력하세요"
           type="text"
-          // onKeyUp={onKeyUpTag}
           onKeyDown={onKeyUpTag}
         />
         <Editor
@@ -92,7 +93,6 @@ const PostEditor = () => {
           initialEditType="markdown"
           initialValue="hello"
           plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax, tableMergedCell]}
-          // onChange={onChangeEditor}
           ref={editorRef}
         />
         <BtnContainer>

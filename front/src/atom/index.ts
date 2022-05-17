@@ -17,7 +17,7 @@ export const currentUserSelector = selector({
     if (Object.keys(data).length !== 0) {
       data.isAuthenticated = true;
     }
-    console.log('sfsf', data);
+
     return data;
   },
 });
