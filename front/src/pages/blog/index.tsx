@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import React from 'react';
 import { dehydrate, QueryClient } from 'react-query';
@@ -23,7 +23,9 @@ const Blog = () => (
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(['posts'], () => getPostsAPI('DESC', 0, ''), { staleTime: 1000 });
+  await queryClient.prefetchInfiniteQuery(['posts', null, ''], () => getPostsAPI('DESC', 0, ''), {
+    staleTime: 3000,
+  });
 
   return {
     props: {
