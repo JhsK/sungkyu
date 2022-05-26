@@ -23,7 +23,7 @@ const Blog = () => (
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery('posts', () => getPostsAPI('DESC', 0, ''), { staleTime: 1000 });
+  await queryClient.prefetchInfiniteQuery(['posts'], () => getPostsAPI('DESC', 0, ''), { staleTime: 1000 });
 
   return {
     props: {
