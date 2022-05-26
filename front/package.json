@@ -11,7 +11,8 @@
     "prettier": "prettier --write --config ./prettier.config.js './src/**/*.{ts,tsx}'",
     "lint": "eslint './src/**/*.{ts,tsx,js,jsx}'",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx,js,jsx}'",
-    "postbuild": "next-sitemap --config next-sitemap.config.js"
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "stage": "next start"
   },
   "author": "",
   "license": "ISC",
