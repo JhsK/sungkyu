@@ -1,3 +1,4 @@
 export const queryKeys = {
-  posts: (tagId: string, searchValue: string) => ['posts', tagId, searchValue] as const,
+  posts: ['posts'] as const,
+  // posts: (tagId: string, searchValue: string) => ['posts', tagId, searchValue] as const,
 };
