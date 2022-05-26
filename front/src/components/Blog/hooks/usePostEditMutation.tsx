@@ -14,7 +14,7 @@ const usePostEditMutation = () => {
 
   return useMutation(postCreateAPI, {
     onSuccess: () => {
-      queryClient.invalidateQueries(queryKeys.posts(null, ''));
+      queryClient.invalidateQueries(queryKeys.posts);
     },
   });
 };
