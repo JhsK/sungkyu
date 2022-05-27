@@ -5,6 +5,7 @@ import { dehydrate, QueryClient } from 'react-query';
 import { getPostsAPI } from 'src/api';
 import BlogComponent from 'src/components/Blog';
 import Header from 'src/components/Header';
+import { queryKeys } from 'src/hooks/queryKey';
 
 const Blog = () => (
   <>
@@ -23,7 +24,7 @@ const Blog = () => (
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(['posts', null, ''], () => getPostsAPI('DESC', 0, ''));
+  await queryClient.prefetchInfiniteQuery(queryKeys.posts, () => getPostsAPI('DESC', 0, ''));
 
   return {
     props: {

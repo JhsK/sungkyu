@@ -16,7 +16,7 @@ const usePostEditMutation = () => {
 
   return useMutation(postCreateAPI, {
     onSuccess: async () => {
-      await queryClient.invalidateQueries(['posts', null, '']);
+      await queryClient.invalidateQueries(queryKeys.posts);
       router.replace('/blog');
     },
   });

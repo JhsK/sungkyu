@@ -202,7 +202,6 @@ const List = ({ inView }) => {
     {
       onSuccess: (data) => setPosts(data?.pages.flat()),
       getNextPageParam: (lastPage) => lastPage?.[lastPage.length - 1]?.id,
-      // staleTime: 1000,
     },
   );
 
