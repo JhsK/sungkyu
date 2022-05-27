@@ -5,7 +5,7 @@ module.exports = class User extends Sequelize.Model {
     return super.init(
       {
         title: {
-          type: Sequelize.STRING(30),
+          type: Sequelize.STRING(60),
           allowNull: false,
         },
         content: {

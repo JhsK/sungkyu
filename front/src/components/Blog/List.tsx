@@ -235,7 +235,6 @@ const List = ({ inView }) => {
 
   return (
     <Container>
-      <span>{postsData.pages[0][0].title}</span>
       <CreateBtn>
         {currentUser?.isAuthenticated && (
           <Link href="/blog/new">
