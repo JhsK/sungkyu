@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { API } from 'src/api/api.config';
@@ -10,11 +11,13 @@ const postCreateAPI = async (params: postCreateType) => {
 };
 
 const usePostEditMutation = () => {
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   return useMutation(postCreateAPI, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(queryKeys.posts);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(queryKeys.posts);
+      router.replace('/blog');
     },
   });
 };

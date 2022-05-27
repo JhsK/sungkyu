@@ -61,7 +61,6 @@ const PostEditor = () => {
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
       mutate(values);
-      router.replace('/blog');
     } catch (error) {
       console.log(error);
       alert('오류가 발생했습니다. 관리자에게 문의해주세요');

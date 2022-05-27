@@ -202,7 +202,6 @@ const List = ({ inView }) => {
     {
       onSuccess: (data) => setPosts(data?.pages.flat()),
       getNextPageParam: (lastPage) => lastPage?.[lastPage.length - 1]?.id,
-      staleTime: 1000,
     },
   );
 
@@ -236,6 +235,7 @@ const List = ({ inView }) => {
 
   return (
     <Container>
+      <span>{postsData.pages[0][0].title}</span>
       <CreateBtn>
         {currentUser?.isAuthenticated && (
           <Link href="/blog/new">
