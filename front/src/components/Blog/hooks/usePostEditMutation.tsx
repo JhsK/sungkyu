@@ -13,9 +13,9 @@ const usePostEditMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(postCreateAPI, {
-    onSuccess: () => {
+    onSuccess: async () => {
       console.log('invalid');
-      queryClient.invalidateQueries(['posts', null, '']);
+      await queryClient.invalidateQueries(['posts', null, '']);
     },
   });
 };
