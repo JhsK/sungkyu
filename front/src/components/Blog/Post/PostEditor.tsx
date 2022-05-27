@@ -60,7 +60,7 @@ const PostEditor = () => {
     const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
-      mutate(values);
+      await mutate(values);
       router.replace('/blog');
     } catch (error) {
       console.log(error);

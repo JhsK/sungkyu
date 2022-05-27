@@ -14,6 +14,7 @@ const usePostEditMutation = () => {
 
   return useMutation(postCreateAPI, {
     onSuccess: () => {
+      console.log('invalid');
       queryClient.invalidateQueries(['posts', null, '']);
     },
   });
