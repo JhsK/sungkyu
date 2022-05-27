@@ -60,8 +60,7 @@ const PostEditor = () => {
     const values = { title, content: editorRef.current?.getInstance()?.getMarkdown(), tag, image: imagePath };
     // console.log(editorRef.current?.getInstance()?.getMarkdown());
     try {
-      await mutate(values);
-      router.replace('/blog');
+      mutate(values);
     } catch (error) {
       console.log(error);
       alert('오류가 발생했습니다. 관리자에게 문의해주세요');

@@ -205,7 +205,7 @@ const List = ({ inView }) => {
       // staleTime: 1000,
     },
   );
-  console.log('blog');
+
   useEffect(() => {
     setInfiniteBool(!isLoading && hasNextPage);
   }, [isLoading, hasNextPage]);
