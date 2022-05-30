@@ -36,38 +36,9 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 },
 });
 
-// const upload = multer({
-//   storage: multer.diskStorage({
-//     destination(req, file, done) {
-//       done(null, "uploads");
-//     },
-//     filename(req, file, done) {
-//       const ext = path.extname(file.originalname); // 확장자 추출(.png)
-//       const basename = path.basename(file.originalname, ext); // 제로초
-//       done(null, basename + "_" + new Date().getTime() + ext); // 제로초15184712891.png
-//     },
-//   }),
-//   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
-// });
-
 router.post("/", isLoggedIn, upload.single("img"), (req, res, next) => {
   // res.json(req.file.filename);
   res.json(req.file.location.replace(/\/original\//, "/thumb/"));
 });
-
-// router.post("/", isLoggedIn, upload.single("img"), async (req, res, next) => {
-//   try {
-//     console.log(req.file);
-//     // const images = await Promise.all(
-//     //   req.body.image.map((image) => Image.create({ src: image }))
-//     // );
-//     const images = await Image.create({ image_url: req.file.filename });
-//     const data = await post.addImage(images);
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// });
 
 module.exports = router;
