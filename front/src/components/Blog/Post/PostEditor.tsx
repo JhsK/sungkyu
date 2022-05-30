@@ -7,13 +7,12 @@ import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-tab
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, EditorProps } from '@toast-ui/react-editor';
 import Link from 'next/link';
-import router from 'next/router';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
-import React, { useState } from 'react';
-import { postCreateAPI } from 'src/api';
-import ImageUploader from 'src/components/share/ImageUploader';
+import React, { useEffect, useState } from 'react';
+import { uploadImageAPI } from 'src/api';
 import usePostEditMutation from 'src/components/Blog/hooks/usePostEditMutation';
+import ImageUploader from 'src/components/share/ImageUploader';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import { BtnContainer, Container, TagInput, TagValue, TitleInput } from '.';
 
@@ -30,6 +29,22 @@ const PostEditor = () => {
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState([]);
   const [tagInputValue, setTagInputValue] = useState('');
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.getInstance().removeHook('addImageBlobHook');
+      editorRef.current.getInstance().addHook('addImageBlobHook', (blob, callback) => {
+        (async () => {
+          const formData = new FormData();
+          formData.append('img', blob);
+
+          const data = await uploadImageAPI(formData);
+          const imageUrl = data.replace(/\/thumb\//, '/original/');
+          callback(imageUrl, 'image');
+        })();
+      });
+    }
+  }, [editorRef]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
