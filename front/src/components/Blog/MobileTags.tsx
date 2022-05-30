@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
 import { getTagAPI } from 'src/api';
 import router from 'next/router';
+import useTagsQuery from './hooks/useTagsQuery';
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +23,7 @@ const Container = styled.div`
 `;
 
 const MobileTags = () => {
-  const { data, isSuccess } = useQuery('tagList', getTagAPI);
+  const { data, isSuccess } = useTagsQuery();
 
   return (
     <Container>

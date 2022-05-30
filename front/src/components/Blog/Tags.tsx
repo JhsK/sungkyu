@@ -1,8 +1,7 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import { useQuery } from 'react-query';
-import { getTagAPI } from 'src/api';
-import router, { useRouter } from 'next/router';
+import router from 'next/router';
+import React from 'react';
+import useTagsQuery from './hooks/useTagsQuery';
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +29,7 @@ const LabelContainer = styled.div`
 `;
 
 const Tags = () => {
-  const { data, isSuccess } = useQuery('tagList', getTagAPI);
+  const { data, isSuccess } = useTagsQuery();
 
   return (
     <Container>
