@@ -10,11 +10,11 @@ import Link from 'next/link';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
 import React, { useEffect, useState } from 'react';
-import { uploadImageAPI } from 'src/api';
 import usePostEditMutation from 'src/components/Blog/hooks/usePostEditMutation';
 import ImageUploader from 'src/components/share/ImageUploader';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import { BtnContainer, Container, TagInput, TagValue, TitleInput } from '.';
+import useImageMutation from '../hooks/useImageMutation';
 
 // const Editor = dynamic<EditorProps>(() => import('@toast-ui/react-editor').then((m) => m.Editor), { ssr: false });
 
@@ -25,6 +25,7 @@ export interface PostEditorWithForwardedProps extends EditorProps {
 const PostEditor = () => {
   const editorRef = React.createRef<Editor>();
   const { mutate } = usePostEditMutation();
+  const { mutate: imageMutate } = useImageMutation();
   const [imagePath, setImagePath] = useState(null);
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState([]);
@@ -38,9 +39,12 @@ const PostEditor = () => {
           const formData = new FormData();
           formData.append('img', blob);
 
-          const data = await uploadImageAPI(formData);
-          const imageUrl = data.replace(/\/thumb\//, '/original/');
-          callback(imageUrl, 'image');
+          imageMutate(formData, {
+            onSuccess: (data) => {
+              const imageUrl = data.replace(/\/thumb\//, '/original/');
+              callback(imageUrl, 'image');
+            },
+          });
         })();
       });
     }

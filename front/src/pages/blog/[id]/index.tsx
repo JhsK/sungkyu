@@ -4,11 +4,12 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useMutation, useQuery } from 'react-query';
-import { toast, ToastContainer } from 'react-toastify';
+import { useQuery } from 'react-query';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getPostAPI, postDeleteAPI } from 'src/api';
+import { getPostAPI } from 'src/api';
 import Comment from 'src/components/Blog/Comment';
+import usePostDeleteMutation from 'src/components/Blog/hooks/usePostDeleteMutation';
 import { TagValue } from 'src/components/Blog/Post';
 import Header from 'src/components/Header';
 import useAuth from 'src/hooks/useAuth';
@@ -81,12 +82,20 @@ const PostView = () => {
   const router = useRouter();
   const { id } = router.query;
   const currentUser = useAuth();
+  const { mutate: deleteMutate } = usePostDeleteMutation();
   const { data: post } = useQuery(`post-${id}`, async () => {
     const data = await getPostAPI(String(id));
     return data;
   });
 
-  const deleteMutate = useMutation(postDeleteAPI);
+  const onClickDeletePost = () => {
+    const deleteBoolean = window.confirm('정말 삭제하시겠습니까?');
+    if (deleteBoolean) {
+      deleteMutate(post?.id, {
+        onSuccess: (data) => router.push('/blog'),
+      });
+    }
+  };
   return (
     <>
       <Head>
@@ -107,32 +116,7 @@ const PostView = () => {
             {currentUser?.isAuthenticated && (
               <UpdateAndDeleteBtn>
                 <span onClick={() => router.push(`/blog/${id}/update`)}>수정</span>
-                <span
-                  onClick={() => {
-                    const deleteBoolean = window.confirm('정말 삭제하시겠습니까?');
-                    if (deleteBoolean) {
-                      deleteMutate.mutate(post.id, {
-                        onSuccess: () => {
-                          toast.success('게시물을 삭제했습니다', {
-                            position: 'top-center',
-                            autoClose: 2000,
-                            hideProgressBar: true,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                          });
-
-                          setTimeout(() => {
-                            router.replace('/blog');
-                          }, 2000);
-                        },
-                      });
-                    }
-                  }}
-                >
-                  삭제
-                </span>
+                <span onClick={onClickDeletePost}>삭제</span>
               </UpdateAndDeleteBtn>
             )}
           </SubTitle>

@@ -43,11 +43,6 @@ export const postUpdateAPI: ({ id, values }) => Promise<boolean> = async ({ id, 
   return data;
 };
 
-export const postDeleteAPI: (id) => Promise<number> = async (id) => {
-  const { data } = await API.delete(`/post/${id}`);
-  return data;
-};
-
 export const getTagAPI: () => Promise<TagModel[]> = async () => {
   const { data } = await API.get('/tag');
   return data;

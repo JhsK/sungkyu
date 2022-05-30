@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import React, { useRef } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { useMutation } from 'react-query';
 import { uploadImageAPI } from 'src/api';
+import useImageMutation from '../Blog/hooks/useImageMutation';
 
 const Container = styled.div`
   padding-bottom: 2rem;
@@ -42,12 +44,15 @@ const CloseBtn = styled.div`
 
 const ImageUploader = ({ imagePath, setImagePath }) => {
   const imageRef = useRef(null);
+  const { mutate: imageMutate } = useImageMutation();
 
   const onChangeImage = async (e) => {
     const formData = new FormData();
     formData.append('img', e.target.files[0]);
-    const data = await uploadImageAPI(formData);
-    setImagePath(data);
+    // const data = await uploadImageAPI(formData);
+    imageMutate(formData, {
+      onSuccess: (data) => setImagePath(data),
+    });
   };
   return (
     <>
