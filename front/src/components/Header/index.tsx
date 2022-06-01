@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { motion, useCycle } from 'framer-motion';
 import useDevice from 'src/hooks/useDevice';
 import Logo from './Logo';

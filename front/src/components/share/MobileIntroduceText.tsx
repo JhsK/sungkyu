@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import 'aos/dist/aos.css';
 import React from 'react';
-import { BsCheck } from 'react-icons/bs';
+import { BsCheck } from '@react-icons/all-files/bs/BsCheck';
 
 const Container = styled.div`
   padding: 2rem 1rem;

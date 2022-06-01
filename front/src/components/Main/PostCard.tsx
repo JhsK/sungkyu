@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight';
 import styled from '@emotion/styled';
 
 const PostCardContainer = styled.div`

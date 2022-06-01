@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React, { useRef } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { AiFillCloseCircle } from '@react-icons/all-files/ai/AiFillCloseCircle';
 import useImageMutation from '../Blog/hooks/useImageMutation';
 
 const Container = styled.div`

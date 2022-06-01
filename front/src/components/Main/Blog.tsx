@@ -2,7 +2,7 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import React from 'react';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight';
 import { useInView } from 'react-intersection-observer';
 import { useQuery } from 'react-query';
 import { getMainPostsAPI } from 'src/api';
