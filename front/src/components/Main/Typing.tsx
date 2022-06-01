@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { Global, css, keyframes } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import MouseScrollAni from '../share/MouseScrollAni';
 

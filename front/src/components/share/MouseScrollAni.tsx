@@ -27,20 +27,6 @@ const AnimationContainer = styled.div`
   border: 2px solid ${(props) => props.theme.PUBLIC_WHITE};
   border-radius: 20px;
 
-  /* @keyframes Mouse_act {
-    0% {
-      transform: translateY(5px);
-    }
-
-    50% {
-      transform: translateY(-5px);
-    }
-
-    100% {
-      transform: translateY(5px);
-    }
-  } */
-
   &::before {
     content: 'SCROLL';
     display: block;

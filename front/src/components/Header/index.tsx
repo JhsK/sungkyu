@@ -71,7 +71,6 @@ const MotionContainer = styled(motion.div)`
     top: 0;
     left: 0;
     bottom: 0;
-    /* width: 250px; */
     width: ${(props: BackgroundProps) => (props.isView ? '' : '250px')};
     height: 100vh;
     background: #fff;

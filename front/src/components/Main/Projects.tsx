@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import Link from 'next/link';
+import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import Link from 'next/link';
+import React from 'react';
+import useDevice from 'src/hooks/useDevice';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
-import useDevice from 'src/hooks/useDevice';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const verticalScroll = keyframes`
     0% { 

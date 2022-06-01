@@ -1,15 +1,15 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 import { useQuery } from 'react-query';
 import { getMainPostsAPI } from 'src/api';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import useDevice from 'src/hooks/useDevice';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
-import useDevice from 'src/hooks/useDevice';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import PostCard from './PostCard';
 
 const fadeIn = keyframes`
