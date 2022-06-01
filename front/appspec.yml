@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+  desination: /home/ubuntu/sungkyu/front
+  overwrite: yes
+
+permissions:
+  - object: /home/ubuntu/sungkyu/front
+    owner: root
+    group: root
+    mode: 755
+hooks:
+  AfterInstall:
+    - location: deploy.sh
+      timeout: 60
+      runas: root
