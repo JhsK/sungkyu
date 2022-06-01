@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { BiSearch } from 'react-icons/bi';
+import { BiSearch } from '@react-icons/all-files/bi/BiSearch';
 
 const SearchContainer = styled.div`
   position: relative;

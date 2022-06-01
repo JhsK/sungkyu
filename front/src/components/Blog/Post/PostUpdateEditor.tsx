@@ -5,7 +5,6 @@ import { BtnContainer, Container, TagInput, TagValue, TitleInput } from 'src/com
 import { useRouter } from 'next/router';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPostAPI, postUpdateAPI } from 'src/api';
-// import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import ImageUploader from 'src/components/share/ImageUploader';
 

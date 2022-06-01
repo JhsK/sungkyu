@@ -1,10 +1,9 @@
 import React from 'react';
 import { FullPage, Slide } from 'react-full-page';
-import { useInView } from 'react-intersection-observer';
-import Typing from './Typing';
+import Blog from './Blog';
 import Intro from './Intro';
 import Projects from './Projects';
-import Blog from './Blog';
+import Typing from './Typing';
 
 const Main = ({ setLogoColor }) => (
   <FullPage>
