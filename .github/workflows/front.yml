@@ -57,7 +57,7 @@ jobs:
           aws s3 cp --region ap-northeast-2 ./build-fe.zip s3://sungkyu.info/deploy/build-fe.zip
           
       - name: deploy
-        run: aws delpoy create-deployment
+        run: aws deploy create-deployment
           --application-name sungkyu-blog-front
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name GROUP
