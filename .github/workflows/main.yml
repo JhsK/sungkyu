@@ -46,7 +46,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_ID }}
           aws-secret-access-key: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
-          aws-region: ap-norheast-2
+          aws-region: ap-northeast-2
           
       - name: upload to s3
         env:
