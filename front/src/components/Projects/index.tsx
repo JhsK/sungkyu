@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { GrGroup } from 'react-icons/gr';
-import { BsPerson } from 'react-icons/bs';
+import { GrGroup } from '@react-icons/all-files/gr/GrGroup';
+import { BsPerson } from '@react-icons/all-files/bs/BsPerson';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import useDevice from 'src/hooks/useDevice';

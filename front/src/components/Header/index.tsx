@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { motion, useCycle } from 'framer-motion';
 import useDevice from 'src/hooks/useDevice';
 import Logo from './Logo';
@@ -71,7 +71,6 @@ const MotionContainer = styled(motion.div)`
     top: 0;
     left: 0;
     bottom: 0;
-    /* width: 250px; */
     width: ${(props: BackgroundProps) => (props.isView ? '' : '250px')};
     height: 100vh;
     background: #fff;

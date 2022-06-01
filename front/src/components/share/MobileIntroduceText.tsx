@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { BsCheck } from 'react-icons/bs';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
+import React from 'react';
+import { BsCheck } from '@react-icons/all-files/bs/BsCheck';
 
 const Container = styled.div`
   padding: 2rem 1rem;
