@@ -28,7 +28,7 @@ jobs:
         run: node -v        
         
       - name: install dependency
-        run: npm ci
+        run: npm install
         
       - name: build
         run: npm run build
