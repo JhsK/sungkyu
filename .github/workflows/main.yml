@@ -27,6 +27,9 @@ jobs:
       - name: Check Node v
         run: node -v
 
+      - name: change diece
+        run: cd front/
+
       - name: console
         run: ls        
         
