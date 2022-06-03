@@ -2,8 +2,8 @@ version: 0.0
 os: linux
 
 files:
-  - source: test
-    desination: /home/ubuntu/sungkyu/front
+  - source: /
+    desination: /home/ubuntu/test
     overwrite: yes
 
 permissions:
