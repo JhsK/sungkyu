@@ -3,11 +3,11 @@ os: linux
 
 files:
   - source: /
-    desination: /home/ubuntu/test
+    desination: /test
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu
+  - object: /test
     owner: root
     group: root
     mode: 755

@@ -32,13 +32,13 @@ jobs:
         run: ls        
         
       - name: install dependency
-        run: npm install
+        run: npm install --frozen-lockfile
         
       - name: build
         run: npm run build
         
       - name: zip create
-        run: zip -qq -r ./build-fe.zip .
+        run: zip -qq -r ./buildfe.zip .
         shell: bash
         
       - name: configure aws credentials
@@ -54,11 +54,11 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
           
         run: |
-          aws s3 cp --region ap-northeast-2 ./build-fe.zip s3://sungkyu.info/deploy/build-fe.zip
+          aws s3 cp --region ap-northeast-2 ./buildfe.zip s3://sungkyu.info/deploy/buildfe.zip
           
       - name: deploy
         run: aws deploy create-deployment
           --application-name sungkyu-blog-front
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name GROUP
-          --s3-location bucket=sungkyu.info,key=deploy/build-fe.zip,bundleType=zip
+          --s3-location bucket=sungkyu.info,key=deploy/buildfe.zip,bundleType=zip
