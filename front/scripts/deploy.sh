@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+REPOSITORY=/home/ubuntu/front
 echo "> FE 배포"
 
 sudo rm -rf node_modules
