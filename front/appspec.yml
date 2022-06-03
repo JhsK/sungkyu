@@ -3,11 +3,11 @@ os: linux
 
 files:
   - source: /
-    destination: /test
+    destination: /home/ubuntu/front
     overwrite: yes
 
 permissions:
-  - object: /test
+  - object: /home/ubuntu/front
     owner: root
     group: root
     mode: 755
