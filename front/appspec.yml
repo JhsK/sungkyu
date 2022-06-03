@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: /
-    desination: /test
+    destination: /test
     overwrite: yes
 
 permissions:
