@@ -19,6 +19,29 @@ sungkyu는 프론트엔드 개발자 임성규의 포트폴리오 및 기술 블
 ## 기능 추가 및 버그 수정
 
 <details>
+    <summary>22.05</summary>
+<br />
+
+#### .05 블로그 게시물 수정 시 태그 개수 증가 버그 수정
+- 블로그 게시물 수정 시에 기존의 태그의 개수가 +1 증가하는 현상, 백엔드 태그 등록 로직 문제로 인해 버그 수정 [#105](https://github.com/JhsK/sungkyu/issues/105)
+
+#### .09 Google Analytics 연동
+- Google Analytics 연동을 통한 사용자 접속 유형 및 기록(통계) 확인 [#108](https://github.com/JhsK/sungkyu/issues/108)
+
+#### .12 moment.js → day.js 로 날짜 표현 라이브러리 변경
+- moment.js → day.js로 변경을 통한 번들 사이즈 감소 및 웹 성능 최적화 [#110](https://github.com/JhsK/sungkyu/issues/110)
+
+#### .27 블로그 게시물 작성 후 게시물 리스트 최신화 적용 버그 수정
+- 블로그 게시물 작성 후 게시물 리스트에는 방금 작성했던 게시물이 화면에 표시되지 않는 버그 발생으로 invalidQueries 호출의 순서 차이로 인해 발생하여 버그 수정 [#113](https://github.com/JhsK/sungkyu/issues/113)
+
+#### .28 블로그 게시물 제목 글자 제한 버그
+- 블로그 게시물 제목 글자수가 영문기준 30글자이므로 한글로 작성시 15자 이상 시 에러 발생으로 인해 DB migraion으로 글자수 변경을 통해 버그 수정 [#114](https://github.com/JhsK/sungkyu/issues/114)
+
+#### .31 Toast ui editor 이미지 드래그 업로드 기능 개발
+- 블로그 게시물 작성 시 이미지 드래그를 통해 에디터에 이미지 표현할 수 있도록 기능 개발, toast ui editor 기존 hook 커스텀을 통해 구현 [#122](https://github.com/JhsK/sungkyu/issues/122)
+</details>
+
+<details>
     <summary>22.04</summary>
 <br />
 
