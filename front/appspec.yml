@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 
 files:
-  - source: /
+  - source: test
     desination: /home/ubuntu/sungkyu/front
     overwrite: yes
 
