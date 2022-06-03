@@ -35,7 +35,7 @@ jobs:
         run: npm run build
         
       - name: zip create
-        run: zip -qq -r ./buildfe.zip .
+        run: zip -r --symlinks buildfe.zip . -x node_modules/\* *.git*
         shell: bash
         
       - name: configure aws credentials
