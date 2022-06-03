@@ -2,5 +2,5 @@
 echo "> FE 배포"
 
 sudo rm -rf node_modules
-sudo npm imstall
+sudo npm install
 sudo npx pm2 reload all
