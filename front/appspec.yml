@@ -3,11 +3,11 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/front
+    destination: /home/ubuntu/sungkyu/front
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu/front
+  - object: /home/ubuntu/sungkyu/front
     owner: root
     group: root
     mode: 755
