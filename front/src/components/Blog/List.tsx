@@ -238,7 +238,7 @@ const List = ({ inView }) => {
       <CreateBtn>
         {currentUser?.isAuthenticated && (
           <Link href="/blog/new">
-            <a>작성하기2</a>
+            <a>작성하기</a>
           </Link>
         )}
       </CreateBtn>
