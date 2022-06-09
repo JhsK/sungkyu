@@ -3,6 +3,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
+  images: {
+    domains: ['s3.ap-northeast-2.amazonaws.com'],
+  },
   compress: true,
   webpack(config, { webpack }) {
     const prod = process.env.NODE_ENV === 'production';

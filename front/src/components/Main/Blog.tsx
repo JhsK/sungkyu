@@ -10,6 +10,7 @@ import useDevice from 'src/hooks/useDevice';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
 import PostCard from './PostCard';
 
 const fadeIn = keyframes`
@@ -122,6 +123,7 @@ const PostContainer = styled.div`
     }
 
     .postImg {
+      position: relative;
       width: 100%;
       background-color: gray;
       height: 200px;
@@ -137,12 +139,6 @@ const PostContainer = styled.div`
 
       @media ${(props) => props.theme.MOBILE_FOLD} {
         height: 200px;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
       }
     }
 
@@ -168,9 +164,6 @@ const PostContainer = styled.div`
 
   .swiperContainer {
     width: 100%;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
   }
 `;
 
@@ -203,9 +196,11 @@ const Blog = () => {
                       <SwiperSlide>
                         <div className="post" key={post.id}>
                           <div className="postImg">
-                            <img
-                              src={post?.Images.length > 0 ? `${post?.Images[0]?.image_url}` : 'default.png'}
+                            <Image
+                              layout="fill"
+                              objectFit="contain"
                               alt="post"
+                              src={post?.Images.length > 0 ? `${post?.Images[0]?.image_url}` : '/default.png'}
                             />
                           </div>
                           <span className="postTitle">{post.title}</span>
