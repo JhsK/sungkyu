@@ -3,6 +3,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
+  i18n: {
+    locales: ['ko'],
+    defaultLocale: 'ko',
+  },
   images: {
     domains: ['s3.ap-northeast-2.amazonaws.com', 'raw.githubusercontent.com'],
   },

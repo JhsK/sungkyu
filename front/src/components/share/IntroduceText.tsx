@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import React, { useEffect } from 'react';
-import AOS from 'aos';
+import React from 'react';
 
 const IntroduceContainer = styled.div`
   span {
     display: block;
     font-weight: bold;
+    color: ${(props) => props.theme.PUBLIC_BLACK};
   }
   .title {
     font-size: 2.3rem;

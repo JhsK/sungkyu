@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { motion, useCycle } from 'framer-motion';
 import useDevice from 'src/hooks/useDevice';
+import { useRouter } from 'next/router';
 import Logo from './Logo';
 import MenuItem from './MenuItem';
 
@@ -41,6 +42,10 @@ const Container = styled.div`
   margin: 0 auto;
   align-items: flex-end;
   height: 60px;
+
+  & > span {
+    cursor: pointer;
+  }
 
   @media ${(props) => props.theme.HDPC} {
     max-width: 1000px;
@@ -91,6 +96,7 @@ const MotionContainer = styled(motion.div)`
 const Header = ({ logoColor, logoSize, headerPadding = false, mainBool }: HeaderProps) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const isMobile = useDevice(650);
+  const router = useRouter();
 
   const sidebar = {
     open: (height = 1000) => ({
@@ -112,14 +118,14 @@ const Header = ({ logoColor, logoSize, headerPadding = false, mainBool }: Header
     },
   };
 
+  const onClickLogo = () => router.push('/');
+
   return (
     <StickyContainer mainBool={mainBool} logoColor={logoColor} headerPadding={headerPadding}>
       <Container>
-        <Link href="/">
-          <a>
-            <Logo size={logoSize} logoColor={logoColor} />
-          </a>
-        </Link>
+        <span onClick={onClickLogo}>
+          <Logo size={logoSize} logoColor={logoColor} />
+        </span>
         <MenuItem isMobile={isMobile} />
         <MotionContainer isView={!isOpen} initial={false} animate={isOpen ? 'open' : 'closed'}>
           <motion.div className="background" variants={sidebar}>

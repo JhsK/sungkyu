@@ -39,7 +39,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="naver-site-verification" content="2e8020e1c65ced9b3bcb4265892dbae75d272cf3" />
         <meta
           name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
+          content="width=device-width,initial-scale=1.0,minimum-scale=5.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover"
         />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="keywords" content="HTML, CSS, Javascript, React, Next, Frontend, Blog, Sungkyu, sungkyu" />
