@@ -7,6 +7,7 @@ const Container = styled.div`
   padding: 2rem 1rem;
   span {
     display: block;
+    color: ${(props) => props.theme.PUBLIC_BLACK};
   }
 
   .title {
