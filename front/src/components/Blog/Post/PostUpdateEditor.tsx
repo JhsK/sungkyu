@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPostAPI, postUpdateAPI } from 'src/api';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import ImageUploader from 'src/components/share/ImageUploader';
+import useImageMutation from '../hooks/useImageMutation';
 
 const PostUpdateEditor = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const PostUpdateEditor = () => {
   const [imagePath, setImagePath] = useState('');
   const queryClient = useQueryClient();
   const updatePostMutation = useMutation(postUpdateAPI);
+  const { mutate: imageMutate } = useImageMutation();
   const editorRef = React.createRef<Editor>();
 
   const { data: post } = useQuery(`post-${id}`, async () => {
@@ -32,6 +34,25 @@ const PostUpdateEditor = () => {
       setTag([...tagData]);
     }
   }, [post]);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.getInstance().removeHook('addImageBlobHook');
+      editorRef.current.getInstance().addHook('addImageBlobHook', (blob, callback) => {
+        (async () => {
+          const formData = new FormData();
+          formData.append('img', blob);
+
+          imageMutate(formData, {
+            onSuccess: (data) => {
+              const imageUrl = data.replace(/\/thumb\//, '/original/');
+              callback(imageUrl, 'image');
+            },
+          });
+        })();
+      });
+    }
+  }, [editorRef]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
