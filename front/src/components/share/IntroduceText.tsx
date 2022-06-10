@@ -34,6 +34,7 @@ const IntroduceContainer = styled.div`
   ul {
     list-style: disc outside none;
     margin-left: 1.7rem;
+    color: ${(props) => props.theme.PUBLIC_BLACK};
   }
 
   li {
