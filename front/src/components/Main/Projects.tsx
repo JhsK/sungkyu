@@ -7,6 +7,7 @@ import useDevice from 'src/hooks/useDevice';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
 
 const verticalScroll = keyframes`
     0% { 
@@ -146,11 +147,17 @@ const ListContainer = styled.div`
     width: 250px;
   }
 
-  img {
+  a {
+    position: relative;
     width: 100%;
     height: 150px;
-    object-fit: cover;
     border-radius: 15px 15px 0 0;
+
+    & > * {
+      height: 150px;
+      position: relative !important;
+      border-radius: 15px 15px 0 0;
+    }
   }
 
   .projects {
@@ -201,9 +208,11 @@ const Projects = () => {
                     <ListContainer>
                       <Link href="/projects/Tre">
                         <a>
-                          <img
-                            src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                          <Image
+                            layout="fill"
+                            objectFit="cover"
                             alt="cover"
+                            src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
                           />
                           <div className="projects">
                             <span>Tre</span>
@@ -219,9 +228,11 @@ const Projects = () => {
                     <ListContainer>
                       <Link href="/projects/Groupstory">
                         <a>
-                          <img
-                            src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                          <Image
+                            layout="fill"
+                            objectFit="cover"
                             alt="cover"
+                            src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
                           />
                           <div className="projects">
                             <span>Groupstory</span>
@@ -237,9 +248,11 @@ const Projects = () => {
                     <ListContainer>
                       <Link href="/projects/Sungkyu">
                         <a>
-                          <img
-                            src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                          <Image
+                            layout="fill"
+                            objectFit="cover"
                             alt="cover"
+                            src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
                           />
                           <div className="projects">
                             <span>Sungkyu</span>
@@ -258,9 +271,11 @@ const Projects = () => {
                 <ListContainer>
                   <Link href="/projects/Tre">
                     <a>
-                      <img
-                        src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                      <Image
+                        layout="fill"
+                        objectFit="cover"
                         alt="cover"
+                        src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
                       />
                       <div className="projects">
                         <span>Tre</span>
@@ -274,9 +289,11 @@ const Projects = () => {
                 <ListContainer>
                   <Link href="/projects/Groupstory">
                     <a>
-                      <img
-                        src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                      <Image
+                        layout="fill"
+                        objectFit="cover"
                         alt="cover"
+                        src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
                       />
                       <div className="projects">
                         <span>Groupstory</span>
@@ -290,9 +307,11 @@ const Projects = () => {
                 <ListContainer>
                   <Link href="/projects/Sungkyu">
                     <a>
-                      <img
-                        src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                      <Image
+                        layout="fill"
+                        objectFit="cover"
                         alt="cover"
+                        src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
                       />
                       <div className="projects">
                         <span>Sungkyu</span>

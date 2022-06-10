@@ -21,6 +21,7 @@ const GlobalStyle = () => (
         overflow-x: hidden;
         width: 100%;
         font-family: NanumSquare, 'Noto Sans KR', notokr, 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+        font-display: swap;
       }
 
       a {

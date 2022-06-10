@@ -2,7 +2,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { getPostsAPI } from 'src/api';
@@ -10,6 +10,7 @@ import { postsInfinite } from 'src/atom';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 import useDevice from 'src/hooks/useDevice';
+import Image from 'next/image';
 import MobileTags from './MobileTags';
 import Search from './Search';
 
@@ -91,10 +92,10 @@ const ListContainer = styled.div`
     box-shadow: 4px 4px 1px -1px rgba(0, 0, 0, 0.12);
   }
 
-  img {
+  .nextImage {
+    position: relative;
     width: 30%;
     height: 100%;
-    object-fit: cover;
 
     @media ${(props) => props.theme.MOBILE} {
       width: 45%;
@@ -289,7 +290,14 @@ const List = ({ inView }) => {
                   ))}
                 </TagsContainer>
               </ContentContainer>
-              <img alt="sumnail" src={post?.Images.length > 0 ? `${post?.Images[0].image_url}` : 'default.png'} />
+              <div className="nextImage">
+                <Image
+                  layout="fill"
+                  src={post?.Images.length > 0 ? `${post?.Images[0].image_url}` : '/default.png'}
+                  alt="sumnail"
+                  objectFit="contain"
+                />
+              </div>
               {isMobileSM && (
                 <PostTitle>{post?.title.length > 20 ? `${post?.title.substring(0, 20)}...` : post?.title}</PostTitle>
               )}

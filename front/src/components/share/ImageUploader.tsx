@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React, { useRef } from 'react';
 import { AiFillCloseCircle } from '@react-icons/all-files/ai/AiFillCloseCircle';
+import Image from 'next/image';
 import useImageMutation from '../Blog/hooks/useImageMutation';
 
 const Container = styled.div`
@@ -25,12 +26,6 @@ const Button = styled.button`
 const ImageContainer = styled.div`
   padding-bottom: 1rem;
   position: relative;
-
-  img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-  }
 `;
 
 const CloseBtn = styled.div`
@@ -58,7 +53,7 @@ const ImageUploader = ({ imagePath, setImagePath }) => {
         <Button onClick={() => imageRef.current.click()}>클릭 또는 드래그를 통해 이미지 업로드</Button>
         {imagePath && (
           <ImageContainer>
-            <img src={`${imagePath.replace(/\/thumb\//, '/original/')}`} alt="sumnail" />
+            <Image width={200} height={200} src={`${imagePath.replace(/\/thumb\//, '/original/')}`} alt="sumnail" />
             <CloseBtn>
               <AiFillCloseCircle />
             </CloseBtn>
