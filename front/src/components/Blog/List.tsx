@@ -274,34 +274,40 @@ const List = ({ inView }) => {
       {posts &&
         posts.map((post) => (
           <>
-            <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
-              <ContentContainer key={post.id}>
-                <div key={post.id}>
-                  <PostTitle>{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</PostTitle>
-                  <div className="content">
-                    {post?.content.length > textLength
-                      ? `${post?.content.substring(0, textLength).replaceAll(/<[^>]*>?|[#<>*_\+\[\]-`]/gm, '')}...`
-                      : post?.content.replaceAll(/<[^>]*>?|[#<>*_\+\[\]-`]/gm, '')}
+            <Link href={`/blog/${post.id}`} key={post.id}>
+              <a key={post.id}>
+                <ListContainer key={post.id}>
+                  <ContentContainer key={post.id}>
+                    <div key={post.id}>
+                      <PostTitle>{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</PostTitle>
+                      <div className="content">
+                        {post?.content.length > textLength
+                          ? `${post?.content.substring(0, textLength).replaceAll(/<[^>]*>?|[#<>*_\+\[\]-`]/gm, '')}...`
+                          : post?.content.replaceAll(/<[^>]*>?|[#<>*_\+\[\]-`]/gm, '')}
+                      </div>
+                    </div>
+                    <TagsContainer>
+                      {post?.Tags.map((tag) => (
+                        <span key={tag.id}>{`#${tag.name}`}</span>
+                      ))}
+                    </TagsContainer>
+                  </ContentContainer>
+                  <div className="nextImage">
+                    <Image
+                      layout="fill"
+                      src={post?.Images.length > 0 ? `${post?.Images[0].image_url}` : '/default.png'}
+                      alt="sumnail"
+                      objectFit="contain"
+                    />
                   </div>
-                </div>
-                <TagsContainer>
-                  {post?.Tags.map((tag) => (
-                    <span key={tag.id}>{`#${tag.name}`}</span>
-                  ))}
-                </TagsContainer>
-              </ContentContainer>
-              <div className="nextImage">
-                <Image
-                  layout="fill"
-                  src={post?.Images.length > 0 ? `${post?.Images[0].image_url}` : '/default.png'}
-                  alt="sumnail"
-                  objectFit="contain"
-                />
-              </div>
-              {isMobileSM && (
-                <PostTitle>{post?.title.length > 20 ? `${post?.title.substring(0, 20)}...` : post?.title}</PostTitle>
-              )}
-            </ListContainer>
+                  {isMobileSM && (
+                    <PostTitle>
+                      {post?.title.length > 20 ? `${post?.title.substring(0, 20)}...` : post?.title}
+                    </PostTitle>
+                  )}
+                </ListContainer>
+              </a>
+            </Link>
             <Hr key={post.createdAt} />
           </>
         ))}

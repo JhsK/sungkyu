@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "> FE 배포"
+cd /home/ubuntu/front
 ls
 pwd
-cd /home/ubuntu/front
 sudo npx pm2 reload all

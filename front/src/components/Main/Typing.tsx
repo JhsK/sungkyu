@@ -37,6 +37,7 @@ const Content = styled.div`
   transform: translate(-50%, -50%);
   font-size: 2.3rem;
   font-weight: bold;
+  color: ${(props) => props.theme.PUBLIC_BLACK};
 
   & h1 {
     margin-bottom: 1rem;
