@@ -8,6 +8,7 @@ import useDevice from 'src/hooks/useDevice';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
+import Image from 'next/image';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -91,11 +92,17 @@ const ProjectsContainer = styled.div`
         width: 200px;
       }
 
-      img {
+      a {
+        position: relative;
         width: 100%;
         height: 150px;
-        object-fit: cover;
         border-radius: 15px 15px 0 0;
+
+        & > * {
+          height: 150px;
+          position: relative !important;
+          border-radius: 15px 15px 0 0;
+        }
       }
 
       .cardTitleContainer {
@@ -144,9 +151,11 @@ const ProjectsComponent = () => {
                   <motion.div className="card" whileHover={{ scale: 1.1 }}>
                     <Link href="/projects/Tre">
                       <a>
-                        <img
-                          src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                        <Image
+                          layout="fill"
+                          objectFit="cover"
                           alt="cover"
+                          src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
                         />
                         <div className="cardTitleContainer">
                           <span>Tre</span>
@@ -160,9 +169,11 @@ const ProjectsComponent = () => {
                   <motion.div className="card" whileHover={{ scale: 1.1 }}>
                     <Link href="/projects/Sungkyu">
                       <a>
-                        <img
-                          src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                        <Image
+                          layout="fill"
+                          objectFit="cover"
                           alt="cover"
+                          src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
                         />
                         <div className="cardTitleContainer">
                           <span>Sungkyu</span>
@@ -179,9 +190,11 @@ const ProjectsComponent = () => {
               <motion.div className="card" whileHover={{ scale: 1.1 }}>
                 <Link href="/projects/Tre">
                   <a>
-                    <img
-                      src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
+                    <Image
+                      layout="fill"
+                      objectFit="cover"
                       alt="cover"
+                      src="https://raw.githubusercontent.com/JhsK/Tre/master/front/public/image/plan_page.png"
                     />
                     <div className="cardTitleContainer">
                       <span>Tre</span>
@@ -193,9 +206,11 @@ const ProjectsComponent = () => {
               <motion.div className="card" whileHover={{ scale: 1.1 }}>
                 <Link href="/projects/Sungkyu">
                   <a>
-                    <img
-                      src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
+                    <Image
+                      layout="fill"
+                      objectFit="cover"
                       alt="cover"
+                      src="https://s3.ap-northeast-2.amazonaws.com/sungkyu.info/original/about_page.png"
                     />
                     <div className="cardTitleContainer">
                       <span>Sungkyu</span>
@@ -228,9 +243,11 @@ const ProjectsComponent = () => {
                   <motion.div className="card" whileHover={{ scale: 1.1 }}>
                     <Link href="/projects/Groupstory">
                       <a>
-                        <img
-                          src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                        <Image
+                          layout="fill"
+                          objectFit="cover"
                           alt="cover"
+                          src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
                         />
                         <div className="cardTitleContainer">
                           <span>Groupstory</span>
@@ -246,9 +263,11 @@ const ProjectsComponent = () => {
             <motion.div className="card" whileHover={{ scale: 1.1 }}>
               <Link href="/projects/Groupstory">
                 <a>
-                  <img
-                    src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
                     alt="cover"
+                    src="https://raw.githubusercontent.com/JhsK/JS-Groupstory/dbclass/public/image/aaaa.png"
                   />
                   <div className="cardTitleContainer">
                     <span>Groupstory</span>

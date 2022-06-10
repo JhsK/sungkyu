@@ -21,12 +21,6 @@ const PostCardContainer = styled.div`
     background-color: gray;
     height: 200px;
     margin-bottom: 1.5rem;
-
-    /* img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    } */
   }
 
   .postTitle {
@@ -57,11 +51,10 @@ const PostCard = ({ posts }) => (
           <div className="postImg">
             <Image
               layout="fill"
-              objectFit="contain"
+              objectFit="cover"
               alt="post"
               src={post?.Images.length > 0 ? `${post?.Images[0]?.image_url}` : '/default.png'}
             />
-            {/* <img src={post?.Images.length > 0 ? `${post?.Images[0]?.image_url}` : 'default.png'} alt="post" /> */}
           </div>
           <span className="postTitle">{post.title}</span>
           <Link href={`/blog/${post.id}`}>

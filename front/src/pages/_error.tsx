@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 const Container = styled.div`
   position: absolute;
@@ -10,11 +11,6 @@ const Container = styled.div`
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-
-  img {
-    width: 600px;
-    height: 600px;
-  }
 
   div {
     font-weight: bold;
@@ -31,7 +27,7 @@ export default function ErrorPage() {
   return (
     <>
       <Container>
-        <img src="./error.png" alt="error" />
+        <Image src="/error.png" alt="error" width={600} height={600} />
         <div>
           <span>에러가 발생했습니다.</span>
           <span>문의사항은 qwe6293@nate.com으로 부탁드립니다.</span>

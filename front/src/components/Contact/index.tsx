@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  img {
+  & > .contactImg {
+    position: relative;
     width: 300px;
     height: 300px;
-    border-radius: 9999px;
     margin-bottom: 1.5rem;
-    object-fit: cover;
+
+    & > * {
+      border-radius: 9999px;
+    }
 
     @media ${(props) => props.theme.MOBILE_FOLD} {
       width: 200px;
@@ -32,7 +36,9 @@ const Container = styled.div`
 
 const ContactComponent = () => (
   <Container>
-    <img src="profile.jpeg" alt="profile" />
+    <span className="contactImg">
+      <Image layout="fill" alt="profile" objectFit="cover" src="/profile.jpeg" />
+    </span>
     <span>임성규</span>
     <span>EMAIL - qwe6293@namte.com</span>
     <span>Github - https://github.com/JhsK</span>
