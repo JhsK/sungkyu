@@ -5,4 +5,4 @@ ls
 pwd
 sudo rm -rf node_modules
 sudo npm install
-sudo npx pm2 reload all
+sudo npx pm2 status

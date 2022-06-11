@@ -274,7 +274,7 @@ const List = ({ inView }) => {
       {posts &&
         posts.map((post) => (
           <>
-            <ListContainer aria-label={post.title} key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
+            <ListContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
               <ContentContainer key={post.id}>
                 <div key={post.id}>
                   <PostTitle>{isMobile ? `${post?.title.substring(0, 6)}...` : post?.title}</PostTitle>

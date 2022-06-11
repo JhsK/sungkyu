@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import React from 'react';
-import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight';
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 const PostCardContainer = styled.div`
   width: 30%;
@@ -10,6 +10,7 @@ const PostCardContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
+  cursor: pointer;
 
   @media ${(props) => props.theme.TABLET} {
     width: 100%;
@@ -27,47 +28,29 @@ const PostCardContainer = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
   }
-
-  .moreContainer {
-    display: flex;
-    align-items: center;
-    color: ${(props) => props.theme.PUBLIC_DARKGRAY};
-    margin-top: 1rem;
-
-    .font {
-      font-size: 0.9rem;
-    }
-    .icon {
-      font-size: 1rem;
-    }
-  }
 `;
 
-const PostCard = ({ posts }) => (
-  <>
-    {posts &&
-      posts.map((post) => (
-        <PostCardContainer className="post" key={post.id}>
-          <div className="postImg">
-            <Image
-              layout="fill"
-              objectFit="cover"
-              alt="post"
-              src={post?.Images.length > 0 ? `${post?.Images[0]?.image_url}` : '/default.png'}
-            />
-          </div>
-          <span className="postTitle">{post.title}</span>
-          <Link href={`/blog/${post.id}`}>
-            <a>
-              <div className="moreContainer">
-                <span className="font">more</span>
-                <MdKeyboardArrowRight className="icon" />
-              </div>
-            </a>
-          </Link>
-        </PostCardContainer>
-      ))}
-  </>
-);
+const PostCard = ({ posts }) => {
+  const router = useRouter();
+
+  return (
+    <>
+      {posts &&
+        posts.map((post) => (
+          <PostCardContainer className="post" key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
+            <div className="postImg">
+              <Image
+                layout="fill"
+                objectFit="cover"
+                alt="post"
+                src={post?.Images.length > 0 ? `${post?.Images[0]?.image_url}` : '/default.png'}
+              />
+            </div>
+            <span className="postTitle">{post.title}</span>
+          </PostCardContainer>
+        ))}
+    </>
+  );
+};
 
 export default PostCard;
