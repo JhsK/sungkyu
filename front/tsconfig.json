@@ -37,6 +37,8 @@
     //     "@store": ["src/common/store/index"],
     //     "@selectors": ["src/common/selectors/index"],
     //   }
+    ,
+    "incremental": true
   },
   "include": [
     "**/*.ts",
