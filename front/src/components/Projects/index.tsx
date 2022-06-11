@@ -99,7 +99,7 @@ const ProjectsContainer = styled.div`
         border-radius: 15px 15px 0 0;
 
         & > * {
-          height: 150px;
+          height: 150px !important;
           position: relative !important;
           border-radius: 15px 15px 0 0;
         }
