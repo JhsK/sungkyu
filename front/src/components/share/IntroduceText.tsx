@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 import React from 'react';
 
 const IntroduceContainer = styled.div`
-  span {
+  & > span {
     display: block;
     font-weight: bold;
     color: ${(props) => props.theme.PUBLIC_BLACK};
   }
-  .title {
+  & > .title {
     font-size: 2.3rem;
     margin-bottom: 2rem;
 
@@ -19,7 +19,7 @@ const IntroduceContainer = styled.div`
     }
   }
 
-  .subTitle {
+  & > .subTitle {
     font-size: 1.8rem;
     margin-bottom: 1.2rem;
 
@@ -31,13 +31,13 @@ const IntroduceContainer = styled.div`
     }
   }
 
-  ul {
+  & > ul {
     list-style: disc outside none;
     margin-left: 1.7rem;
     color: ${(props) => props.theme.PUBLIC_BLACK};
   }
 
-  li {
+  & > ul > li {
     margin-bottom: 1rem;
 
     @media ${(props) => props.theme.TABLET_SM} {

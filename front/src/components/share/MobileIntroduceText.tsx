@@ -5,12 +5,13 @@ import { BsCheck } from '@react-icons/all-files/bs/BsCheck';
 
 const Container = styled.div`
   padding: 2rem 1rem;
+  color: ${(props) => props.theme.PUBLIC_BLACK};
+
   span {
     display: block;
-    color: ${(props) => props.theme.PUBLIC_BLACK};
   }
 
-  .title {
+  & > .title {
     font-size: 1.2rem;
     margin-bottom: 2rem;
   }
@@ -20,12 +21,13 @@ const Container = styled.div`
     align-items: flex-start;
     margin-bottom: 1rem;
 
-    span {
+    & > span {
       line-height: 1.5rem;
     }
 
-    div {
+    & > div {
       margin-right: 0.3rem;
+      padding-top: 0.2rem;
     }
   }
 `;

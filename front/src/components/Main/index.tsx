@@ -5,7 +5,11 @@ import Intro from './Intro';
 import Projects from './Projects';
 import Typing from './Typing';
 
-const Main = ({ setLogoColor }) => (
+interface MainProps {
+  setLogoColor: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Main = ({ setLogoColor }: MainProps) => (
   <FullPage>
     <Slide>
       <Typing setLogoColor={setLogoColor} />
