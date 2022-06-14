@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-escape */
-import styled from '@emotion/styled';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { getPostsAPI } from 'src/api';
@@ -10,168 +10,21 @@ import { postsInfinite } from 'src/atom';
 import { PostModel } from 'src/constant';
 import useAuth from 'src/hooks/useAuth';
 import useDevice from 'src/hooks/useDevice';
-import Image from 'next/image';
-import MobileTags from './MobileTags';
-import Search from './Search';
-
-const Container = styled.div`
-  width: 73%;
-
-  a {
-    margin-bottom: 1rem;
-  }
-`;
-
-const LableContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-
-  @media ${(props) => props.theme.MOBILE} {
-    justify-content: center;
-  }
-
-  .filter {
-    span {
-      margin-right: 1.5rem;
-      font-weight: 800;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    @media ${(props) => props.theme.MOBILE} {
-      margin-bottom: 1rem;
-    }
-  }
-
-  input {
-    width: 150px;
-    height: 20px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    padding-left: 0.5rem;
-
-    @media ${(props) => props.theme.MOBILE} {
-      width: 200px;
-    }
-  }
-
-  input:focus {
-    outline: none;
-  }
-
-  @media ${(props) => props.theme.MOBILE} {
-    flex-wrap: wrap;
-  }
-`;
-
-const Newest = styled.span`
-  color: ${(props) => (props.color === '최신순' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
-`;
-
-const Latest = styled.span`
-  color: ${(props) => (props.color === '후순위' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
-`;
-
-const All = styled.span`
-  color: ${(props) => (props.color === 'All' ? props.theme.PUBLIC_BLACK : props.theme.NO_ACTIVE_CATEGORY_COLOR)};
-`;
-
-const ListContainer = styled.div`
-  width: 100%;
-  height: 170px;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  transition: box-shadow 0.3s ease 0s, border-color 0.3s ease 0s;
-
-  &:hover {
-    box-shadow: 4px 4px 1px -1px rgba(0, 0, 0, 0.12);
-  }
-
-  .nextImage {
-    position: relative;
-    width: 30%;
-    height: 100%;
-
-    @media ${(props) => props.theme.MOBILE} {
-      width: 45%;
-    }
-
-    @media ${(props) => props.theme.MOBILE_SM} {
-      width: 100%;
-    }
-  }
-`;
-
-const ContentContainer = styled.div`
-  width: 65%;
-  padding-right: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-
-  @media ${(props) => props.theme.MOBILE} {
-    width: 50%;
-  }
-
-  @media ${(props) => props.theme.MOBILE_SM} {
-    display: none;
-  }
-
-  .content {
-    @media ${(props) => props.theme.PC} {
-      font-size: 0.9rem;
-    }
-  }
-
-  div {
-    line-height: 1.5rem;
-  }
-`;
-
-const PostTitle = styled.span`
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 1.3rem;
-
-  @media ${(props) => props.theme.MOBILE} {
-    font-size: 1.3rem;
-  }
-
-  @media ${(props) => props.theme.MOBILE_SM} {
-    margin-top: 0.7rem;
-  }
-`;
-
-const TagsContainer = styled.div`
-  display: flex;
-  align-items: center;
-
-  span {
-    font-size: 0.8rem;
-    color: ${(props) => props.theme.POST_EDIT_TITLE_BORDER_COLOR};
-    margin-right: 0.8rem;
-  }
-`;
-
-const Hr = styled.hr`
-  opacity: 0.2;
-  margin: 2rem 0;
-
-  @media ${(props) => props.theme.MOBILE_SM} {
-    margin: 3rem 0;
-  }
-`;
-
-const CreateBtn = styled.div`
-  margin-bottom: 1rem;
-`;
+import MobileTags from '../MobileTags';
+import Search from '../Search';
+import {
+  All,
+  Container,
+  ContentContainer,
+  CreateBtn,
+  Hr,
+  LableContainer,
+  Latest,
+  ListContainer,
+  Newest,
+  PostTitle,
+  TagsContainer,
+} from './style';
 
 interface CategoryType {
   name: '최신순' | '후순위' | '태그' | 'All';
@@ -295,7 +148,7 @@ const List = ({ inView }) => {
                   layout="fill"
                   src={post?.Images.length > 0 ? `${post?.Images[0].image_url}` : '/default.png'}
                   alt="sumnail"
-                  objectFit="contain"
+                  objectFit="cover"
                 />
               </div>
               {isMobileSM && (

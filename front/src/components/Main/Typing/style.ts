@@ -1,8 +1,5 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import React, { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-import MouseScrollAni from '../share/MouseScrollAni';
 
 const typing = keyframes`
     0% {
@@ -16,7 +13,7 @@ const typing = keyframes`
     }
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: auto;
@@ -24,13 +21,13 @@ const Container = styled.div`
   background-image: linear-gradient(90deg, #ffdee9 0%, #b5fffc 100%);
 `;
 
-const Section = styled.section`
+export const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -39,7 +36,7 @@ const Content = styled.div`
   font-weight: bold;
   color: ${(props) => props.theme.PUBLIC_BLACK};
 
-  & h1 {
+  & > h1 {
     margin-bottom: 1rem;
   }
 
@@ -57,7 +54,7 @@ const Content = styled.div`
   }
 `;
 
-const H1 = styled.h1`
+export const H1 = styled.h1`
   color: transparent;
   text-transform: capitalize;
   white-space: nowrap;
@@ -81,29 +78,3 @@ const H1 = styled.h1`
     }
   }
 `;
-
-const Typing = ({ setLogoColor }) => {
-  const [ref, inView] = useInView({
-    threshold: 0,
-    initialInView: true,
-  });
-
-  useEffect(() => {
-    setLogoColor(!inView);
-  }, [inView]);
-
-  return (
-    <Container>
-      <Section>
-        <Content ref={ref}>
-          <h1>저는</h1>
-          <H1>불편함을 해소하기 위해 고민하는</H1>
-          <h1>개발자 입니다.</h1>
-        </Content>
-        <MouseScrollAni />
-      </Section>
-    </Container>
-  );
-};
-
-export default Typing;

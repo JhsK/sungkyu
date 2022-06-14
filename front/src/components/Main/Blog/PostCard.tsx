@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { PostModel } from 'src/constant';
 
 const PostCardContainer = styled.div`
   width: 30%;
@@ -30,14 +30,18 @@ const PostCardContainer = styled.div`
   }
 `;
 
-const PostCard = ({ posts }) => {
+interface PostCardProps {
+  posts: PostModel[];
+}
+
+const PostCard = ({ posts }: PostCardProps) => {
   const router = useRouter();
 
   return (
     <>
       {posts &&
         posts.map((post) => (
-          <PostCardContainer className="post" key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
+          <PostCardContainer key={post.id} onClick={() => router.push(`/blog/${post.id}`)}>
             <div className="postImg">
               <Image
                 layout="fill"

@@ -4,6 +4,22 @@ import { BiSearch } from '@react-icons/all-files/bi/BiSearch';
 
 const SearchContainer = styled.div`
   position: relative;
+
+  input {
+    width: 150px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding-left: 0.5rem;
+
+    @media ${(props) => props.theme.MOBILE} {
+      width: 200px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 const SearchBtnContainer = styled.div`

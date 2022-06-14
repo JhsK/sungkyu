@@ -23,7 +23,7 @@ export const AboutContainer = styled.div`
     align-items: center;
   }
 
-  span {
+  & > span {
     font-weight: bold;
     font-size: 1.4rem;
   }
@@ -124,7 +124,7 @@ export const Container = styled.div`
         @media ${(props) => props.theme.MOBILE} {
           font-size: 0.9rem;
         }
-        h1 {
+        & > h1 {
           font-size: 1.4rem;
           margin-bottom: 1rem;
 
@@ -133,7 +133,7 @@ export const Container = styled.div`
           }
         }
 
-        span {
+        & > span {
           opacity: 0.5;
           margin-bottom: 0.5rem;
           display: block;
@@ -149,13 +149,13 @@ export const Container = styled.div`
           margin-bottom: 1rem;
           line-height: 1.2rem;
         }
-      }
 
-      .task {
-        padding-left: 1rem;
+        .task {
+          padding-left: 1rem;
 
-        li {
-          list-style-type: circle;
+          & > li {
+            list-style-type: circle;
+          }
         }
       }
     }
