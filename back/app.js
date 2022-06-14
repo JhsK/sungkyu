@@ -57,9 +57,9 @@ app.use(
     resave: false,
     secret: process.env.COOKIE_SECRET,
     cookie: {
-      // httpOnly: true,
-      // proxy: true, // https 설정시 true
-      // secure: true, // https 설정시 true
+      httpOnly: true,
+      proxy: true, // https 설정시 true
+      secure: true, // https 설정시 true
       domain: process.env.NODE_ENV === "production" && ".sungkyu.info",
     },
   })
