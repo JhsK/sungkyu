@@ -29,6 +29,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       loc: 'https://sungkyu.info/blog/8',
       lastmod: new Date().toISOString(),
     },
+    {
+      loc: 'https://sungkyu.info/blog/10',
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: 'https://sungkyu.info/blog/31',
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: 'https://sungkyu.info/blog/32',
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: 'https://sungkyu.info/blog/33',
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: 'https://sungkyu.info/blog/34',
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: 'https://sungkyu.info/blog/35',
+      lastmod: new Date().toISOString(),
+    },
   ];
   return getServerSideSitemap(ctx, fields);
 };
