@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect, useSyncExternalStore } from 'react';
+import { useSyncExternalStore } from 'react';
 import Moon from './Icons/Moon';
 import Sun from './Icons/Sun';
 import { THEME_STORAGE_KEY, type Theme } from '@/lib/theme';
@@ -21,15 +21,6 @@ function getServerSnapshot(): Theme {
 
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-
-  // React clears the attribute on the dev Strict Mode remount. No-op in production.
-  useLayoutEffect(() => {
-    try {
-      if (localStorage.getItem(THEME_STORAGE_KEY) === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    } catch {}
-  }, []);
 
   function toggle() {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
