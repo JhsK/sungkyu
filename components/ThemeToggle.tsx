@@ -5,30 +5,16 @@ import Moon from './Icons/Moon';
 import Sun from './Icons/Sun';
 import { THEME_STORAGE_KEY, type Theme } from '@/lib/theme';
 
-function subscribe(onChange: () => void) {
-  const observer = new MutationObserver(onChange);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  return () => observer.disconnect();
-}
-
-function getSnapshot(): Theme {
-  return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-}
-
-function getServerSnapshot(): Theme {
-  return 'light';
-}
-
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  function toggle() {
+  const toggle = () => {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     try {
       localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {}
-  }
+  };
 
   return (
     <button
@@ -42,4 +28,18 @@ export function ThemeToggle() {
       <Sun className="hidden dark:block" />
     </button>
   );
+}
+
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  return () => observer.disconnect();
+}
+
+function getSnapshot(): Theme {
+  return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+}
+
+function getServerSnapshot(): Theme {
+  return 'light';
 }
