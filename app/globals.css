@@ -37,6 +37,9 @@
   --color-surface: var(--surface);
   --color-accent: var(--accent);
   --font-sans: var(--f-sans);
+
+  /* max-xs:는 `width < 481px`로 생성되므로 시안의 `max-width: 480px`와 같다. */
+  --breakpoint-xs: 481px;
 }
 
 body {
