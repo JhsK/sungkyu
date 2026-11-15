@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useSyncExternalStore } from 'react';
 import Search from './Icons/Search';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -12,23 +11,11 @@ const NAV = [
   { href: '/about', label: '소개', activeOn: /^\/about(\/|$)/ },
 ];
 
-function subscribeScroll(onChange: () => void) {
-  window.addEventListener('scroll', onChange, { passive: true });
-  return () => window.removeEventListener('scroll', onChange);
-}
-
-const getScrolled = () => window.scrollY > 8;
-const getServerScrolled = () => false;
-
 export function Header() {
   const pathname = usePathname();
-  const scrolled = useSyncExternalStore(subscribeScroll, getScrolled, getServerScrolled);
 
   return (
-    <header
-      data-scrolled={scrolled}
-      className="sticky top-0 z-20 border-b border-border bg-[color-mix(in_srgb,var(--bg)_92%,transparent)] backdrop-blur-[8px] after:pointer-events-none after:absolute after:right-0 after:bottom-[-12px] after:left-0 after:h-3 after:bg-[linear-gradient(rgb(0_0_0/0.06),transparent)] after:opacity-0 after:transition-opacity after:duration-200 after:ease-(--ease) after:content-[''] data-[scrolled=true]:after:opacity-100"
-    >
+    <header className="sticky top-0 z-20 border-b border-border bg-[color-mix(in_srgb,var(--bg)_92%,transparent)] backdrop-blur-[8px]">
       <div className="mx-auto flex min-h-16 max-w-[1080px] flex-wrap items-center justify-between gap-x-4 gap-y-1 px-6 py-2.5 max-xs:px-4">
         <Link
           href="/"
