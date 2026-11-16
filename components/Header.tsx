@@ -9,7 +9,7 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-[color-mix(in_srgb,var(--bg)_92%,transparent)] backdrop-blur-[8px]">
+    <header className="sticky top-0 z-20 border-b border-border bg-bg/92 backdrop-blur-sm">
       <div className="mx-auto flex min-h-16 max-w-[1080px] flex-wrap items-center justify-between gap-x-4 gap-y-1 px-6 py-2.5 max-xs:px-4">
         <Link
           href="/"
