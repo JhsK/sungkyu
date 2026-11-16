@@ -5,12 +5,6 @@ import { usePathname } from 'next/navigation';
 import { IconButton } from './IconButton';
 import { ThemeToggle } from './ThemeToggle';
 
-const NAV = [
-  { href: '/', label: '글', activeOn: /^\/(blog(\/|$)|$)/ },
-  { href: '/til', label: 'TIL', activeOn: /^\/til(\/|$)/ },
-  { href: '/about', label: '소개', activeOn: /^\/about(\/|$)/ },
-];
-
 export function Header() {
   const pathname = usePathname();
 
@@ -24,7 +18,7 @@ export function Header() {
           sungkyu<span className="text-accent">.dev</span>
         </Link>
         <nav aria-label="주요 메뉴" className="flex items-center gap-1">
-          {NAV.map(({ href, label, activeOn }) => (
+          {NAV_LINKS.map(({ href, label, activeOn }) => (
             <Link
               key={href}
               href={href}
@@ -41,3 +35,9 @@ export function Header() {
     </header>
   );
 }
+
+const NAV_LINKS = [
+  { href: '/', label: '글', activeOn: /^\/(blog(\/|$)|$)/ },
+  { href: '/til', label: 'TIL', activeOn: /^\/til(\/|$)/ },
+  { href: '/about', label: '소개', activeOn: /^\/about(\/|$)/ },
+];
