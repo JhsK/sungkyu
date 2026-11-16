@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Search from './Icons/Search';
+import { IconButton } from './IconButton';
 import { ThemeToggle } from './ThemeToggle';
 
 const NAV = [
@@ -34,13 +34,7 @@ export function Header() {
               {label}
             </Link>
           ))}
-          <button
-            type="button"
-            aria-label="검색"
-            className="inline-grid size-11 place-items-center rounded-lg border-0 bg-transparent text-muted transition-[color,background-color,border-color,transform] duration-(--dur) ease-(--ease) hover:bg-surface hover:text-fg active:scale-[0.97]"
-          >
-            <Search />
-          </button>
+          <IconButton icon="search" aria-label="검색" />
           <ThemeToggle />
         </nav>
       </div>

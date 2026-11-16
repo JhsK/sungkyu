@@ -1,8 +1,7 @@
 'use client';
 
 import { useLayoutEffect, useSyncExternalStore } from 'react';
-import Moon from './Icons/Moon';
-import Sun from './Icons/Sun';
+import { IconButton } from './IconButton';
 import { THEME_STORAGE_KEY, type Theme } from '@/lib/theme';
 
 export function ThemeToggle() {
@@ -27,16 +26,12 @@ export function ThemeToggle() {
   };
 
   return (
-    <button
-      type="button"
+    <IconButton
+      icon={theme === 'dark' ? 'sun' : 'moon'}
       aria-label="다크 모드"
       aria-pressed={theme === 'dark'}
       onClick={toggle}
-      className="inline-grid size-11 place-items-center rounded-lg border-0 bg-transparent text-muted transition-[color,background-color,border-color,transform] duration-(--dur) ease-(--ease) hover:bg-surface hover:text-fg active:scale-[0.97]"
-    >
-      <Moon className="dark:hidden" />
-      <Sun className="hidden dark:block" />
-    </button>
+    />
   );
 }
 
