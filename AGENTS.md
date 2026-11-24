@@ -11,3 +11,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Pull requests
 
 PR을 만들거나 PR 본문을 고칠 때는 먼저 `docs/pull-request-guide.md`를 읽고 그대로 따른다.
+
+## Commits
+
+커밋 제목과 본문은 한국어로 쓴다. 제목은 `type(scope): 한국어 요약` 형식이고, type과 scope는 PR 제목 규칙(`docs/pull-request-guide.md`)과 같다. `Co-Authored-By` 같은 trailer는 원래 형식 그대로 둔다.
+
+```
+refactor(header): 내비게이션 목록 이름 정리
+fix: 다크 모드 새로고침 시 깜빡임 수정
+```
