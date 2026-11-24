@@ -19,7 +19,7 @@ export function ThemeToggle() {
 
   const toggle = () => {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
+    applyThemeWithoutTransition(next);
     try {
       localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {}
@@ -33,6 +33,18 @@ export function ThemeToggle() {
       onClick={toggle}
     />
   );
+}
+
+// 호버용 color·background-color 트랜지션이 테마 전환에도 걸려 일부 요소만 늦게 바뀌므로, 전환하는 순간에만 트랜지션을 끈다.
+function applyThemeWithoutTransition(theme: Theme) {
+  const disableTransitionStyle = document.createElement('style');
+  disableTransitionStyle.textContent = '*,*::before,*::after{transition:none!important}';
+  document.head.appendChild(disableTransitionStyle);
+  document.documentElement.setAttribute('data-theme', theme);
+  // 값을 읽어 Style 계산을 강제한다. 생략하면 끄기·테마 변경·켜기가 한 번에 계산되어 트랜지션이 그대로 실행된다.
+  void getComputedStyle(document.body).transition;
+  // 호버 트랜지션은 유지해야 하므로 현재 작업이 끝난 뒤 바로 되돌린다.
+  setTimeout(() => disableTransitionStyle.remove(), 1);
 }
 
 function subscribe(onChange: () => void) {
