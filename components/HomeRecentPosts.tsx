@@ -1,8 +1,11 @@
 import Link from 'next/link';
-import { POSTS } from '@/lib/posts';
+import { toDotDate } from '@/lib/format-date';
+import { getPosts } from '@/lib/posts';
+import { TagChip } from './TagChip';
 
 export function HomeRecentPosts() {
-  const [latestPost, ...olderPosts] = POSTS;
+  const posts = getPosts();
+  const [latestPost, ...olderPosts] = posts;
 
   return (
     <section aria-labelledby="recent-posts-title" className="min-w-0 flex-[999_1_560px]">
@@ -10,7 +13,7 @@ export function HomeRecentPosts() {
         <h2 id="recent-posts-title" className="text-[15px] font-semibold text-muted">
           최근 글
         </h2>
-        <span className={POST_META_CLASS_NAME}>{POSTS.length}편</span>
+        <span className={POST_META_CLASS_NAME}>{posts.length}편</span>
       </div>
       <Link
         href={`/blog/${latestPost.slug}`}
@@ -25,8 +28,6 @@ export function HomeRecentPosts() {
         <p className="text-muted">{latestPost.excerpt}</p>
         <div className={POST_META_CLASS_NAME}>
           <time dateTime={latestPost.publishedAt}>{toDotDate(latestPost.publishedAt)}</time>
-          <span aria-hidden="true">·</span>
-          <span>{latestPost.readingMinutes}분</span>
         </div>
       </Link>
       <ul>
@@ -48,12 +49,7 @@ export function HomeRecentPosts() {
               <p className="text-muted">{post.excerpt}</p>
               <div className="mt-1 flex flex-wrap gap-1.5">
                 {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center rounded-full bg-chip-bg px-2.5 py-[3px] text-[13px] text-chip-fg"
-                  >
-                    {tag}
-                  </span>
+                  <TagChip key={tag} tag={tag} />
                 ))}
               </div>
             </Link>
@@ -63,8 +59,6 @@ export function HomeRecentPosts() {
     </section>
   );
 }
-
-const toDotDate = (isoDate: string) => isoDate.replaceAll('-', '.');
 
 const POST_META_CLASS_NAME =
   'flex flex-wrap items-center gap-2 text-[13px] text-subtle tabular-nums';
