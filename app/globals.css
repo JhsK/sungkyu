@@ -5,6 +5,7 @@
 :root {
   --bg: #ffffff;
   --fg: #16181d;
+  --body: #262a33;
   --muted: #5b616e;
   --subtle: #6b7080;
   --border: #e7e8ec;
@@ -14,10 +15,14 @@
   --surface: #f6f7f9;
   --accent: #2b59d1;
   --accent-soft: #eef2fc;
+  --callout-fg: #1f2a44;
+  --kw: #8a3fb8;
+  --str: #1f7a4d;
 
   --f-sans:
     'Pretendard Variable', 'Pretendard', -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR',
     system-ui, sans-serif;
+  --f-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --dur: 160ms;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -27,6 +32,7 @@
 :root[data-theme='dark'] {
   --bg: #0f1115;
   --fg: #e8e9ec;
+  --body: #cdd0d6;
   --muted: #a0a6b2;
   --subtle: #8a909c;
   --border: #262a33;
@@ -36,12 +42,16 @@
   --surface: #171a20;
   --accent: #7fa0f5;
   --accent-soft: #1a2236;
+  --callout-fg: #d5ddf2;
+  --kw: #c79bea;
+  --str: #7fd1a4;
   color-scheme: dark;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-fg: var(--fg);
+  --color-body: var(--body);
   --color-muted: var(--muted);
   --color-subtle: var(--subtle);
   --color-border: var(--border);
@@ -51,7 +61,9 @@
   --color-surface: var(--surface);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-callout-fg: var(--callout-fg);
   --font-sans: var(--f-sans);
+  --font-mono: var(--f-mono);
 
   --animate-rise-view: rise 320ms var(--ease) both;
   --animate-rise-item: rise 420ms var(--ease) both;
@@ -65,6 +77,7 @@
 
   /* max-xs:는 `width < 481px`로 생성되므로 시안의 `max-width: 480px`와 같다. */
   --breakpoint-xs: 481px;
+  --breakpoint-toc: 872px;
 }
 
 @layer base {
@@ -86,6 +99,77 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 4px;
+  }
+}
+
+@layer components {
+  .post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 40px;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--body);
+  }
+
+  .post-body h2 {
+    margin-top: 24px;
+    font-size: 26px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    text-wrap: balance;
+    scroll-margin-top: 88px;
+  }
+
+  .post-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .post-body :not(pre) > code {
+    font-family: var(--f-mono);
+    font-size: 0.86em;
+    background: var(--chip-bg);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  [data-code-block] code {
+    counter-reset: code-line;
+  }
+
+  [data-code-block] [data-line] {
+    display: block;
+    padding-right: 20px;
+    counter-increment: code-line;
+  }
+
+  [data-code-block] [data-line]::before {
+    content: counter(code-line);
+    display: inline-block;
+    width: 44px;
+    padding-right: 16px;
+    text-align: right;
+    color: var(--subtle);
+    opacity: 0.6;
+    user-select: none;
+  }
+
+  .post-body ul,
+  .post-body ol {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 22px;
+    list-style: disc;
+  }
+
+  .post-body ol {
+    list-style: decimal;
   }
 }
 

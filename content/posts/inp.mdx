@@ -1,0 +1,35 @@
+---
+title: '요금제 비교 페이지의 INP를 개선하며 배운 것'
+publishedAt: '2026-10-04'
+tags: ['성능', 'React']
+excerpt: '필터를 누를 때마다 느껴지던 버벅임의 원인을 찾고, 렌더링을 쪼개 입력 반응성을 되찾은 과정을 정리했습니다.'
+---
+
+필터 칩을 누르면 결과가 바뀌기까지 미묘한 지연이 있었습니다. 체감상 "느리다"까지는 아니었지만, 계속 쓰다 보면 손이 먼저 알아채는 종류의 버벅임이었습니다.
+
+## 원인 찾기
+
+Performance 패널에서 클릭 이벤트 이후 긴 태스크가 이어지는 것을 확인했습니다. 필터 상태가 바뀔 때마다 목록 전체가 다시 렌더링되고 있었고, 그 안에서 정렬까지 동기로 수행되고 있었습니다.
+
+```tsx title="PlanList.tsx"
+const [filter, setFilter] = useState(initial);
+const deferred = useDeferredValue(filter);
+
+// 무거운 계산은 지연된 값 기준으로
+const plans = useMemo(
+  () => sortPlans(filterPlans(all, deferred)),
+  [all, deferred]
+);
+```
+
+## 입력과 렌더링 분리하기
+
+칩의 선택 상태는 즉시 반영하고(<CodeLineRef>1번째 줄</CodeLineRef>), 목록 계산은 `useDeferredValue`로 한 박자 늦췄습니다(<CodeLineRef>2번째 줄</CodeLineRef>). 무거운 필터링과 정렬은 <CodeLineRef>4–8번째 줄</CodeLineRef>처럼 지연된 값을 기준으로 계산합니다. 사용자가 누른 것은 바로 보이고, 결과는 뒤따라옵니다.
+
+<Callout>**메모** 측정 전후 수치는 실제 환경에서 확인한 값으로 채울 자리입니다.</Callout>
+
+## 정리
+
+- 느림은 대개 "무엇을 언제 그리는가"의 문제였다.
+- 즉시 반응해야 하는 UI와 나중에 따라와도 되는 UI를 구분한다.
+- 추측보다 프로파일러를 먼저 연다.

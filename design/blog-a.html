@@ -491,11 +491,11 @@ dialog[open]::backdrop { animation: fade 200ms var(--ease); }
 <script>
 (() => {
   const POSTS = [
-    { slug: 'inp', title: '요금제 비교 페이지의 INP를 개선하며 배운 것', date: '2026.10.04', tags: ['성능', 'React'], mins: 8, excerpt: '필터를 누를 때마다 느껴지던 버벅임의 원인을 찾고, 렌더링을 쪼개 입력 반응성을 되찾은 과정을 정리했습니다.', full: true },
-    { slug: 'content', title: '블로그를 옮기며 정리한 콘텐츠 구조', date: '2026.09.21', tags: ['Next.js', 'TypeScript'], mins: 6, excerpt: '글과 TIL을 나누고, 타입 안전한 frontmatter 스키마를 잡은 방법.' },
-    { slug: 'form', title: '폼 상태를 서버 상태와 분리해야 했던 이유', date: '2026.09.02', tags: ['상태 관리', '설계'], mins: 7, excerpt: '가입 신청 폼에서 겪은 동기화 문제와, 상태의 출처를 명확히 나누고 나서 달라진 점.' },
-    { slug: 'a11y', title: '디자인 시스템 컴포넌트에 접근성 테스트 붙이기', date: '2026.08.15', tags: ['접근성', '테스트'], mins: 9, excerpt: '스토리북과 자동화된 a11y 검사로 놓치기 쉬운 포커스·레이블 문제를 잡아낸 기록.' },
-    { slug: 'review', title: '리뷰 코멘트를 질문으로 바꿨더니', date: '2026.07.20', tags: ['회고'], mins: 4, excerpt: '"이건 틀렸어요" 대신 "이 경우엔 어떻게 될까요?" 작은 말투 변화가 리뷰 속도에 준 영향.' },
+    { slug: 'inp', title: '요금제 비교 페이지의 INP를 개선하며 배운 것', date: '2026.10.04', tags: ['성능', 'React'], excerpt: '필터를 누를 때마다 느껴지던 버벅임의 원인을 찾고, 렌더링을 쪼개 입력 반응성을 되찾은 과정을 정리했습니다.', full: true },
+    { slug: 'content', title: '블로그를 옮기며 정리한 콘텐츠 구조', date: '2026.09.21', tags: ['Next.js', 'TypeScript'], excerpt: '글과 TIL을 나누고, 타입 안전한 frontmatter 스키마를 잡은 방법.' },
+    { slug: 'form', title: '폼 상태를 서버 상태와 분리해야 했던 이유', date: '2026.09.02', tags: ['상태 관리', '설계'], excerpt: '가입 신청 폼에서 겪은 동기화 문제와, 상태의 출처를 명확히 나누고 나서 달라진 점.' },
+    { slug: 'a11y', title: '디자인 시스템 컴포넌트에 접근성 테스트 붙이기', date: '2026.08.15', tags: ['접근성', '테스트'], excerpt: '스토리북과 자동화된 a11y 검사로 놓치기 쉬운 포커스·레이블 문제를 잡아낸 기록.' },
+    { slug: 'review', title: '리뷰 코멘트를 질문으로 바꿨더니', date: '2026.07.20', tags: ['회고'], excerpt: '"이건 틀렸어요" 대신 "이 경우엔 어떻게 될까요?" 작은 말투 변화가 리뷰 속도에 준 영향.' },
   ];
   const TILS = [
     { date: '2026.10.22', title: 'Intl.RelativeTimeFormat으로 "3일 전" 만들기', tag: 'JavaScript', body: '날짜 차이를 직접 계산해 문자열을 붙이던 코드를 지웠다. new Intl.RelativeTimeFormat("ko", { numeric: "auto" })로 "어제", "3일 전"까지 알아서 나온다.' },
@@ -528,7 +528,7 @@ dialog[open]::backdrop { animation: fade 200ms var(--ease); }
   $('featured').innerHTML = `<a class="featured" href="#post-${latest.slug}">
       <span class="new">새 글</span>
       <h3>${esc(latest.title)}</h3><p>${esc(latest.excerpt)}</p>
-      <div class="meta"><time>${latest.date}</time><span aria-hidden="true">·</span><span>${latest.mins}분</span></div>
+      <div class="meta"><time>${latest.date}</time></div>
     </a>`;
   $('posts').innerHTML = rest.map((p, n) => `<li style="--i:${n}"><a class="post" href="#post-${p.slug}">
       <time class="meta">${p.date}</time><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p>
@@ -651,7 +651,7 @@ dialog[open]::backdrop { animation: fade 200ms var(--ease); }
     const p = POSTS[i];
     $('post-h1').textContent = p.title;
     $('post-tags').innerHTML = p.tags.map((t) => `<span class="tag">${t}</span>`).join('');
-    $('post-meta').innerHTML = `<time>${p.date}</time><span aria-hidden="true">·</span><span>${p.mins}분 읽기</span>`;
+    $('post-meta').innerHTML = `<time>${p.date}</time>`;
     $('prose').innerHTML = p.full ? FULL : `<p>${esc(p.excerpt)}</p><p class="unavailable">이 글은 목록 예시라 본문이 없습니다. 본문 레이아웃은 「${esc(POSTS[0].title)}」에서 볼 수 있어요.</p>`;
     const heads = [...$('prose').querySelectorAll('h2')];
     const tocHtml = heads.map((h) => `<li><a href="#post-${slug}" data-target="${h.id}">${esc(h.textContent)}</a></li>`).join('');
